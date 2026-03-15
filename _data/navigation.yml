@@ -1,24 +1,29 @@
-# _data/navigation.yml
 main:
+  - title: "About Me"
+    url: /about/
   - title: "Salesforce"
     url: /categories/salesforce/
   - title: "Apex"
-    url: /categories/apex/
+    url: /categories/sfdc-apex/
   - title: "LWC"
-    url: /categories/lwc/
+    url: /categories/sfdc-lwc/
   - title: "External Libraries"
     url: /categories/external-libraries/
 
 sidebar:
-  - title: "Knowledge"
+  - title: "Profile"
     children:
-      - title: "About Salesforce"
+      - title: "About Hermes"
+        url: /about/
+  - title: "Salesforce"
+    children:
+      - title: "Core Knowledge"
         url: /categories/salesforce/
-  - title: "Development"
+      - title: "Apex Development"
+        url: /categories/sfdc-apex/
+      - title: "LWC Mastery"
+        url: /categories/sfdc-lwc/
+  - title: "Resources"
     children:
-      - title: "Apex"
-        url: /categories/apex/
-      - title: "LWC"
-        url: /categories/lwc/
       - title: "External Libraries"
         url: /categories/external-libraries/
