@@ -2,6 +2,7 @@
 layout: home
 author_profile: true
 title: "Salesforce Developer's Tech Archive"
+entries_layout: grid
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
