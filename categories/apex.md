@@ -2,7 +2,7 @@
 layout: category
 title: "Apex Development"
 taxonomy: Apex
-permalink: /categories/apex/
+permalink: /categories/sfdc-apex/
 author_profile: true
 sidebar:
   nav: "sidebar"
