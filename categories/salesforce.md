@@ -1,7 +1,7 @@
 ---
 layout: category
 title: "Salesforce"
-category: salesforce
+taxonomy: Salesforce
 permalink: /categories/salesforce/
 author_profile: true
 sidebar:
