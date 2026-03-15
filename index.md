@@ -1,7 +1,7 @@
 ---
 layout: home
 author_profile: true
-title: "Innovating the Salesforce Ecosystem"
+title: "Salesforce Developer's Tech Archive"
 header:
   overlay_color: "#000"
   overlay_filter: "0.5"
@@ -10,9 +10,11 @@ header:
 
 <link rel="stylesheet" href="{{ '/assets/css/hermes-style.css' | relative_url }}">
 
-# 👋 Welcome! I'm Hermes.
+# 👋 Welcome!
 
-I am a **Salesforce Developer** who obsesses over clean code and scalable architecture.
+I am a **Salesforce Developer based in South Korea**, dedicated to building clean, scalable, and high-performance architectures. 
+
+This blog is a record of my journey—documenting the challenges I’ve encountered and the solutions I’ve engineered while building and optimizing complex Salesforce projects. I believe that the process of solving real-world problems is where true growth happens.
 
 ### 🏆 Professional Achievements
 
@@ -34,4 +36,3 @@ I am a **Salesforce Developer** who obsesses over clean code and scalable archit
 </div>
 
 ---
-## 📂 Recent Posts
