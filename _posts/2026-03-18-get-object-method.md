@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Salesforce Apex: Get Object Using Schema"
+title: "Apex Schema Methods: How to Get Object Metadata Dynamically"
 date: 2026-03-18
 categories:
   - Apex
