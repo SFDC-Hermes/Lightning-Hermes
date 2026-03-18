@@ -101,6 +101,9 @@ public static Map<String, List<ObjectInfo>> getObjectMap() {
 
 ---
 
+👉 [View Full Class on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/SchemaService)
+
+
 ## 💡 Key Architectural Takeaways
 
 1. **Performance with @AuraEnabled(cacheable=true):** Schema operations are expensive. Client-side caching ensures your UI remains snappy without overloading the server.
