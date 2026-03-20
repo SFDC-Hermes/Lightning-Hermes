@@ -14,8 +14,10 @@ Salesforce Custom Path
 
 ## 🚀 Key Features
 
-* **SOQL Optimization:** Precise GMT calculation for Start/End of Day.
-* **Context Awareness:** Automatically detects the current user's timezone.
-* **Clean API:** Static methods designed for readability and reuse.
+* **Dynamic Picklist Rendering:** Fetches StageName picklist values via Apex and dynamically generates the Path UI.
+* **Visual Progress Tracking:** Displays completed stages as `slds-is-complete` and the current stage as `slds-is-current slds-is-active` for intuitive progress visualization.
+* **Closed Stage Modal:** Provides a modal dialog for selecting the final outcome (Closed Won/Lost) when closing an Opportunity.
+* **Real-time Record Update:** Leverages `updateRecord` from `lightning/uiRecordApi` to instantly update records without page refresh.
+* **Reusable Design:** Built with `@api recordId` to be easily reusable across any Opportunity record page.
 
 ---
