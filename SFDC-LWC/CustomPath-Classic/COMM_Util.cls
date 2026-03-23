@@ -1,4 +1,5 @@
-@AuraEnabled(cacheable=true)
+public without sharing class COMM_Util {
+    @AuraEnabled(cacheable=true)
     public static List<PicklistWrap> getPicklistWrap(String objectName, String fieldName) {
 
         Schema.SObjectType sObjectType = Schema.getGlobalDescribe().get(objectName);
@@ -23,3 +24,4 @@
             this.value = value;
         }
     }
+}
