@@ -15,7 +15,7 @@ header:
 
 I am a **Salesforce Developer based in South Korea**, dedicated to building clean, scalable, and high-performance architectures. 
 
-This blog is a record of my journey—documenting the challenges I’ve encountered and the solutions I’ve engineered while building and optimizing complex Salesforce projects. I believe that the process of solving real-world problems is where true growth happens.
+This blog is a record of my journey—documenting the challenges I’ve encountered and the solutions I’ve engineered while building and optimizing complex Salesforce projects. I believe that the process of solving real-world problems is where true growth happens. I'm committed to publishing one article every Wednesday.
 
 ### 🏆 Professional Achievements
 
