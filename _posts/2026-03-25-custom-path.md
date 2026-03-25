@@ -21,3 +21,5 @@ Salesforce Custom Path
 * **Reusable Design:** Built with `@api recordId` to be easily reusable across any Opportunity record page.
 
 ---
+
+👉 [View Full Class on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/SchemaService)
