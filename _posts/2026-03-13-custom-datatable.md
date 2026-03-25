@@ -93,7 +93,7 @@ This component relies on the **toggleType** component to handle the specific ren
 - `toggleType`
 
 👉 [View Source Code on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/CustomDatatable)
-👉 [toggleType Component](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/ToggleType)
+👉 [ToggleType Component](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/ToggleType)
 
 ---
 
