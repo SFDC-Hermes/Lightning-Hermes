@@ -1,4 +1,5 @@
 ---
+layout: single
 title: "Custom Path LWC Component"
 date: 2026-03-25
 categories:
@@ -8,10 +9,10 @@ tags:
   - Path
 ---
 
-**Salesforce Custom Path**
-
+Salesforce Custom Path
 A reusable LWC component that mirrors the standard Salesforce Path design while allowing custom functionality.  
-Simply configure `recordId`, `objectName`, and `fieldName` via XML to use it on any object. This is the Classic version.
+Simply configure `recordId`, `objectName`, and `fieldName` via XML to use it on any object. This is the Classic version
+
 ---
 
 ## 🚀 Key Features
