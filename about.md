@@ -22,7 +22,7 @@ I am a **Salesforce Developer** with a focus on building secure, scalable, and h
 
 ### 🏆 Professional Highlights
 
-* **Certified Expert:** Holder of **13+ Salesforce Certifications**, including Application Architect (Candidate) and the rare **AgentBlazer Legend** title.
+* **Certified Expert:** Holder of **13+ Salesforce Certifications**, including Application Architect and the rare **AgentBlazer Legend** title.
 * **Industry Experience:** Delivered successful E2E system implementations and problem-solving for **global leaders in the Energy and Manufacturing sectors.**
 * **Continuous Growth:** I believe in "Learning by Doing." I maintain several open-source utility libraries and security frameworks on my GitHub.
 
