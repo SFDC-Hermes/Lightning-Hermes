@@ -10,7 +10,7 @@ tags:
 
 Salesforce Custom Path 
 A reusable LWC component that mirrors the standard Salesforce Path design while allowing custom functionality. Simply configure recordId, objectName, and fieldName via XML to use it on any object. 
-this is the Classic version.
+-this is the Classic version.
 ---
 
 ## 🚀 Key Features
