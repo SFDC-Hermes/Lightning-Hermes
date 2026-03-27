@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Salesforce Apex: Get Public Group User Data"
+title: "Salesforce Apex: Get Public Group User Data(Email)"
 date: 2026-04-01
 categories:
   - Apex
