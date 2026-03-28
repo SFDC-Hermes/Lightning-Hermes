@@ -10,6 +10,8 @@ export default class LseCustomPath extends LightningElement {
     selectedValue;
     pickList = [];
 
+    showSpinner = false;
+
     get fieldsToQuery() {
         if (this.objectName && this.fieldName) {
             return [`${this.objectName}.${this.fieldName}`];
@@ -50,7 +52,6 @@ export default class LseCustomPath extends LightningElement {
         if (Array.isArray(this.pickList)) {
             let selectedIndex = -1;
 
-            // 각 Picklist 항목에 대해 스타일 클래스 설정
             this.pickList.forEach((picklistEntry, index) => {
                 let classList = 'slds-path__item slds-is-incomplete';
                 
@@ -65,7 +66,6 @@ export default class LseCustomPath extends LightningElement {
                 });
             });
 
-            // 선택된 항목 이전 단계는 완료 상태로 표시
             if (selectedIndex > 0) {
                 for (let i = 0; i < selectedIndex; i++) {
                     itemsList[i].classList = 'slds-path__item slds-is-complete';

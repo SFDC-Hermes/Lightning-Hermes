@@ -9,7 +9,7 @@
 	    						<ul class="slds-path__nav" role="listbox" aria-orientation="horizontal">
 	    							<template if:true={picklistValues}>
 	    								<template for:each={picklistValues} for:item="item">
-	    									<li data-value={item.pItem.value} key={item} class={item.classList} role="presentation">
+	    									<li data-value={item.pItem.value} key={item.pItem.value} class={item.classList} role="presentation">
 	    										<a data-value={item.pItem.value} aria-selected="true" class="slds-path__link" href="javascript:void(0);" id={item.pItem.value} role="option"
 	    											tabindex="0">
 	    											<span class="slds-path__stage">
