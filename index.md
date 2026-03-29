@@ -17,7 +17,7 @@ header:
     I am a <span class="highlight">Salesforce Developer based in South Korea</span>, dedicated to building clean, scalable, and high-performance architectures. 
   </p>
   <p class="intro-subtext">
-    This blog serves as a technical archive where I document the challenges encountered and solutions engineered while optimizing complex Salesforce environments. I am committed to sharing insights on <b>system design and clean code</b> every Wednesday.
+    This blog serves as a technical archive for system design and clean code. I document complex engineering challenges and the architectural solutions derived from real-world Salesforce projects.
   </p>
   
   <div class="skill-badges">
@@ -27,17 +27,15 @@ header:
 
 <hr class="section-divider">
 
-### 🏆 Professional Achievements
+### 🏆 Professional Credentials
 
-<div class="cert-grid">
+<div class="cert-mini-grid">
   {% for cert in site.data.mycerts %}
-  <div class="cert-card">
-    <div class="cert-header">
-      <img src="{{ cert.image | relative_url }}" class="cert-badge-img">
-    </div>
-    <div class="cert-body">
-      <h4>{{ cert.title }}</h4>
-      <p class="cert-date">Issued {{ cert.date }}</p>
+  <div class="cert-mini-card">
+    <img src="{{ cert.image | relative_url }}" class="cert-mini-icon">
+    <div class="cert-mini-info">
+      <p class="cert-mini-title">{{ cert.title }}</p>
+      <p class="cert-mini-date">{{ cert.date }}</p>
     </div>
   </div>
   {% endfor %}
