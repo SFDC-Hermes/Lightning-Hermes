@@ -21,7 +21,7 @@ header:
   </p>
   
   <div class="skill-badges">
-    <span>Apex</span> <span>LWC</span> <span>Python</span> <span>System Architect</span> <span>Agentforce</span>
+    <span>Apex</span> <span>LWC</span> <span>Data</span> <span>System Architect</span> <span>Agentforce</span> <span>Java</span>
   </div>
 </div>
 
