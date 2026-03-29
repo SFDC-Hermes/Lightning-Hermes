@@ -2,14 +2,31 @@
     date: "Issued Feb 2026"
     alt: "Application Architect"
     title: "Salesforce Certified Application Architect"
-    status: "Active"
   - image: /assets/images/Agentforce_Cert.png
     date: "Issued Oct 2024"
     alt: "Agentforce"
     title: "Salesforce Certified Agentforce Specialist"
-    status: "Active"
   - image: /assets/images/Developer_Cert.png
     date: "Issued Jul 2025"
     alt: "PD2"
     title: "Salesforce Certified Platform Developer II"
-    status: "Active"
+  - image: /assets/images/Admin_Cert.png
+    date: "Issued Oct 2025"
+    alt: "Admin2"
+    title: "Salesforce Certified Platform Administrator II"
+  - image: /assets/images/Data_Cert.png
+    date: "Issued Dec 2025"
+    alt: "Data Cloud"
+    title: "Salesforce Certified Data 360 Consultant"
+  - image: /assets/images/Data_Cert.png
+    date: "Issued Feb 2026"
+    alt: "Data Architect"
+    title: "Salesforce Certified Data Architect"
+  - image: /assets/images/Sharing_Cert.png
+    date: "Issued Dec 2025"
+    alt: "Sharing Architect"
+    title: "Salesforce Certified Sharing And Visibility Architect"
+  - image: /assets/images/JS_Cert.png
+    date: "Issued Jul 2024"
+    alt: "JSD1"
+    title: "Salesforce Certified Java Script Developer I"
