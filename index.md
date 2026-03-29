@@ -4,7 +4,7 @@ author_profile: true
 title: "Salesforce Developer's Tech Archive"
 entries_layout: grid
 header:
-  overlay_color: "#032D60"
+  overlay_color: "white"
   overlay_filter: "0.7"
   excerpt: "Salesforce Developer | Application Architect | Agentforce Legend ⚡"
 ---
