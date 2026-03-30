@@ -40,11 +40,6 @@ All contributions are welcome!
   <img src="https://ghchart.rshah.org/00A1E0/SFDC-Hermes" alt="GitHub Contribution Chart" />
 </p>
 
-<p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=SFDC-Hermes&theme=tokyo-night&area=true&hide_border=true" />
-</p>
-
-
 📫 Let's Connect
 📧 Feel free to reach out through GitHub issues
 ⭐ Star this repo if you find it useful!
