@@ -17,3 +17,5 @@ At the previous post I simply configuring the `recordId`, `objectName`, and `fie
 In Advanced version I will add configure `errorValue`, `endValue`, `replaceFromValue`, `booleanValue`, `booleanPickValue`, `replaceToValue`.
 If this property filled, We can Dynamically show picklistValue such as if errorValue, all of the picklistValue will be blank except errorValue.
 And it will return slds-is-current slds-is-lost class. 
+
+Also if endValue propery filled, We can show only one end picklistValue and the other one will be filtered.
