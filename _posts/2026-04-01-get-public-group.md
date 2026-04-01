@@ -79,5 +79,3 @@ By targeting these three types, the utility accurately maps the `RelatedId` (the
 ## Summary
 
 Architecture is about making intentional choices. By implementing **Hybrid Branching** and **Precise Role Mapping**, this utility provides a robust way to handle Salesforce's complex membership model without sacrificing performance.
-
-*Are you handling nested roles in your Apex utilities? Let me know your thoughts on this approach!*
