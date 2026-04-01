@@ -73,8 +73,7 @@ private static Set<Id> getUserIdsByRoleGroups(Set<Id> subGroupIds) {
 By targeting these three types, the utility accurately maps the `RelatedId` (the actual UserRole ID) back to the users, covering all possible membership scenarios.
 
 ---
-
-👉 [View Full Class on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-APEX/GroupMemberUtility)
+👉 [View Full Class on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/GroupMemberUtility)
 
 ## Summary
 
