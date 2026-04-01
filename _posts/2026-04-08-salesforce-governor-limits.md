@@ -32,15 +32,6 @@ for (Account acc : Trigger.new) {
 1. Key Limits You Must Know
 Here are the limits that will impact your daily development:
 
-Resource	Synchronous	Asynchronous
-SOQL Queries	100	200
-Query Rows	50,000	50,000
-DML Statements	150	150
-DML Rows	10,000	10,000
-CPU Time	10,000 ms	60,000 ms
-Heap Size	6 MB	12 MB
-
-
 | Resource | Synchronous | Asynchronous |
 | :--- | :--- | :--- |
 | **SOQL Queries** | 100 | 200 |
