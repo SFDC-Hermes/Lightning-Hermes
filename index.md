@@ -12,7 +12,7 @@ header:
 <link rel="stylesheet" href="{{ '/assets/css/hermes-style.css' | relative_url }}">
 
 <div class="intro-wrapper">
-  <h1>👋 ## Welcome!</h1>
+  <h1>👋 Welcome!</h1>
   <p class="intro-text">
     I am a <span class="highlight">Salesforce Developer based in South Korea</span>, dedicated to building clean, scalable, and high-performance architectures. 
   </p>
@@ -27,7 +27,7 @@ header:
 
 <hr class="section-divider">
 
-## 🏆 Professional Credentials
+### 🏆 Professional Credentials
 
 <div class="cert-mini-grid">
   {% for cert in site.data.mycerts %}
@@ -43,4 +43,4 @@ header:
 
 <hr class="section-divider">
 
-## ✍️ Recent Archive
+### ✍️ Recent Archive
