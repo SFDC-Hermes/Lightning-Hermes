@@ -3,6 +3,7 @@ layout: home
 author_profile: true
 title: "Salesforce Developer's Tech Archive"
 entries_layout: grid
+classes: wide  
 header:
   overlay_color: "white"
   overlay_filter: "0.7"
