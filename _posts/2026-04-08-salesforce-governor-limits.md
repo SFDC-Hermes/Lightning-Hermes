@@ -40,3 +40,5 @@ Here are the limits that will impact your daily development:
 | **DML Rows** | 10,000 | 10,000 |
 | **CPU Time** | 10,000 ms | 60,000 ms |
 | **Heap Size** | 6 MB | 12MB |
+
+👉 [Salesforce Official Document]([https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/SchemaService](https://developer.salesforce.com/docs/atlas.en-us.salesforce_app_limits_cheatsheet.meta/salesforce_app_limits_cheatsheet/salesforce_app_limits_platform_apexgov.htm))
