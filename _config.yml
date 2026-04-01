@@ -33,3 +33,5 @@ defaults:
       read_time: true
       comments: true
       share: true
+      toc: true
+      toc_sticky: true
