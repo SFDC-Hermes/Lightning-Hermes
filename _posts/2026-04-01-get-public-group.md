@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Apex Get Group Emails: Designing a Hybrid Resolver for Salesforce Groups"
-date: 2026-03-31
+date: 2026-04-01
 categories:
   - Apex
 tags:
