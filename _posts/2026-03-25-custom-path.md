@@ -81,5 +81,3 @@ I combined **Lightning Data Service (@wire)** for record data and **Apex** for p
 3.  **Scalability:** This "Classic" version sets the foundation for more advanced features like custom "Path Guidance" or specialized modals for closed stages.
 
 ---
-
-*Custom components should feel like a part of the platform. How are you enhancing the standard Salesforce UI with LWC?*
