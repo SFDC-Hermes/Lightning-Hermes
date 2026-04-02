@@ -43,7 +43,7 @@ h3 { font-size: 1.4rem; border-bottom: none !important; }
 }
 
 .highlight {
-  color: var(--blue);
+  color: var(--steelblue);
   font-weight: 600;
   border-bottom: 2px solid black;
 }
