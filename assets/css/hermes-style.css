@@ -18,7 +18,6 @@ body {
 
 h1, h2, h3, h4 {
   font-family: 'Poppins', sans-serif;
-  color: var(--navy) !important;
   margin-top: 0.6rem !important;
   margin-bottom: 0.5rem !important;
   letter-spacing: -0.02em;
