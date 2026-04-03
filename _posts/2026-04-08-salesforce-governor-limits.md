@@ -25,7 +25,7 @@ To guarantee **fair resource allocation** and **consistent performance** across 
 // This innocent-looking code could bring down an entire pod
 for (Account acc : Trigger.new) {
     Contact c = [SELECT Id FROM Contact WHERE AccountId = :acc.Id];
-    // ❌ SOQL inside a loop = disaster waiting to happen
+    // SOQL inside a loop = disaster waiting to happen
 }
 ```
 
@@ -89,20 +89,20 @@ Here are the limits that will impact your daily development:
 
 | @future (Legacy) | Queueable (Recommended) |
 |:---|:---|
-| X No Job ID returned | O Returns Job ID for monitoring |
-| X Primitives only | O Accepts complex types (sObjects, custom classes) |
-| X Cannot chain jobs | O Supports job chaining |
-| X No progress tracking | O Query `AsyncApexJob` for status |
-| X Limited debugging | O Better error handling |
+| No Job ID returned | Returns Job ID for monitoring |
+| Primitives only |  Accepts complex types (sObjects, custom classes) |
+| Cannot chain jobs | Supports job chaining |
+| No progress tracking | Query `AsyncApexJob` for status |
+| Limited debugging | Better error handling |
 
 > 💡 **Best Practice:** Always use `Queueable` instead of `@future`. It provides all the same functionality with more flexibility and better monitoring capabilities.
 
 ```java
-// ❌ Old way - Don't use
+//  Old way - Don't use
 @future(callout=true)
 public static void oldWay(Set<Id> recordIds) { }
 
-// ✅ New way - Use Queueable
+//  New way - Use Queueable
 public class NewWay implements Queueable, Database.AllowsCallouts {
     public void execute(QueueableContext context) { }
 }
