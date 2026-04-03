@@ -41,6 +41,27 @@ Here are the limits that will impact your daily development:
 | **CPU Time** | 10,000 ms | 60,000 ms |
 | **Heap Size** | 6 MB | 12MB |
 
+2. Debug Key Limits Methods Reference
+
+| Method | Description | Return Value |
+|:---|:---|:---|
+| `Limits.getQueries()` | Number of SOQL queries issued | Current count |
+| `Limits.getLimitQueries()` | Maximum allowed SOQL queries | Sync: 100 / Async: 200 |
+| `Limits.getQueryRows()` | Number of records retrieved | Current count |
+| `Limits.getLimitQueryRows()` | Maximum records retrievable | 50,000 |
+| `Limits.getDMLStatements()` | Number of DML statements issued | Current count |
+| `Limits.getLimitDMLStatements()` | Maximum allowed DML statements | 150 |
+| `Limits.getDMLRows()` | Number of records processed by DML | Current count |
+| `Limits.getLimitDMLRows()` | Maximum records for DML | 10,000 |
+| `Limits.getCpuTime()` | CPU time used (milliseconds) | Current usage |
+| `Limits.getLimitCpuTime()` | Maximum CPU time allowed | Sync: 10,000ms / Async: 60,000ms |
+| `Limits.getHeapSize()` | Heap size used (bytes) | Current usage |
+| `Limits.getLimitHeapSize()` | Maximum heap size allowed | Sync: 6MB / Async: 12MB |
+| `Limits.getCallouts()` | Number of callouts made | Current count |
+| `Limits.getLimitCallouts()` | Maximum callouts allowed | 100 |
+
+---
+
 👉 [Salesforce Official Document](https://developer.salesforce.com/docs/atlas.en-us.salesforce_app_limits_cheatsheet.meta/salesforce_app_limits_cheatsheet/salesforce_app_limits_platform_apexgov.htm)
 👉 [Salesforce Trailhead](https://trailhead.salesforce.com/ko/content/learn/modules/starting_force_com/starting_understanding_arch)
 
