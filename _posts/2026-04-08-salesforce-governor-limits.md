@@ -62,6 +62,53 @@ Here are the limits that will impact your daily development:
 
 ---
 
+2. Async Methods at a Glance
+
+| Method | Best For | Max Calls | Chaining | Returns Job ID |
+|:---|:---|:---|:---|:---|
+| **@future** | Simple callouts | 50/transaction | X | X |
+| **Queueable** | Complex jobs with chaining | 50/transaction | O | O |
+| **Batch** | Large data (50M+ records) | 5 concurrent | O | O |
+| **Scheduled** | Time-based automation | 100/org | O | O |
+
+---
+
+### 🎯 When to Use What?
+
+| Scenario | Use This |
+|:---|:---|
+| Callout from trigger | `Queueable` |
+| Need job tracking | `Queueable` |
+| Process 10,000+ records | `Batch Apex` |
+| Chain multiple jobs | `Queueable` |
+| Daily/weekly tasks | `Scheduled Apex` |
+
+---
+
+### ⚠️ Why You Should Stop Using @future
+
+| @future (Legacy) | Queueable (Recommended) |
+|:---|:---|
+| X No Job ID returned | O Returns Job ID for monitoring |
+| X Primitives only | O Accepts complex types (sObjects, custom classes) |
+| X Cannot chain jobs | O Supports job chaining |
+| X No progress tracking | O Query `AsyncApexJob` for status |
+| X Limited debugging | O Better error handling |
+
+> 💡 **Best Practice:** Always use `Queueable` instead of `@future`. It provides all the same functionality with more flexibility and better monitoring capabilities.
+
+```java
+// ❌ Old way - Don't use
+@future(callout=true)
+public static void oldWay(Set<Id> recordIds) { }
+
+// ✅ New way - Use Queueable
+public class NewWay implements Queueable, Database.AllowsCallouts {
+    public void execute(QueueableContext context) { }
+}
+```
+
+---
 👉 [Salesforce Official Document](https://developer.salesforce.com/docs/atlas.en-us.salesforce_app_limits_cheatsheet.meta/salesforce_app_limits_cheatsheet/salesforce_app_limits_platform_apexgov.htm)
 👉 [Salesforce Trailhead](https://trailhead.salesforce.com/ko/content/learn/modules/starting_force_com/starting_understanding_arch)
 
