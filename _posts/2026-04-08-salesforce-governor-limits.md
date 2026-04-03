@@ -41,7 +41,7 @@ Here are the limits that will impact your daily development:
 | **CPU Time** | 10,000 ms | 60,000 ms |
 | **Heap Size** | 6 MB | 12MB |
 
-2. Debug Key Limits Methods Reference
+**How to check Governor Limit in apex**
 
 | Method | Description | Return Value |
 |:---|:---|:---|
