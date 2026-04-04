@@ -2,7 +2,7 @@ import { LightningElement, api, wire } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
 import getPicklistWrap from '@salesforce/apex/COMM_Util.getPicklistWrap';
 
-export default class LseCustomPath extends LightningElement {
+export default class CustomPath extends LightningElement {
     @api recordId;
     @api objectName;
     @api fieldName;
