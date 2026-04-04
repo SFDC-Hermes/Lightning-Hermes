@@ -71,6 +71,7 @@ I combined **Lightning Data Service (@wire)** for record data and **Apex** for p
 ---
 
 👉 [View Full Project on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/CustomPath-Classic)
+👉 [View Advanced Code on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/CustomPath-Advanced)
 
 ---
 
