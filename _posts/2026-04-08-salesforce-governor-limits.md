@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Salesforce Governor Limits: Why Every Developer Must Master Them"
+title: "Salesforce Governor Limits: The Architecture of Multi-tenancy"
 date: 2026-04-08
 categories:
   - Salesforce
@@ -11,26 +11,37 @@ tags:
   - BestPractices
 ---
 
-Salesforce Governor Limits are arguably the most critical concept for anyone working with the Salesforce platform. Whether you're a developer, administrator, or architect, understanding these limits is fundamental to building scalable and reliable solutions.
+Salesforce Governor Limits are arguably the most critical concept for anyone working with the Salesforce platform. Whether you're a developer, administrator, or architect, understanding these guardrails is fundamental to building scalable, reliable, and enterprise-grade solutions.
 
 ---
 
-## Why Do Governor Limits Exist?
+## 🏗️ Why Do Governor Limits Exist?
 
-Salesforce is a **SaaS (Software as a Service)** platform built on a **multi-tenant architecture**. This means thousands of organizations share the same infrastructure, compute resources, and database instances.
+Salesforce is a **SaaS (Software as a Service)** platform built on a **multi-tenant architecture**. This means thousands of organizations share the same underlying infrastructure, compute resources, and database instances.
 
-To guarantee **fair resource allocation** and **consistent performance** across all orgs, Salesforce enforces Governor Limits. Without these guardrails, a single poorly written trigger could degrade performance for every customer on that pod.
+Imagine living in a luxury apartment complex. If one tenant uses all the water, every other resident suffers. To guarantee **fair resource allocation** and **consistent performance** across all tenants, Salesforce enforces Governor Limits. Without these guardrails, a single inefficient script could degrade performance for every customer on that pod.
 
+### The "Anti-pattern": SOQL inside a Loop
 ```java
 // This innocent-looking code could bring down an entire pod
 for (Account acc : Trigger.new) {
+    // This is the "N+1" problem. SOQL inside a loop = disaster.
     Contact c = [SELECT Id FROM Contact WHERE AccountId = :acc.Id];
-    // SOQL inside a loop = disaster waiting to happen
 }
 ```
 
-1. Key Limits You Must Know
-Here are the limits that will impact your daily development:
+### The "Architect" Way: Bulkification
+```java
+// Always query outside the loop using Collections (Set/Map)
+Set<Id> accIds = Trigger.newMap.keySet();
+List<Contact> relatedCons = [SELECT Id, AccountId FROM Contact WHERE AccountId IN :accIds];
+```
+
+---
+
+## 1. Key Limits You Must Know
+
+As an architect, you must design your logic to fit within these constraints. Leveraging **Asynchronous Apex** is a primary strategy for handling heavy workloads.
 
 | Resource | Synchronous | Asynchronous |
 | :--- | :--- | :--- |
@@ -39,76 +50,77 @@ Here are the limits that will impact your daily development:
 | **DML Statements** | 150 | 150 |
 | **DML Rows** | 10,000 | 10,000 |
 | **CPU Time** | 10,000 ms | 60,000 ms |
-| **Heap Size** | 6 MB | 12MB |
+| **Heap Size** | 6 MB | 12 MB |
 
-**How to check Governor Limit in apex**
+** Critical Note:** Unlike standard exceptions, a `System.LimitException` **cannot be caught** with a `try-catch` block. Once you breach a limit, the entire transaction terminates and rolls back immediately.
+
+###  Proactive Monitoring with the `Limits` Class
+Build "self-aware" code by monitoring resource usage in real-time. This is essential for complex logic that might approach platform thresholds.
 
 | Method | Description | Return Value |
 |:---|:---|:---|
-| `Limits.getQueries()` | Number of SOQL queries issued | Current count |
-| `Limits.getLimitQueries()` | Maximum allowed SOQL queries | Sync: 100 / Async: 200 |
-| `Limits.getQueryRows()` | Number of records retrieved | Current count |
-| `Limits.getLimitQueryRows()` | Maximum records retrievable | 50,000 |
-| `Limits.getDMLStatements()` | Number of DML statements issued | Current count |
-| `Limits.getLimitDMLStatements()` | Maximum allowed DML statements | 150 |
-| `Limits.getDMLRows()` | Number of records processed by DML | Current count |
-| `Limits.getLimitDMLRows()` | Maximum records for DML | 10,000 |
-| `Limits.getCpuTime()` | CPU time used (milliseconds) | Current usage |
-| `Limits.getLimitCpuTime()` | Maximum CPU time allowed | Sync: 10,000ms / Async: 60,000ms |
+| `Limits.getQueries()` | SOQL queries issued so far | Current count |
+| `Limits.getLimitQueries()` | Maximum allowed SOQL | 100 / 200 |
+| `Limits.getDMLStatements()` | DML statements issued | Current count |
+| `Limits.getCpuTime()` | CPU time consumed (ms) | Current usage |
 | `Limits.getHeapSize()` | Heap size used (bytes) | Current usage |
-| `Limits.getLimitHeapSize()` | Maximum heap size allowed | Sync: 6MB / Async: 12MB |
-| `Limits.getCallouts()` | Number of callouts made | Current count |
-| `Limits.getLimitCallouts()` | Maximum callouts allowed | 100 |
 
 ---
 
-2. Async Methods at a Glance
+## 2. Async Methods at a Glance
+
+When synchronous limits are too restrictive, move your logic to the asynchronous layer.
 
 | Method | Best For | Max Calls | Chaining | Returns Job ID |
 |:---|:---|:---|:---|:---|
-| **@future** | Simple callouts | 50/transaction | X | X |
-| **Queueable** | Complex jobs with chaining | 50/transaction | O | O |
-| **Batch** | Large data (50M+ records) | 5 concurrent | O | O |
-| **Scheduled** | Time-based automation | 100/org | O | O |
+| **@future** | Simple, isolated tasks | 50/transaction | X | X |
+| **Queueable** | Complex logic / Chaining | 50/transaction | O | O |
+| **Batch** | Massive data processing | 5 concurrent | O | O |
+| **Scheduled** | Recurring automation | 100/org | O | O |
 
 ---
 
-### 🎯 When to Use What?
+### 🎯 When to Use What? (Design Strategy)
 
-| Scenario | Use This |
+| Scenario | Recommended Approach |
 |:---|:---|
-| Callout from trigger | `Queueable` |
-| Need job tracking | `Queueable` |
-| Process 10,000+ records | `Batch Apex` |
-| Chain multiple jobs | `Queueable` |
-| Daily/weekly tasks | `Scheduled Apex` |
+| Callout from a trigger | `Queueable` |
+| Need to monitor job status | `Queueable` (via `AsyncApexJob`) |
+| Processing >10,000 records | `Batch Apex` |
+| Chaining multiple sequential jobs | `Queueable` |
+| Daily/Weekly maintenance tasks | `Scheduled Apex` |
 
 ---
 
-### ⚠️ Why You Should Stop Using @future
+### ⚠️ The Shift from @future to Queueable
 
-| @future (Legacy) | Queueable (Recommended) |
+While `@future` was a staple in legacy Apex, modern Salesforce architecture favors **Queueable Apex** for its flexibility and robustness.
+
+| @future (Legacy) | Queueable (Architect's Choice) |
 |:---|:---|
-| No Job ID returned | Returns Job ID for monitoring |
-| Primitives only |  Accepts complex types (sObjects, custom classes) |
-| Cannot chain jobs | Supports job chaining |
-| No progress tracking | Query `AsyncApexJob` for status |
-| Limited debugging | Better error handling |
+| No Job ID; hard to track | Returns **Job ID** for monitoring |
+| Primitives only (ID, String, etc.) | Accepts **Complex Types** (sObjects, Lists) |
+| Cannot chain jobs | Supports **Job Chaining** |
+| Difficult to debug | Better error handling and visibility |
 
-> 💡 **Best Practice:** Always use `Queueable` instead of `@future`. It provides all the same functionality with more flexibility and better monitoring capabilities.
+> 💡 **Best Practice:** Default to `Queueable` instead of `@future`. It provides superior monitoring, allows for job chaining, and handles complex data structures seamlessly.
 
 ```java
-//  Old way - Don't use
+// Legacy Approach: Limited and hard to monitor
 @future(callout=true)
-public static void oldWay(Set<Id> recordIds) { }
+public static void processSync(Set<Id> ids) { ... }
 
-//  New way - Use Queueable
-public class NewWay implements Queueable, Database.AllowsCallouts {
-    public void execute(QueueableContext context) { }
+// Modern Architect Approach: Scalable and trackable
+public class VaultProcessor implements Queueable, Database.AllowsCallouts {
+    public void execute(QueueableContext context) { 
+        // Logic here
+    }
 }
 ```
 
 ---
-👉 [Salesforce Official Document](https://developer.salesforce.com/docs/atlas.en-us.salesforce_app_limits_cheatsheet.meta/salesforce_app_limits_cheatsheet/salesforce_app_limits_platform_apexgov.htm)
-👉 [Salesforce Trailhead](https://trailhead.salesforce.com/ko/content/learn/modules/starting_force_com/starting_understanding_arch)
+👉 [Salesforce Official Limits Documentation](https://developer.salesforce.com/docs/atlas.en-us.salesforce_app_limits_cheatsheet.meta/salesforce_app_limits_cheatsheet/salesforce_app_limits_platform_apexgov.htm)
+👉 [Salesforce Multi-tenant Architecture (Trailhead)](https://trailhead.salesforce.com/en/content/learn/modules/starting_force_com/starting_understanding_arch)
+```
 
+---
