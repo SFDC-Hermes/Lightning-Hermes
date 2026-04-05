@@ -79,4 +79,8 @@ By combining **LDS Reactivity** with **Custom Logic**, we’ve built a component
 
 ```
 
+👉 [View Full Project on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/CustomPath-Advanced)
+👉 [View Classic Code on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/CustomPath-Classic)
+
+
 ---
