@@ -71,12 +71,12 @@ To ensure the component is "Admin-friendly," I documented the property requireme
 
 ---
 
+👉 [View Full Project on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/CustomPath-Advanced)
+👉 [View Classic Code on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/CustomPath-Classic)
+
 ## 🎯 Conclusion
 
 By combining **LDS Reactivity** with **Custom Logic**, we’ve built a component that isn't just a status indicator, but an intelligent, reactive guide for users. 
 
 **Key Takeaway:** Always design your components to be "self-aware." Use native features like `getRecord` to handle reactivity, and keep your business logic contained in the controller to maximize reusability.
-
-👉 [View Full Project on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/CustomPath-Advanced)
-👉 [View Classic Code on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/CustomPath-Classic)
 
