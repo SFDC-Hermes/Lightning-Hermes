@@ -66,6 +66,16 @@ This is a powerful feature for binary UI transformations.
 
 ### 3. Value Replacement & Aliasing (`replaceFromValue` & `replaceToValue`)
 Instead of displaying raw database values, we can "alias" labels on the fly. This ensures a more user-friendly interface without needing to alter the underlying data model.
+```xml
+<property name="replaceFromValue"
+          type="String"
+          label="Replace From Value"
+          description="replace from values (Only One)"/>
+<property name="replaceToValue"
+          type="String"
+          label="Replace To Value"
+          description="replace to values (Only One)"/>
+```
 
 ---
 
