@@ -42,9 +42,6 @@ Before processing, we check if the string fits within our designated limit (e.g.
  */
 private static Boolean calculateByte(String txt){
     if (String.isEmpty(txt)) return true;
-    
-    // Convert to Blob to get the actual UTF-8 byte size
-    Integer byteLength = Blob.valueOf(txt).size();
-    
+    Integer byteLength = Blob.valueOf(txt).size(); 
     return byteLength <= 90;
 }
