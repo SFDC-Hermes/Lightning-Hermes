@@ -4,7 +4,7 @@ public with sharing class StringUtility {
     private static Boolean calculateByte(String txt){
         if (String.isEmpty(txt)) return true;
         Integer byteLength = Blob.valueOf(txt).size(); 
-        return byteLength <= 90;
+        return byteLength <= MAX_BYTE_LIMIT;
     }
 
     private static List<String> splitByByte(String input) {
