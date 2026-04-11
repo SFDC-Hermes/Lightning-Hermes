@@ -1,4 +1,4 @@
-public with sharing class DateTimeUtility {
+public with sharing class StringUtility {
     private static final Integer MAX_BYTE_LIMIT = 90;
 
     private static Boolean calculateByte(String txt){
