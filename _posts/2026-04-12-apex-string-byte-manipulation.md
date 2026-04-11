@@ -90,7 +90,6 @@ private static List<String> splitByByte(String input) {
 ```
 
 ---
-
 ## 🧐 Architect's Insight: Performance & Precision
 1. The Cost of Blob.valueOf()
 Inside a loop, Blob.valueOf() can be CPU-intensive if the string is massive. For extremely large texts, consider using a Buffer approach or processing in larger blocks. However, for standard integration payloads (like SMS messages or field updates), this greedy character-by-character check is the safest way to ensure character integrity.
@@ -102,5 +101,12 @@ In many messaging protocols, once a payload exceeds 90 bytes, the message is aut
 
 3. Preventing Data Corruption
 By measuring the byte size of each character before adding it to the chunk, we ensure that a 3-byte character isn't accidentally cut between two different chunks, which would render the character unreadable.
+---
+
+---
+🎯 Conclusion
+In a globalized Salesforce environment, being "byte-aware" is not optional—it's a requirement for robust integration. By leveraging Blob.valueOf().size(), we move from fragile **"Length-based"** logic to a more resilient **"Byte-based"** architecture.
+
+👉 [Salesforce Official Blob Class](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_blob.htm)
 
 ---
