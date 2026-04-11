@@ -88,3 +88,15 @@ private static List<String> splitByByte(String input) {
 }
 
 ```
+
+🧐 Architect's Insight: Performance & Precision
+1. The Cost of Blob.valueOf()
+Inside a loop, Blob.valueOf() can be CPU-intensive if the string is massive. For extremely large texts, consider using a Buffer approach or processing in larger blocks. However, for standard integration payloads (like SMS messages or field updates), this greedy character-by-character check is the safest way to ensure character integrity.
+
+2. The "90-Byte" Threshold: SMS vs. MMS Strategy
+In a recent enterprise project involving telecommunications integration, I faced a specific business constraint: the 90-byte threshold.
+
+In many messaging protocols, once a payload exceeds 90 bytes, the message is automatically converted from a standard SMS to a more expensive MMS (or LMS). To manage operational costs and ensure predictable messaging behavior, I implemented this byte-splitting logic. By centralizing this "90-byte rule" in a utility, the system can gracefully "chunk" long texts into multiple standard SMS segments, preventing unintended MMS conversions across the entire application. It’s a perfect example of how code architecture directly impacts cost efficiency.
+
+3. Preventing Data Corruption
+By measuring the byte size of each character before adding it to the chunk, we ensure that a 3-byte character isn't accidentally cut between two different chunks, which would render the character unreadable.
