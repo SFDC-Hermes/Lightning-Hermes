@@ -106,5 +106,6 @@ By measuring the byte size of each character before adding it to the chunk, we e
 In a globalized Salesforce environment, being "byte-aware" is not optional—it's a requirement for robust integration. By leveraging Blob.valueOf().size(), we move from fragile **"Length-based"** logic to a more resilient **"Byte-based"** architecture.
 
 👉 [Salesforce Official Blob Class](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_blob.htm)
+👉 [View Utility Code on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/StringUtility)
 
 ---
