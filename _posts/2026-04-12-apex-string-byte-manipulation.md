@@ -101,10 +101,8 @@ In many messaging protocols, once a payload exceeds 90 bytes, the message is aut
 
 3. Preventing Data Corruption
 By measuring the byte size of each character before adding it to the chunk, we ensure that a 3-byte character isn't accidentally cut between two different chunks, which would render the character unreadable.
----
 
----
-🎯 Conclusion
+## 🎯 Conclusion
 In a globalized Salesforce environment, being "byte-aware" is not optional—it's a requirement for robust integration. By leveraging Blob.valueOf().size(), we move from fragile **"Length-based"** logic to a more resilient **"Byte-based"** architecture.
 
 👉 [Salesforce Official Blob Class](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_blob.htm)
