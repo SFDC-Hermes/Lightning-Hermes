@@ -36,6 +36,7 @@ Here is the implementation of a byte-size validator and a greedy splitting algor
 Before processing, we check if the string fits within our designated limit (e.g., 90 bytes).
 
 ```java
+
 /**
  * @description Validates if the string's byte size is within the limit.
  * @return Boolean - Returns true if it does NOT overflow.
@@ -45,3 +46,45 @@ private static Boolean calculateByte(String txt){
     Integer byteLength = Blob.valueOf(txt).size(); 
     return byteLength <= 90;
 }
+
+```
+
+### 2. Strategic Splitting (splitByByte)
+If a string exceeds the limit, we need to chunk it. Simply cutting the string by length might break a multi-byte character in half, leading to data corruption. This logic ensures each chunk is valid and stays under the byte limit.
+
+```java
+
+/**
+ * @description Splits a string into multiple chunks, each within the max byte limit.
+ */
+private static List<String> splitByByte(String input) {
+    List<String> result = new List<String>();
+    if (String.isEmpty(input)) return result;
+
+    Integer totalBytes = 0;
+    String currentChunk = '';
+
+    for (Integer i = 0; i < input.length(); i++) {
+        String ch = input.substring(i, i + 1);
+        // Measure each character's byte size individually
+        Integer chBytes = Blob.valueOf(ch).size();
+
+        if (totalBytes + chBytes > MAX_BYTE_LIMIT) {
+            // If adding this char exceeds the limit, push the current chunk and start new
+            result.add(currentChunk);
+            currentChunk = ch;
+            totalBytes = chBytes;
+        } else {
+            currentChunk += ch;
+            totalBytes += chBytes;
+        }
+    }
+
+    if (!String.isEmpty(currentChunk)) {
+        result.add(currentChunk);
+    }
+
+    return result;
+}
+
+```
