@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Apex: Managing Multi-byte Strings via Byte-size Logic"
+title: "Salesforce Apex Byte Manipulation: Managing Multi-byte Strings via Byte-size Logic"
 date: 2026-04-11
 categories:
   - Apex
