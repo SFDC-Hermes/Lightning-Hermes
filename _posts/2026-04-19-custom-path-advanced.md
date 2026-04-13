@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "LWC: Building a Highly Reactive Custom Path (Advanced Logic)"
-date: 2026-04-15
+date: 2026-04-19
 categories:
   - LWC
 tags:
