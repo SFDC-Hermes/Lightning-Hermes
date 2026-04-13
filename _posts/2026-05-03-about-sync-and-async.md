@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Salesforce Sync VS Async"
-date: 2026-04-29
+date: 2026-05-03
 categories:
   - Salesforce
 tags:
