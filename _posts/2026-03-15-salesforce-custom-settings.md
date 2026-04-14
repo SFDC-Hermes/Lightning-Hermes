@@ -3,7 +3,7 @@ layout: single
 title: "Custom Settings vs. Custom Metadata: Why DML Matters in Architecture"
 date: 2026-03-15
 categories:
-  - Salesforce
+  - Concepts
 tags:
   - Salesforce
   - Apex
