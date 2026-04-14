@@ -1,9 +1,9 @@
 ---
 layout: single
-title: "Salesforce Apex: Mastering Global Timezone Conversions"
+title: "Apex: Mastering Global Timezone Conversions"
 date: 2026-03-14
 categories:
-  - Apex
+  - Development
 tags:
   - Apex
   - Salesforce
