@@ -3,7 +3,7 @@ layout: single
 title: "LWC: Building a Reusable Custom Path Component"
 date: 2026-03-25
 categories:
-  - LWC
+  - Development
 tags:
   - LWC
   - Salesforce
