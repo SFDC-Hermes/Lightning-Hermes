@@ -1,9 +1,9 @@
 ---
 layout: single
-title: "Salesforce Apex Schema Mastery: Building an Intelligent Object Selector"
+title: "Apex Schema Mastery: Building an Intelligent Object Selector"
 date: 2026-03-18
 categories:
-  - Apex
+  - Development
 tags:
   - Apex
   - Salesforce
