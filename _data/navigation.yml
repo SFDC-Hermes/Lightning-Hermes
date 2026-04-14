@@ -1,12 +1,10 @@
 main:
   - title: "About Me"
     url: /about/
-  - title: "Salesforce"
-    url: /categories/salesforce/
-  - title: "Apex"
-    url: /categories/sfdc-apex/
-  - title: "LWC"
-    url: /categories/sfdc-lwc/
+  - title: "Salesforce Concepts"
+    url: /categories/sfdc-concepts/
+  - title: "Salesforce Development"
+    url: /categories/sfdc-development/
   - title: "External Libraries"
     url: /categories/external-libraries/
 
@@ -18,11 +16,9 @@ sidebar:
   - title: "Salesforce"
     children:
       - title: "Core Knowledge"
-        url: /categories/salesforce/
-      - title: "Apex Development"
-        url: /categories/sfdc-apex/
-      - title: "LWC Mastery"
-        url: /categories/sfdc-lwc/
+        url: /categories/sfdc-concepts/
+      - title: "Core Development"
+        url: /categories/sfdc-development/
   - title: "Resources"
     children:
       - title: "External Libraries"
