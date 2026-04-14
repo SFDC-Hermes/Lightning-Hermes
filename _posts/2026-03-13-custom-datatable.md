@@ -3,7 +3,7 @@ layout: single
 title: "LWC: Extending Lightning Datatable with Custom Types"
 date: 2026-03-13
 categories:
-  - LWC
+  - development
 tags:
   - LWC
   - Salesforce
