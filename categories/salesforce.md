@@ -1,8 +1,8 @@
 ---
 layout: category
-title: "Salesforce"
-taxonomy: Salesforce
-permalink: /categories/salesforce/
+title: "Concepts"
+taxonomy: Concepts
+permalink: /categories/Concepts/
 author_profile: true
 sidebar:
   nav: "sidebar"
