@@ -1,10 +1,10 @@
 main:
   - title: "About Me"
     url: /about/
-  - title: "Concepts"
-    url: /categories/sfdc-concepts/
   - title: "Development"
     url: /categories/sfdc-development/
+  - title: "Concepts"
+    url: /categories/sfdc-concepts/
   - title: "External Libraries"
     url: /categories/external-libraries/
 
@@ -15,10 +15,10 @@ sidebar:
         url: /about/
   - title: "Salesforce"
     children:
-      - title: "Core Knowledge"
-        url: /categories/sfdc-concepts/
       - title: "Core Development"
         url: /categories/sfdc-development/
+      - title: "Core Knowledge"
+        url: /categories/sfdc-concepts/
   - title: "Resources"
     children:
       - title: "External Libraries"
