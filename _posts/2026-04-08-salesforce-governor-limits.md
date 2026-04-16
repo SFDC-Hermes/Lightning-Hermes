@@ -3,7 +3,7 @@ layout: single
 title: "Salesforce Governor Limits: The Architecture of Multi-tenancy"
 date: 2026-04-07
 categories:
-  - Salesforce
+  - Concepts
 tags:
   - Apex
   - Salesforce
