@@ -3,7 +3,7 @@ layout: single
 title: "Apex: How to Paging Data in Salesforce"
 date: 2026-04-26
 categories:
-  - Apex
+  - Development
 tags:
   - Apex
   - Salesforce
