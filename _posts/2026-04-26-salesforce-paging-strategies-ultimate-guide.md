@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Apex: The Ultimate Guide to Scalable Paging in Salesforce"
-date: 2026-04-18
+date: 2026-04-26
 categories:
   - Development
 tags:
@@ -26,7 +26,7 @@ The most intuitive way to page data is using `LIMIT` and `OFFSET`. While simple,
 
 ```java
 // Page 3 (20 records per page)
-List<Account> accs = [SELECT Id, Name FROM Account ORDER BY Name LIMIT 20 OFFSET 40];
+List<Account> accountList = [SELECT Id, Name FROM Account ORDER BY Name LIMIT 20 OFFSET 40];
 ```
 
 
