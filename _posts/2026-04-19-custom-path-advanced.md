@@ -38,6 +38,7 @@ Let’s break down the internal logic within the `processPickList()` method and 
 When a process has multiple ending stages (e.g., "Closed Won", "Closed Lost"), showing all of them simultaneously can clutter the UI. 
 * **The Logic:** If the current record value matches one of the `endValue` candidates, the component filters out all other terminal stages. 
 * **Result:** A clean, focused UI that only displays the relevant closing path to the user.
+
 ```xml
 <property name="endValue"
           type="String"
