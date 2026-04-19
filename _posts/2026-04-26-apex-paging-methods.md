@@ -26,3 +26,39 @@ The most intuitive way to page data is using `LIMIT` and `OFFSET`. While simple,
 ```java
 // Page 3 (20 records per page)
 List<Account> accs = [SELECT Id, Name FROM Account ORDER BY Name LIMIT 20 OFFSET 40];
+
+Dynamic Implementation (Real-world Pattern)
+In a production environment, you need a reusable service that calculates the offset on the fly.
+
+```java
+private static final Integer DEFAULT_PAGE_SIZE = 20;
+private static final Integer DEFAULT_PAGE_NUMBER = 1;
+
+public static List<SObject> getPagedRecords(String objectName, Integer pageSize, Integer pageNumber) {
+    List<SObject> result = new List<SObject>();
+    if (String.isBlank(objectName)) {
+        return result;
+    }
+
+    Integer size = (pageSize == null || pageSize < 1) ? DEFAULT_PAGE_SIZE : pageSize;
+    Integer page = (pageNumber == null || pageNumber < 1) ? DEFAULT_PAGE_NUMBER : pageNumber;
+
+    Integer offsetValue = (page - 1) * size;
+
+    if (offsetValue > 2000) {
+        throw new AuraHandledException('The requested page exceeds the maximum offset limit of 2,000.');
+    }
+    
+    // 3. Secure Dynamic SOQL
+    // Use bind variables (:size, :offsetValue) for better security and performance
+    String query = 'SELECT Id, Name FROM ' + String.escapeSingleQuotes(objectName) + 
+                   ' ORDER BY CreatedDate DESC ' +
+                   ' LIMIT :size OFFSET :offsetValue';
+    
+    try {
+        result = Database.query(query);
+        return result;
+    } catch (Exception e) {
+        throw new AuraHandledException('Error retrieving records. Please check the object name or parameters.');
+    }
+}
