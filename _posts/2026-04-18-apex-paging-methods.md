@@ -27,12 +27,13 @@ The most intuitive way to page data is using `LIMIT` and `OFFSET`. While simple,
 ```java
 // Page 3 (20 records per page)
 List<Account> accs = [SELECT Id, Name FROM Account ORDER BY Name LIMIT 20 OFFSET 40];
+```
+
 
 Dynamic Implementation (Real-world Pattern)
 In a production environment, you need a reusable service that calculates the offset on the fly.
 
 ```java
-
 private static final Integer DEFAULT_PAGE_SIZE = 20;
 private static final Integer DEFAULT_PAGE_NUMBER = 1;
 
@@ -64,3 +65,4 @@ public static List<SObject> getPagedRecords(String objectName, Integer pageSize,
         throw new AuraHandledException('Error retrieving records. Please check the object name or parameters.');
     }
 }
+```
