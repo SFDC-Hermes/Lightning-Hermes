@@ -23,6 +23,7 @@ From the basic **Offset** to the modern **Apex Cursor**, let’s explore every m
 The most intuitive way to page data is using `LIMIT` and `OFFSET`. While simple, it has significant architectural constraints.
 
 ### Static Implementation
+
 ```java
 // Page 3 (20 records per page)
 List<Account> accs = [SELECT Id, Name FROM Account ORDER BY Name LIMIT 20 OFFSET 40];
@@ -31,6 +32,7 @@ Dynamic Implementation (Real-world Pattern)
 In a production environment, you need a reusable service that calculates the offset on the fly.
 
 ```java
+
 private static final Integer DEFAULT_PAGE_SIZE = 20;
 private static final Integer DEFAULT_PAGE_NUMBER = 1;
 
