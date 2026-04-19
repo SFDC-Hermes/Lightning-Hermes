@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Apex: How to Paging Data in Salesforce"
+title: "Apex: The Ultimate Guide to Scalable Paging in Salesforce"
 date: 2026-04-26
 categories:
   - Development
@@ -9,16 +9,20 @@ tags:
   - Salesforce
   - Paging
   - Performance
+  - ApexCursor
 ---
-How do you handle large data in Salesforce? Here's a quick guide to the 6 paging methods you need to know.
 
+Handling large datasets is a core challenge in Salesforce architecture. Fetching everything at once leads to Heap Size issues and CPU timeouts. To build resilient systems, you must choose the right paging strategy. 
 
-Offset-Based Pagination (OFFSET clause)
+From the basic **Offset** to the modern **Apex Cursor**, let’s explore every major paging method available in the ecosystem.
 
-QueryLocator (Batch Apex)
+---
 
-SOQL FOR Loop (Automatic Chunking)
+## 1. Offset-Based Pagination (Standard & Dynamic)
 
-Cursor-Based Pagination (REST API - nextRecordsUrl)
+The most intuitive way to page data is using `LIMIT` and `OFFSET`. While simple, it has significant architectural constraints.
 
-Keyset Pagination (WHERE + ORDER BY)
+### Static Implementation
+```java
+// Page 3 (20 records per page)
+List<Account> accs = [SELECT Id, Name FROM Account ORDER BY Name LIMIT 20 OFFSET 40];
