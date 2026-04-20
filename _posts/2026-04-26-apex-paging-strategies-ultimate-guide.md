@@ -73,3 +73,17 @@ public static List<SObject> getPagedRecords(String objectName, Integer pageSize,
 
 •	Scan & Discard: Performance degrades as you go deeper. To return records 1,980–2,000, Salesforce must still scan the first 1,979 records, leading to higher execution times.
 
+## 2. Keyset (Manual Cursor) Pagination
+To scale beyond 2,000 rows, architects use Keyset Pagination. This uses an indexed field (like Id or CreatedDate) as a marker.
+
+```java
+// Fetching the next page based on the last record from the previous page
+List<Account> accs = [SELECT Id, Name FROM Account 
+                      WHERE Id > :lastIdSeen 
+                      ORDER BY Id ASC LIMIT 20];
+```
+
+🧐 Pros & Cons
+•	Pros: Constant performance. Since it uses an index-based WHERE clause, it is lightning-fast even with millions of records.
+•	Cons: No random access. You cannot jump directly to Page 10 from Page 1. Users are restricted to "Next" and "Previous" navigation.
+
