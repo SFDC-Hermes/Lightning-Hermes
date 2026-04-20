@@ -68,7 +68,7 @@ public static List<SObject> getPagedRecords(String objectName, Integer pageSize,
 ```
 
 ⚠️ The Architect's Warning
-•	The 2,000 Row Wall: The OFFSET clause cannot exceed 2,000. You cannot use this for massive datasets.
 
+•	The 2,000 Row Wall: The OFFSET clause cannot exceed 2,000. You cannot use this for massive datasets.
 •	Scan & Discard: Performance degrades as you go deeper. To return records 1,980–2,000, Salesforce must still scan the first 1,979 records, leading to higher execution times.
 
