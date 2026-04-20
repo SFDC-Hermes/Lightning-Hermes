@@ -84,6 +84,8 @@ List<Account> accs = [SELECT Id, Name FROM Account
 ```
 
 🧐 Pros & Cons
+
 •	Pros: Constant performance. Since it uses an index-based WHERE clause, it is lightning-fast even with millions of records.
+
 •	Cons: No random access. You cannot jump directly to Page 10 from Page 1. Users are restricted to "Next" and "Previous" navigation.
 
