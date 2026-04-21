@@ -104,5 +104,12 @@ List<SObject> chunk = myCursor.fetch(5000, 200);
 
 •	State Management: Cursors have a limited lifespan (usually 48 hours) and are governed by per-user/per-org limits.
 
+## 4. Are there other ways? (Advanced Techniques)
+Beyond the methods above, there are two other techniques used in specific scenarios:
+1. QueryLocator (Async Processing)
+Used primarily in Batch Apex, the Database.QueryLocator can handle up to 50 million records.
+It is the engine behind heavy-duty data migrations and bulk updates. However, it is designed for asynchronous processing rather than real-time UI paging.
+
+
 
 
