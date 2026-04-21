@@ -101,6 +101,7 @@ List<SObject> chunk = myCursor.fetch(5000, 200);
 🛠️ Current Constraints
 
 •	No Subqueries: Subqueries like (SELECT Id FROM Contacts) are not supported in Cursor SOQL yet.
+
 •	State Management: Cursors have a limited lifespan (usually 48 hours) and are governed by per-user/per-org limits.
 
 
