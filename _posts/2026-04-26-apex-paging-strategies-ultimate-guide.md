@@ -89,3 +89,13 @@ List<Account> accs = [SELECT Id, Name FROM Account
 
 •	Cons: No random access. You cannot jump directly to Page 10 from Page 1. Users are restricted to "Next" and "Previous" navigation.
 
+## 3. Apex Cursor (The Modern Standard)
+Newly introduced, Apex Cursor is a stateful feature that allows you to navigate up to 50 million rows without the complexity of manual keyset logic.
+
+```Java
+Database.Cursor myCursor = Database.getCursor([SELECT Id, Name FROM Account]);
+// Fetching records 5,000 to 5,200
+List<SObject> chunk = myCursor.fetch(5000, 200);
+```
+
+
