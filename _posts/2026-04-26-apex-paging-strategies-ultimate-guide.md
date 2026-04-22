@@ -120,6 +120,7 @@ It is the engine behind heavy-duty data migrations and bulk updates. However, it
 | Apex Cursor |	50 Million |	Yes |	Fast	Large UI/Complex State |
 | Batch Apex |	50 Million |	No |	N/A (Async)	Bulk Data Processing |
 
+👉 [View Cursor Class in SF Document]([https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/SchemaService](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_class_Database_Cursor.htm))
 
 
 
