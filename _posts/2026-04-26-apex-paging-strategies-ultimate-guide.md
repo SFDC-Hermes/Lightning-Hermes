@@ -104,6 +104,8 @@ List<SObject> chunk = myCursor.fetch(5000, 200);
 
 •	State Management: Cursors have a limited lifespan (usually 48 hours) and are governed by per-user/per-org limits.
 
+• Apex Cursor is technically still in Beta, but it’s pretty solid for standard queries as long as there are no subqueries
+
 ## 4. Are there other ways? (Advanced Techniques)
 Beyond the methods above, there are two other techniques used in specific scenarios:
 
@@ -122,6 +124,15 @@ It is the engine behind heavy-duty data migrations and bulk updates. However, it
 
 👉 [View Cursor Class in SF Document]([https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/SchemaService](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_class_Database_Cursor.htm))
 
+🎯 Conclusion
 
+As an architect, your choice depends on the volume and the UX.
+1.	Use Offset for basic tables (under 2,000 rows).
+2.	Use Keyset for infinite scrolls or high-volume feeds.
+3.	Use Apex Cursor for modern, large-scale UI components that require page jumping.
+
+The 2,000-record OFFSET limit has long been a source of frustration for the Salesforce developer community. Fortunately, we are finally seeing more advanced methods evolve, which is a very welcome change.
+
+Mastering these patterns ensures your Salesforce implementation remains "Future-Proof" as your data grows.
 
 
