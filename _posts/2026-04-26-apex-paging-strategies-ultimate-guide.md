@@ -113,7 +113,8 @@ Used primarily in Batch Apex, the Database.QueryLocator can handle up to 50 mill
 It is the engine behind heavy-duty data migrations and bulk updates. However, it is designed for asynchronous processing rather than real-time UI paging.
 
 📊 Summary Comparison
-| **Strategy** |	**Max Rows** |**Random Access** |	**Performance	Best For** |
+| Strategy |	Max Rows |Random Access |	Performance	Best For |
+| :--- | :--- | :--- | :--- |
 | Offset | 2,000 |	Yes |	Slows at depth	Small/Medium UI |
 | Keyset |	Unlimited	| No |	Always Fast	High-Volume Logs/Feeds |
 | Apex Cursor |	50 Million |	Yes |	Fast	Large UI/Complex State |
