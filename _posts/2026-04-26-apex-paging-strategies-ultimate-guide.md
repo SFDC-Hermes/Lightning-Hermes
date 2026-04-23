@@ -89,7 +89,7 @@ List<Account> accountList = [SELECT Id, Name FROM Account
 
 •	Cons: No random access. You cannot jump directly to Page 10 from Page 1. Users are restricted to "Next" and "Previous" navigation.
 
-👉 [View Custom Index in SF Document]((https://developer.salesforce.com/docs/atlas.en-us.salesforce_large_data_volumes_bp.meta/salesforce_large_data_volumes_bp/ldv_deployments_infrastructure_indexes.htm)))
+👉 [View Custom Index in SF Document]((https://developer.salesforce.com/docs/atlas.en-us.salesforce_large_data_volumes_bp.meta/salesforce_large_data_volumes_bp/ldv_deployments_infrastructure_indexes.htm))
 
 ## 3. Apex Cursor (The Modern Standard)
 Newly introduced, Apex Cursor is a stateful feature that allows you to navigate up to 50 million rows without the complexity of manual keyset logic.
