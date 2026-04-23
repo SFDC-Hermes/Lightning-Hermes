@@ -73,6 +73,9 @@ public static List<SObject> getPagedRecords(String objectName, Integer pageSize,
 
 •	Scan & Discard: Performance degrades as you go deeper. To return records 1,980–2,000, Salesforce must still scan the first 1,979 records, leading to higher execution times.
 
+👉 [View Offset in SF Document](https://developer.salesforce.com/docs/atlas.en-us.soql_sosl.meta/soql_sosl/sforce_api_calls_soql_select_offset.htm)
+
+
 ## 2. Keyset (Manual Cursor) Pagination
 To scale beyond 2,000 rows, architects use Keyset Pagination. This uses an indexed field (like Id or CreatedDate) as a marker.
 
