@@ -93,9 +93,19 @@ List<Account> accountList = [SELECT Id, Name FROM Account
 Newly introduced, Apex Cursor is a stateful feature that allows you to navigate up to 50 million rows without the complexity of manual keyset logic.
 
 ```Java
-Database.Cursor myCursor = Database.getCursor([SELECT Id, Name FROM Account]);
-// Fetching records 5,000 to 5,200
-List<SObject> chunk = myCursor.fetch(5000, 200);
+/**
+ * @description Using the new Apex Cursor for high-volume paging
+ */
+public static List<SObject> getRecordsWithCursor(Integer startPos, Integer count) {
+    String query = 'SELECT Id FROM Account';
+    String orderByQuery = ' ORDER BY Name ';
+    Database.Cursor myCursor = Database.getCursor([query + orderByQuery]);
+    
+    // 2. Fetch a specific chunk based on position
+    // Unlike Offset, this can go way beyond 2,000
+    return myCursor.fetch(startPos, count);
+}
+
 ```
 
 🛠️ Current Constraints
