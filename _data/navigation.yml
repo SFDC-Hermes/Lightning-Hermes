@@ -5,8 +5,8 @@ main:
     url: /categories/sfdc-development/
   - title: "Concepts"
     url: /categories/sfdc-concepts/
-  - title: "External Libraries"
-    url: /categories/external-libraries/
+  - title: "Agentforce"
+    url: /categories/sfdc-agentforce/
 
 sidebar:
   - title: "Profile"
@@ -21,5 +21,5 @@ sidebar:
         url: /categories/sfdc-concepts/
   - title: "Resources"
     children:
-      - title: "External Libraries"
-        url: /categories/external-libraries/
+      - title: "Agentforce Legend"
+        url: /categories/sfdc-agentforce/
