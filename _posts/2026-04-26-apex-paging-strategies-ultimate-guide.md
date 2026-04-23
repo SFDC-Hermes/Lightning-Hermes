@@ -89,6 +89,8 @@ List<Account> accountList = [SELECT Id, Name FROM Account
 
 •	Cons: No random access. You cannot jump directly to Page 10 from Page 1. Users are restricted to "Next" and "Previous" navigation.
 
+👉 [View Custom Index in SF Document]((https://developer.salesforce.com/docs/atlas.en-us.salesforce_large_data_volumes_bp.meta/salesforce_large_data_volumes_bp/ldv_deployments_infrastructure_indexes.htm)))
+
 ## 3. Apex Cursor (The Modern Standard)
 Newly introduced, Apex Cursor is a stateful feature that allows you to navigate up to 50 million rows without the complexity of manual keyset logic.
 
@@ -132,7 +134,7 @@ It is the engine behind heavy-duty data migrations and bulk updates. However, it
 | Apex Cursor |	50 Million |	Yes |	Fast	Large UI/Complex State |
 | Batch Apex |	50 Million |	No |	N/A (Async)	Bulk Data Processing |
 
-👉 [View Cursor Class in SF Document]([https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/SchemaService](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_class_Database_Cursor.htm))
+👉 [View Cursor Class in SF Document]((https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_class_Database_Cursor.htm))
 
 🎯 Conclusion
 
