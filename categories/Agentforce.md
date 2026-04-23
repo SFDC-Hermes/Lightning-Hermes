@@ -1,7 +1,7 @@
 ---
 layout: category
 title: "Salesforce Agentforce"
-taxonomy: agentforce
+taxonomy: Agentforce
 permalink: /categories/salesforce-agentforce/
 author_profile: true
 sidebar:
