@@ -10,7 +10,7 @@ tags:
   - Sync
   - Async
 ---
-
+In a multi-tenant ecosystem, deciding between synchronous and asynchronous execution is a strategic choice that defines a system’s scalability.
 
 ---
 ## 1. Async Methods at a Glance
