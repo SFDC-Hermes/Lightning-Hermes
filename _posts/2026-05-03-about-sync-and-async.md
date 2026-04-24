@@ -14,6 +14,9 @@ tags:
 In a multi-tenant ecosystem, deciding between synchronous and asynchronous execution is a strategic choice that defines a system’s scalability.
 It is the art of managing transaction boundaries to maximize throughput while maintaining a seamless user experience under the pressure of governor limits.
 
+Based on the recent release notes, Salesforce appears to be prioritizing Queueable Apex over other asynchronous Apex features.
+Queueable Apex is no longer just a flexible alternative to @future; it has evolved into the cornerstone of modern asynchronous orchestration. Recent enhancements like scheduled delays and transaction finalizers provide architects with unprecedented control over execution timing and error recovery.
+
 ---
 ## 1. Async Methods at a Glance
 
