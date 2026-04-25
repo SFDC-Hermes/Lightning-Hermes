@@ -28,7 +28,8 @@ Synchronous execution is the default mode in Salesforce. It runs in a single thr
 
 ## 2. Sync vs. Async: Beyond the Governor Limits
 
-While we previously discussed [Detailed Governor Limits]({% post_url 2026-04-10-salesforce-governor-limits %}) in depth, the choice between Sync and Async also involves **Resource Isolation** and **Transaction Boundaries**.
+While we previously discussed in depth, the choice between Sync and Async also involves **Resource Isolation** and **Transaction Boundaries**.
+👉 [View governor limits post on GitHub](https://sfdc-hermes.github.io/SFDC-Hermes/concepts/2026/04/07/salesforce-governor-limits.html)
 
 | Feature | Synchronous (Sync) | Asynchronous (Async) |
 | :--- | :--- | :--- |
