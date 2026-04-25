@@ -8,14 +8,14 @@ public with sharing class PagingUtility {
      */
     public class ResultWrapper {
         @AuraEnabled public Integer totalCount { get; set; }
-        @AuraEnabled public List<SObject> records { get; set; }
+        @AuraEnabled public List<SObject> recordList { get; set; }
         public ResultWrapper(){
             this.totalCount = 0;
-            this.records = null;
+            this.recordList = null;
         }
         public ResultWrapper(Integer totalCount, List<SObject> records) {
             this.totalCount = totalCount;
-            this.records = records;
+            this.recordList = records;
         }
     }
 
@@ -44,7 +44,7 @@ public with sharing class PagingUtility {
 
         try {
             result.totalCount = Database.countQuery(countQuery);
-            result.records = Database.query(dataQuery);
+            result.recordList = Database.query(dataQuery);
             return result;
         } catch (Exception e) {
             throw new AuraHandledException('Paging Error: ' + e.getMessage());
