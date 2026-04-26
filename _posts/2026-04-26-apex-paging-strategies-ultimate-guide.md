@@ -81,9 +81,11 @@ To scale beyond 2,000 rows, architects use Keyset Pagination. This uses an index
 
 ```java
 // Fetching the next page based on the last record from the previous page
+Integer pageSize = (size == null) ? DEFAULT_PAGE_SIZE : size;
+
 List<Account> accountList = [SELECT Id, Name FROM Account 
                       WHERE Id > :lastIdSeen 
-                      ORDER BY Id ASC LIMIT 20];
+                      ORDER BY Id ASC LIMIT :pageSize];
 ```
 
 🧐 Pros & Cons
