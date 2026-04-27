@@ -99,7 +99,7 @@ List<Account> accountList = [SELECT Id, Name FROM Account
 ## 3. Apex Cursor (The Modern Standard)
 Newly introduced, Apex Cursor is a stateful feature that allows you to navigate up to 50 million rows without the complexity of manual keyset logic.
 
-```Java
+```java
 /**
  * @description Using the new Apex Cursor for high-volume paging
  */
