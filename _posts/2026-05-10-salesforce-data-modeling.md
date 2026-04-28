@@ -15,8 +15,7 @@ One of the most fundamental decisions a Salesforce Architect makes is choosing t
 Today, we’ll break down the two primary relationship types: **Master-Detail** and **Lookup**, and discuss when to use which.
 
 ## 🚨 1. Before Modeling Object Relationships
-Please review these two documents prior to data modeling. Correcting a flawed relationship architecture can be a significant challenge later on. In particular, transitioning from a Master-Detail to a Lookup relationship can be complicated due to numerous field dependencies. 
-
+**Please review these two documents prior to data modeling. Correcting a flawed relationship architecture can be a significant challenge later on. In particular, transitioning from a Master-Detail to a Lookup relationship can be complicated due to numerous field dependencies. **
 
 👉 [View SF Document about Relationships](https://help.salesforce.com/s/articleView?id=platform.overview_of_custom_object_relationships.htm&type=5)
 👉 [View SF Document about Considerations for Object Relationships](https://help.salesforce.com/s/articleView?id=platform.relationships_considerations.htm&type=5)
