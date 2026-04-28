@@ -14,6 +14,8 @@ tags:
 One of the most fundamental decisions a Salesforce Architect makes is choosing the right relationship type between objects. This choice dictates how data flows, how records are secured, and how the system performs.
 Today, we’ll break down the two primary relationship types: **Master-Detail** and **Lookup**, and discuss when to use which.
 
+---
+
 ## 🚨 1. Before Modeling Object Relationships
 
 **Please review these two documents prior to data modeling. Correcting a flawed relationship architecture can be a significant challenge later on. In particular, transitioning from a Master-Detail to a Lookup relationship can be complicated due to numerous field dependencies. **
