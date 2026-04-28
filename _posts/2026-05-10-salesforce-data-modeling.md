@@ -26,8 +26,8 @@ Think of a Master-Detail relationship as a **tightly coupled** parent-child bond
   
 ## Behaviors of master-detail relationships:
 
-* By default, records can’t be reparented in master-detail relationships. Administrators can, however, allow child records in master-detail relationships on custom objects to be reparented to different parent records by selecting the Allow reparenting option in the master-detail relationship definition.
-*  As a best practice, don’t exceed 10,000 child records for a master-detail relationship.
-* Each custom object can have up to two master-detail relationships and up to 40 total relationships.
+* By default, records can’t be reparented in master-detail relationships. Administrators can, however, allow child records in master-detail relationships on custom objects to be reparented to different parent records by selecting the **Allow reparenting option** in the master-detail relationship definition.
+*  As a best practice, don’t exceed **10,000** child records for a master-detail relationship.
+* Each custom object can have up to **two master-detail relationships** and up to **40 total relationships**.
   
 ---
