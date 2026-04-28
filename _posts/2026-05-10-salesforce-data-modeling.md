@@ -18,7 +18,7 @@ Today, we’ll break down the two primary relationship types: **Master-Detail** 
 
 ## 🚨 1. Before Modeling Object Relationships
 
-**I highly recommend reading these two documents before starting your data modeling. From my experience, once a relationship is established, it's extremely difficult to revert. This is especially true when converting from Master-Detail to Lookup, as many fields may already be dependent on that relationship.**
+**I highly recommend reading these two documents before starting your data modeling. From my experience, once a relationship is established, it's extremely difficult to revert. This is especially true when converting from Master-Detail to Lookup, as many roll-up summary fields may already be dependent on that relationship.**
 
 👉 [View SF Document about Relationships](https://help.salesforce.com/s/articleView?id=platform.overview_of_custom_object_relationships.htm&type=5)
 👉 [View SF Document about Considerations for Object Relationships](https://help.salesforce.com/s/articleView?id=platform.relationships_considerations.htm&type=5)
