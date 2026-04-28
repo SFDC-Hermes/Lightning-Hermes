@@ -14,7 +14,8 @@ tags:
 One of the most fundamental decisions a Salesforce Architect makes is choosing the right relationship type between objects. This choice dictates how data flows, how records are secured, and how the system performs.
 Today, we’ll break down the two primary relationship types: **Master-Detail** and **Lookup**, and discuss when to use which.
 
-Please review these two documents prior to data modeling. Correcting a flawed relationship architecture can be a significant challenge later on. In particular, transitioning from a Master-Detail to a Lookup relationship can be complicated due to numerous field dependencies. {: style="color: red;"}
+## 🚨 1. Before Modeling Object Relationships
+Please review these two documents prior to data modeling. Correcting a flawed relationship architecture can be a significant challenge later on. In particular, transitioning from a Master-Detail to a Lookup relationship can be complicated due to numerous field dependencies. 
 
 
 👉 [View SF Document about Relationships](https://help.salesforce.com/s/articleView?id=platform.overview_of_custom_object_relationships.htm&type=5)
@@ -22,7 +23,7 @@ Please review these two documents prior to data modeling. Correcting a flawed re
 
 ---
 
-## 🏗️ 1. Master-Detail: The "Inseparable" Connection
+## 🏗️ 2. Master-Detail: The "Inseparable" Connection
 Think of a Master-Detail relationship as a **tightly coupled** parent-child bond. The child (Detail) cannot exist without its parent (Master).
 ### Key Characteristics:
 * **Mandatory Parent:** A child record must have a parent at all times.
