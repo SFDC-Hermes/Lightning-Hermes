@@ -40,3 +40,13 @@ Think of a Master-Detail relationship as a **tightly coupled** parent-child bond
 * Each custom object can have up to **two master-detail relationships** and up to **40 total relationships**.
   
 ---
+
+## 🌿 2. Lookup: The "Professional" Association
+A Lookup relationship is a **loosely coupled** association. Two objects are linked, but they remain independent entities.
+### Key Characteristics:
+* **Optional Parent:** A record can exist without being linked to a parent.
+* **Independent Security:** Each record has its own **Owner** and can have its own independent sharing rules (Sharing Rules).
+* **Flexible Deletion:** If a parent is deleted, you can choose to either clear the lookup field, protect the parent from deletion, or (in some cases) cascade delete.
+* **No Native Roll-up:** Standard Roll-up Summary fields are not supported. You’ll need Apex triggers or Flow to aggregate data.
+
+---
