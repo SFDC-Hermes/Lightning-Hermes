@@ -92,7 +92,10 @@ Beyond security, the tightly coupled nature of Master-Detail creates significant
 To build a truly resilient system, one must prioritize Architectural Freedom.
 - **Maintain Lookup Relationships**: Keep the data models decoupled to ensure each object can have its own Sharing Rules and owners.
 - **Decouple Aggregation**: Use asynchronous logic (Flows or Apex) for data roll-ups instead of relying on the native MD feature.
-- **Final Thought**: Never let the ease of inherited sharing dictate your data security model. Security should be granular and independent. Build a system that can pivot with the business, not one that is anchored by its own relationships.
+  
+## Final Thought
+
+Never let the ease of inherited sharing dictate your data security model. Security should be granular and independent. Build a system that can pivot with the business, not one that is anchored by its own relationships.
 
 ## 🎯 Conclusion
 
