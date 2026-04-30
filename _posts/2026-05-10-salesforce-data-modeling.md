@@ -85,7 +85,7 @@ Beyond security, the tightly coupled nature of Master-Detail creates significant
 
 - Record Locking: Any update to a child record triggers a lock on the parent to maintain data integrity (and recalculate roll-ups).
   
--Contention: In systems processing thousands of transactions per second, this leads to frequent "Row Lock" errors, degrading performance and frustrating end-users.
+- Contention: In systems processing thousands of transactions per second, this leads to frequent "Row Lock" errors, degrading performance and frustrating end-users.
 
 **The Strategic Choice: Resilience over Convenience**
 
