@@ -63,5 +63,7 @@ A Lookup relationship is a **loosely coupled** association. Two objects are link
 
 ---
 
-## 🧐 Architect's Decision Matrix: Which one to choose?
-When deciding between these two, don't just look at the requirement for a Roll-up Summary.
+## 🎯 Conclusion
+
+As an architect, your role is to balance **functionality** (like Roll-up Summaries) with **security and integrity**. While Master-Detail offers powerful automation, the rigid security model can become a bottleneck as the organization grows.
+**Rule of Thumb:** If they are "One Soul in Two Bodies," go with Master-Detail. If they are "Colleagues working on the same project," choose Lookup.
