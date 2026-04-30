@@ -41,7 +41,7 @@ Think of a Master-Detail relationship as a **tightly coupled** parent-child bond
   
 ---
 
-## 🌿 2. Lookup: The "Professional" Association
+## 🌿 3. Lookup: The "Professional" Association
 A Lookup relationship is a **loosely coupled** association. Two objects are linked, but they remain independent entities.
 ### Key Characteristics:
 * **Optional Parent:** A record can exist without being linked to a parent.
