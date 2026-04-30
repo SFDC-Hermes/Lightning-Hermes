@@ -50,3 +50,18 @@ A Lookup relationship is a **loosely coupled** association. Two objects are link
 * **No Native Roll-up:** Standard Roll-up Summary fields are not supported. You’ll need Apex triggers or Flow to aggregate data.
 
 ---
+
+## 📊 Comparison at a Glance
+| Feature | Master-Detail | Lookup |
+| :--- | :--- | :--- |
+| **Coupling** | Tight (Strongly linked) | Loose (Independent) |
+| **Parent Required?** | Yes | Optional |
+| **Delete Behavior** | Always Cascade Delete | Clear / Protect / Cascade |
+| **Record Ownership** | Inherited from Master | Independent (Owner field exists) |
+| **Roll-up Summary** | **Supported natively** | Requires Customization (Flow/Apex) |
+| **Limits** | Max 2 per object | Max 40 per object |
+
+---
+
+## 🧐 Architect's Decision Matrix: Which one to choose?
+When deciding between these two, don't just look at the requirement for a Roll-up Summary.
