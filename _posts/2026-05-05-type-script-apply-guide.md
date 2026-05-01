@@ -117,7 +117,10 @@ Then, replace the content with the following configuration. This setup uses a "T
     "moduleResolution": "node",
     "module": "ESNext",
     "types": ["@salesforce/lightning-types"],
-    
+    "sourceMap": false,
+    "declaration": false,
+    "declarationMap": true,
+
     /* Path Mapping: Resolving 'c/component' imports */
     "baseUrl": ".",
     "paths": {
@@ -133,7 +136,9 @@ Then, replace the content with the following configuration. This setup uses a "T
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true, // Required: LWC compiler transpiles files individually
+    "noUncheckedSideEffectImports": true,
     "skipLibCheck": true,
+    "moduleDetection": "force",
     "noEmit": false
   },
   "include": ["force-app/main/default/lwc/**/*.ts"],
