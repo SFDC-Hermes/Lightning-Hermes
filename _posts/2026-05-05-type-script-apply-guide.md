@@ -117,7 +117,10 @@ Then, replace the content with the following configuration. This setup uses a "T
     "moduleResolution": "node",
     "module": "ESNext",
     "types": ["@salesforce/lightning-types"],
-    
+    "sourceMap": false,
+    "declaration": false,
+    "declarationMap": true,
+
     /* Path Mapping: Resolving 'c/component' imports */
     "baseUrl": ".",
     "paths": {
@@ -133,7 +136,9 @@ Then, replace the content with the following configuration. This setup uses a "T
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true, // Required: LWC compiler transpiles files individually
+    "noUncheckedSideEffectImports": true,
     "skipLibCheck": true,
+    "moduleDetection": "force",
     "noEmit": false
   },
   "include": ["force-app/main/default/lwc/**/*.ts"],
@@ -209,5 +214,8 @@ By adding this, you ensure that your editor stays clean and only alerts you to i
 With Node.js as your engine and TypeScript as your guardrails, you are now equipped to build more resilient Salesforce solutions. This setup is not just about writing code; it is about establishing a professional environment that prioritizes stability and long-term maintainability.
 
 ---
+<<<<<<< HEAD
 
 ## Error
+=======
+>>>>>>> aa74d5733628beaa9d42f18f109efbec1c950ae0
