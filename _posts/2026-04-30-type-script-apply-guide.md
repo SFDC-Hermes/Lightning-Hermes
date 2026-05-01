@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "A Step-by-Step Guide: TypeScript for Salesforce"
-date: 2026-05-17
+date: 2026-04-30
 categories:
   - Concepts
 tags:
@@ -114,3 +114,8 @@ Architect's Tip: Excluding .sfdx and node_modules from search significantly impr
 If you are working on a Windows environment, you may encounter execution errors when running scripts. Setting the execution policy allows the Salesforce CLI and npm scripts to run securely.
 
 Open PowerShell as Administrator and execute:
+
+```bash
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+Select 'Y' when prompted.
