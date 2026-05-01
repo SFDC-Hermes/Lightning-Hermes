@@ -172,8 +172,42 @@ You turn your development environment into a real-time validation engine. The co
 
 ---
 
+## 8. Pro Tip: Managing ESLint Noise in JavaScript (Optional)
+If you have the ESLint extension installed in VS Code, you might notice that it flags errors in your .js files alongside your .ts files. While well-intentioned, this can create unnecessary noise in a TypeScript-first project.
+
+Why Disable Linting for JS?
+JavaScript is a dynamically typed language, which means it often cannot detect certain types of errors until the code is actually executed at runtime. In our modern workflow, we rely on TypeScript's static analysis to catch these issues during the development phase.
+
+Once your TypeScript is transpiled into JavaScript, the resulting .js file is a "runtime artifact." Checking it again with ESLint is redundant and can lead to confusing warnings.
+
+The Solution: ignorePatterns
+To tell ESLint to focus exclusively on your source logic (TS) and ignore the generated artifacts (JS), update your .eslintrc.json file by adding the ignorePatterns property:
+
+```json 
+{
+  "extends": ["@salesforce/eslint-config-lwc/recommended"],
+  /* Ignore all .js files to prevent redundant linting noise */
+  "ignorePatterns": ["**/*.js"], 
+  "overrides": [
+    {
+      "files": ["*.test.js"],
+      "rules": {
+        "@lwc/lwc/no-unexpected-wire-adapter-usages": "off"
+      },
+      "env": {
+        "node": true
+      }
+    }
+  ]
+}
+```
+
+By adding this, you ensure that your editor stays clean and only alerts you to issues within your Source of Truth—the TypeScript files.
+
 🎯 Conclusion
 
 With Node.js as your engine and TypeScript as your guardrails, you are now equipped to build more resilient Salesforce solutions. This setup is not just about writing code; it is about establishing a professional environment that prioritizes stability and long-term maintainability.
 
 ---
+
+## Error
