@@ -103,7 +103,8 @@ tsc --init
 ```
 Then, replace the content with the following configuration. This setup uses a "Transpile-in-place" strategy, which is the most effective approach for the current Salesforce metadata structure.
 
-```Json
+```json
+
 {
   "compilerOptions": {
     /* File Layout */
@@ -138,6 +139,7 @@ Then, replace the content with the following configuration. This setup uses a "T
   "include": ["force-app/main/default/lwc/**/*.ts"],
   "exclude": ["node_modules"]
 }
+
 ```
 
 ---
@@ -162,7 +164,7 @@ To truly embrace the power of TypeScript, you shouldn't have to run the compiler
 
 By running the "Watch" command in your terminal:
 
-```Bash
+```bash
 tsc -w
 ```
 
