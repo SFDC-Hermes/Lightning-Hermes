@@ -1,3 +1,13 @@
+/**
+ * @description       : 
+ * @author            : SFDC-Hermes
+ * @group             : 
+ * @last modified on  : 2026-04-12
+ * @last modified by  : SFDC-Hermes
+ * Modifications Log 
+ * Ver   Date         Author        Modification
+ * 1.0   2026-04-12   SFDC-Hermes   Initial Version
+ **/
 public with sharing class StringUtility {
     private static final Integer MAX_BYTE_LIMIT = 90;
 

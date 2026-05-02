@@ -1,3 +1,13 @@
+/**
+ * @description       : 
+ * @author            : SFDC-Hermes
+ * @group             : 
+ * @last modified on  : 2026-04-26
+ * @last modified by  : SFDC-Hermes
+ * Modifications Log 
+ * Ver   Date         Author        Modification
+ * 1.0   2026-04-26   SFDC-Hermes   Initial Version
+ **/
 public with sharing class PagingUtility {
     private static final Integer DEFAULT_PAGE_SIZE = 20;
     private static final Integer DEFAULT_PAGE_NUMBER = 1;

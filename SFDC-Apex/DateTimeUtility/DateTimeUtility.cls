@@ -1,3 +1,13 @@
+/**
+ * @description       : 
+ * @author            : SFDC-Hermes
+ * @group             : 
+ * @last modified on  : 2026-03-14
+ * @last modified by  : SFDC-Hermes
+ * Modifications Log 
+ * Ver   Date         Author        Modification
+ * 1.0   2026-03-14   SFDC-Hermes   Initial Version
+ **/
 public with sharing class DateTimeUtility {
     /**
      * @description Converts a Date to a DateTime with a specified hour

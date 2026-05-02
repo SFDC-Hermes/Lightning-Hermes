@@ -1,3 +1,13 @@
+/**
+ * @description       : 
+ * @author            : SFDC-Hermes
+ * @group             : 
+ * @last modified on  : 2026-04-19
+ * @last modified by  : SFDC-Hermes
+ * Modifications Log 
+ * Ver   Date         Author        Modification
+ * 1.0   2026-04-19   SFDC-Hermes   Initial Version
+ **/
 import { LightningElement, api, wire, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { getRecord, getFieldValue as getRecordFieldValue } from 'lightning/uiRecordApi';

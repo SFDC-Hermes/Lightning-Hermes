@@ -4,7 +4,10 @@
  * @group             : 
  * @last modified on  : 2026-03-13
  * @last modified by  : SFDC-Hermes
-**/
+ * Modifications Log 
+ * Ver   Date         Author        Modification
+ * 1.0   2026-03-13   SFDC-Hermes   Initial Version
+ **/
 import { LightningElement } from 'lwc';
 import LightningDatatable from 'lightning/datatable';
 import picklistEditable from './picklistEditable.html';

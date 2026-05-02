@@ -1,10 +1,15 @@
-/**
- * @description Utility class for retrieving Public Group member emails.
+ /**
+ * @description       : Utility class for retrieving Public Group member emails.
  * Supports both flat (direct members only) and recursive (nested subgroups/roles) resolution.
- * Includes protection against circular references in group structures.
- * @author Hermes
- * @date 2026-03-28
- */
+ * Includes protection against circular references in group structures. 
+ * @author            : SFDC-Hermes
+ * @group             : 
+ * @last modified on  : 2026-03-28
+ * @last modified by  : SFDC-Hermes
+ * Modifications Log 
+ * Ver   Date         Author        Modification
+ * 1.0   2026-03-28   SFDC-Hermes   Initial Version
+ **/
 public class GroupMemberUtility {
 
     /**

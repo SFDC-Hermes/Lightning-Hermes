@@ -1,3 +1,13 @@
+/**
+ * @description       : 
+ * @author            : SFDC-Hermes
+ * @group             : 
+ * @last modified on  : 2026-03-25
+ * @last modified by  : SFDC-Hermes
+ * Modifications Log 
+ * Ver   Date         Author        Modification
+ * 1.0   2026-03-25   SFDC-Hermes   Initial Version
+ **/
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
 import getPicklistWrap from '@salesforce/apex/COMM_Util.getPicklistWrap';
