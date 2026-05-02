@@ -179,6 +179,16 @@ To truly embrace the power of TypeScript, you shouldn't have to run the compiler
 
 By running the "Watch" command in your terminal:
 
+If your terminal is currently at the project root, you must first move to the LWC folder:
+
+```bash
+cd "force-app/main/default/lwc"
+```
+
+Once your terminal is in the correct directory, you can activate the "Watch" command.
+
+Then, run the following to start the automation:
+
 ```bash
 tsc -w
 ```
