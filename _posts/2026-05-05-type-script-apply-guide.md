@@ -106,7 +106,10 @@ Then, replace the content with the following configuration. This setup uses a "T
 ```json
 
 {
+  "extends": "../../../../.sfdx/tsconfig.sfdx.json",
   "compilerOptions": {
+    "checkJs": false, 
+    "allowJs": true,
     /* File Layout */
     "rootDir": "./force-app/main/default/lwc", 
     "outDir": "./force-app/main/default/lwc", 
@@ -131,6 +134,8 @@ Then, replace the content with the following configuration. This setup uses a "T
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
+    "experimentalDecorators": true,
+
 
     /* LWC Architect Standards */
     "jsx": "react-jsx",
@@ -141,8 +146,13 @@ Then, replace the content with the following configuration. This setup uses a "T
     "moduleDetection": "force",
     "noEmit": false
   },
-  "include": ["force-app/main/default/lwc/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+        "**/*.ts",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "exclude": [
+        "**/__tests__/**"
+    ]
 }
 
 ```
