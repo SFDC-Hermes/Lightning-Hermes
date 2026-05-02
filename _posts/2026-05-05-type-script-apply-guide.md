@@ -115,8 +115,8 @@ Then, replace the content with the following configuration. This setup uses a "T
     "outDir": ".", 
 
     /* Environment Settings */
-    "target": "es2017",
-    "lib": ["es2017", "dom"],
+    "target": "es2022",
+    "lib": ["es2022", "dom"],
     "moduleResolution": "bundler",
     "module": "ESNext",
     "types": ["@salesforce/lightning-types"],
@@ -135,10 +135,9 @@ Then, replace the content with the following configuration. This setup uses a "T
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "experimentalDecorators": true,
-
+    "emitDecoratorMetadata": false, 
 
     /* LWC Architect Standards */
-    "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true, // Required: LWC compiler transpiles files individually
     "noUncheckedSideEffectImports": true,
@@ -151,7 +150,8 @@ Then, replace the content with the following configuration. This setup uses a "T
         "../../../../.sfdx/typings/lwc/**/*.d.ts"
     ],
     "exclude": [
-        "**/__tests__/**"
+        "**/__tests__/**",
+        "**/*.js"
     ]
 }
 
