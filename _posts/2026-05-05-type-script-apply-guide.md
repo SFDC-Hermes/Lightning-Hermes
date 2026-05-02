@@ -111,13 +111,13 @@ Then, replace the content with the following configuration. This setup uses a "T
     "checkJs": false, 
     "allowJs": true,
     /* File Layout */
-    "rootDir": "./force-app/main/default/lwc", 
-    "outDir": "./force-app/main/default/lwc", 
+    "rootDir": ".", 
+    "outDir": ".", 
 
     /* Environment Settings */
     "target": "es2017",
     "lib": ["es2017", "dom"],
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "module": "ESNext",
     "types": ["@salesforce/lightning-types"],
     "sourceMap": false,
