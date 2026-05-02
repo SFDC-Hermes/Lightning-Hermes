@@ -19,6 +19,30 @@ In this guide, we will set up the essential foundation—Node.js and VS Code—w
 
 ---
 
+## 0. The Hard Truth: The "Decorator War"
+Before you begin, we must address the elephant in the room: Salesforce LWC does not "natively" run TypeScript.
+
+While Salesforce provides build-time support, the standard TypeScript compiler (tsc) and the LWC engine often fight over Decorators (@api, @track, @wire). If you use tsc -w (Watch Mode) with default settings, it will "helpfully" transpile your decorators into a complex polyfill like this:
+
+```javascript
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+```
+
+The Result? Your deployment will FAIL. The Salesforce LWC compiler is hardcoded to look for the literal @api string to generate metadata. If it sees __decorate, it has no idea that the variable is a public property.
+
+As a developer who understands the immense value of static typing—especially in Enterprise-level projects where code stability and maintainability are paramount—this environmental friction is disappointing. Static typing significantly reduces runtime errors and allows for more robust architectural designs, such as those following SOLID principles.
+
+I sincerely hope to see seamless, native TypeScript support from the Salesforce platform soon, allowing us to leverage the full power of the TS engine without these manual "workarounds." Until then, we must be strategic in our environment setup to enjoy "TypeScript's brain" without breaking "JavaScript's compatibility."
+
+---
+
 ## 1. Establishing the Environment: Node.js
 
 Before we can use TypeScript, we need the runtime environment that allows our development tools to function.
