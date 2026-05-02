@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "LWC: Extending Lightning Datatable with Custom Types"
+title: "LWC: Extending Lightning Datatable with Picklist and Toggle Types (1)"
 date: 2026-03-13
 categories:
   - Development
