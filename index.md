@@ -15,12 +15,14 @@ header:
 <div class="intro-wrapper">
   <h1>👋 Welcome!</h1>
   <p class="intro-text">
-    I am a <span class="highlight">Salesforce Developer based in South Korea</span>, dedicated to building clean, scalable, and high-performance architectures. 
-    I can't share the exact code or details from my actual projects, but I plan to consistently post and refine the foundational concepts behind them.
+    I am a <span class="highlight">Salesforce Developer based in South Korea</span>, dedicated to building clean, scalable, and high-performance architectures.
   </p>
-<p class="intro-subtext">
-  This blog serves as a technical archive for system design and clean code. I document complex engineering challenges and the architectural solutions derived from my real-world Salesforce projects. <b>While the technical substance and logic are rooted in my direct professional experience, the narratives of these posts are refined in collaboration with AI.</b>
-</p>
+  <p class = "itnro-subtext">
+    I can't share the exact code or details from my actual projects, but I plan to consistently post and refine the <b>foundational concepts</b> behind them.
+  </p>
+  <p class="intro-subtext">
+    This blog serves as a technical archive for system design and clean code. I document complex engineering challenges and the architectural solutions derived from my real-world Salesforce projects. <b>While     the technical substance and logic are rooted in my direct professional experience, the narratives of these posts are refined in collaboration with AI.</b>
+  </p>
   
   <div class="skill-badges">
     <span>Apex</span> <span>LWC</span> <span>Data</span> <span>System Architect</span> <span>Agentforce</span> <span>Java</span>
