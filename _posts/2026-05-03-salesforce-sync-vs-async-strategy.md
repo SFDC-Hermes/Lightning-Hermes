@@ -3,7 +3,7 @@ layout: single
 title: "Salesforce Architecture: Synchronous vs. Asynchronous Strategy"
 date: 2026-05-03
 categories:
-  - Development
+  - Concepts
 tags:
   - Apex
   - Salesforce
