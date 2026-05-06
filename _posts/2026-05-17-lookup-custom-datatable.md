@@ -31,3 +31,22 @@ Refer to the previously implemented codebase to maintain consistency in field ma
 👉 [Previous Code Overview](https://sfdc-hermes.github.io/SFDC-Hermes/development/2026/03/13/custom-datatable.html)
 
 ---
+
+## 1. 
+
+```javascript
+import LightningDatatable from 'lightning/datatable';
+import lookupTemplate from './lookupTemplate.html';
+import lookupEditTemplate from './lookupEditTemplate.html';
+
+export default class CustomDatatable extends LightningDatatable {
+    static customTypes = {
+        lookup: {
+            template: lookupTemplate,      
+            editTemplate: lookupEditTemplate,
+            standardCellLayout: true,
+            typeAttributes: ['value', 'objectApiName', 'name', 'label', 'context', 'fieldName'] 
+        }
+    };
+}
+```
