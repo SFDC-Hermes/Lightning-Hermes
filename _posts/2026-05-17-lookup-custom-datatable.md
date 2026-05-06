@@ -32,7 +32,9 @@ Refer to the previously implemented codebase to maintain consistency in field ma
 
 ---
 
-## 1. 
+## 1. Core Implementation: CustomDatatable.js
+
+To add new types, we define customTypes in our JavaScript file. This tells the datatable which template to render for specific type attributes.
 
 ```javascript
 import LightningDatatable from 'lightning/datatable';
