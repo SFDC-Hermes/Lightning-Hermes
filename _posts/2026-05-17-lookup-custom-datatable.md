@@ -52,3 +52,27 @@ export default class CustomDatatable extends LightningDatatable {
     };
 }
 ```
+
+---
+## 2. How to Use: Column Configuration
+When using this custom component in your parent LWC, configure the columns as follows. Note that you must set editable: true and provide the necessary typeAttributes.
+
+```javascript
+Columns = [
+            label: 'Account Name'
+            , fieldName: 'AccountId'
+            , type: 'lookup'
+            , editable: true
+            , typeAttributes: {
+                objectApiName: 'Account',
+                value: { fieldName: 'AccountId' },
+                name: { fieldName : 'AccountId_Name' }, 
+                fieldName: 'AccountId',
+                label: 'Account',
+                context: { fieldName: 'Id' }
+            }
+        },
+  ]
+```
+
+
