@@ -23,3 +23,11 @@ This post covers how to implement a custom datatable that supports specialized c
 * **Reusable Architecture:** Extends the standard `LightningDatatable` while maintaining all original functionalities.
 
 ---
+
+## 0. Implementation Reference
+
+Refer to the previously implemented codebase to maintain consistency in field mapping and event handling.
+
+👉 [Previous Code Overview](https://sfdc-hermes.github.io/SFDC-Hermes/development/2026/03/13/custom-datatable.html)
+
+---
