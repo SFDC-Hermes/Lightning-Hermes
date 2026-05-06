@@ -75,4 +75,11 @@ Columns = [
   ]
 ```
 
+--- 
+
+## 3. Key Architectural Takeaways
+Standardization: By extending the base class, we keep the look and feel consistent with the rest of Salesforce Lightning.
+Context Binding: Passing the Id as a context attribute is crucial. It allows the component to return the exact record ID when a value is changed.
+Scalability: You can easily add more custom types (like file uploaders or custom lookups) by adding them to the customTypes object.
+
 
