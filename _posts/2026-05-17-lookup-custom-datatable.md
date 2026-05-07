@@ -80,6 +80,18 @@ Columns = [
 
 ## 3. How to detect changes 
 
+How to Perform Dynamic Queries Using recordId in ApexIn Salesforce development, often need to handle multiple objects with a single Apex method. 
+
+Instead of hardcoding the object name, you can pass the recordId as a parameter and use it to identify the object type dynamically.
+
+To achieve this, use the following code snippet to retrieve the Object API Name:
+
+```java
+  String objectApiName = recordId.getSobjectType().getDescribe().getName();
+```
+
+By using this approach can construct a Dynamic SOQL query that works for any object, making Apex code much more reusable and flexible.
+
 ```javascript
 
 async handleLookupSelect(event) {
