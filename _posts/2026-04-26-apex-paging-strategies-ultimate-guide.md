@@ -122,6 +122,7 @@ public static List<SObject> getRecordsWithCursor(Integer startPos, Integer count
 •	State Management: Cursors have a limited lifespan (usually 48 hours) and are governed by per-user/per-org limits.
 
 | Limit |	Synchronous |	Asynchronous |
+| :--- | :--- | :--- |
 | Maximum number of Apex cursors per day |	10,000	| 10,000 |
 | Maximum cumulative number of new cursor rows and pagination cursor rows per 24-hour period |	100,000,000 |	100,000,000 |
 | Maximum number of Apex pagination cursor instances per 24-hour period |	200,000	| 200,000 |
