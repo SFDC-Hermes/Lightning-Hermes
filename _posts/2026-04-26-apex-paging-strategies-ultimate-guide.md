@@ -96,7 +96,7 @@ List<Account> accountList = [SELECT Id, Name FROM Account
 
 👉 [View Custom Index in SF Document](https://developer.salesforce.com/docs/atlas.en-us.salesforce_large_data_volumes_bp.meta/salesforce_large_data_volumes_bp/ldv_deployments_infrastructure_indexes.htm)
 
-## 3. Apex Cursor (The Modern Standard)
+## 3. Apex Cursor 
 Newly introduced, Apex Cursor is a stateful feature that allows you to navigate up to 50 million rows without the complexity of manual keyset logic.
 
 ```java
@@ -120,6 +120,12 @@ public static List<SObject> getRecordsWithCursor(Integer startPos, Integer count
 •	No Subqueries: Subqueries like (SELECT Id FROM Contacts) are not supported in Cursor SOQL yet.
 
 •	State Management: Cursors have a limited lifespan (usually 48 hours) and are governed by per-user/per-org limits.
+
+| Limit |	Synchronous |	Asynchronous |
+| Maximum number of Apex cursors per day |	10,000	| 10,000 |
+| Maximum cumulative number of new cursor rows and pagination cursor rows per 24-hour period |	100,000,000 |	100,000,000 |
+| Maximum number of Apex pagination cursor instances per 24-hour period |	200,000	| 200,000 |
+
 
 • Apex Cursor is technically still in Beta, but it’s pretty solid for standard queries as long as there are no subqueries
 
