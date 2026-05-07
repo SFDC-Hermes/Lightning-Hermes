@@ -76,6 +76,16 @@ Columns = [
   ]
 ```
 
+### ⚠️ Required Dependency
+
+This component relies on the **lookupType** component to handle the specific rendering of the switch. Make sure to deploy both:
+- `customDatatable`
+- `lookupType`
+- `lookupLinkCell` - Navigate to record detail page in default state
+
+👉 [LookupLinkCell Component](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/LookupType)
+👉 [LookupType Component](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/LookupLinkCell)
+
 --- 
 
 ## 3. Key Architectural Takeaways
