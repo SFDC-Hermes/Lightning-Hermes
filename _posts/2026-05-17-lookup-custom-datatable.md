@@ -100,11 +100,7 @@ async handleLookupSelect(event) {
         this.updateDraftValuesAndData(draftItem);
 
         const displayFieldName = fieldName + '_Name';
-        this.updateDataValues({
-                              Id: context
-                              , [fieldName]: value
-                              , [displayFieldName]: realRecordName
-                              });
+        this.updateDataValues({Id: context, [fieldName]: value, [displayFieldName]: realRecordName});
     }
 
 ```
