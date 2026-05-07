@@ -24,4 +24,22 @@ public without sharing class COMM_Util {
             this.value = value;
         }
     }
+
+    @AuraEnabled(cacheable=true)
+    public static String getRecordName(Id recordId) {
+        String result;
+        if (recordId == null) return null;
+        try{
+           String objectApiName = recordId.getSobjectType().getDescribe().getName();
+
+           String query = 'SELECT Name FROM ' + objectApiName + ' WHERE Id = :recordId LIMIT 1';
+           List<SObject> results = Database.query(query);
+           if (!results.isEmpty()) {
+               result = (String)results[0].get('Name');
+           }
+           return result;
+        }catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }           
+    }
 }
