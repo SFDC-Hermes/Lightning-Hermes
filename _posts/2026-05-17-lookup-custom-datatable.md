@@ -76,6 +76,39 @@ Columns = [
   ]
 ```
 
+---
+
+## 3. How to detect changes 
+
+```javascript
+
+async handleLookupSelect(event) {
+        event.stopPropagation();
+        const { context, value, fieldName } = event.detail.data;
+
+        let realRecordName = '';
+        if (value) {
+            try {
+                realRecordName = await getRecordName({ recordId: value });
+            } catch (error) {
+                console.error('Record name fetch failed:', error);
+                realRecordName = 'Unknown';
+            }
+        }
+
+        const draftItem = { Id: context, [fieldName]: value };
+        this.updateDraftValuesAndData(draftItem);
+
+        const displayFieldName = fieldName + '_Name';
+        this.updateDataValues({
+                              Id: context
+                              , [fieldName]: value
+                              , [displayFieldName]: realRecordName
+                              });
+    }
+
+```
+
 ### ⚠️ Required Dependency
 
 This component relies on the **lookupType** component to handle the specific rendering of the switch. Make sure to deploy both:
