@@ -121,15 +121,26 @@ public static List<SObject> getRecordsWithCursor(Integer startPos, Integer count
 
 •	State Management: Cursors have a limited lifespan (usually 48 hours) and are governed by per-user/per-org limits.
 
-| Limit |	Synchronous |	Asynchronous |
-| :--- | :--- | :--- |
-| Maximum number of Apex cursors per day |	10,000	| 10,000 |
-| Maximum cumulative number of new cursor rows and pagination cursor rows per 24-hour period |	100,000,000 |	100,000,000 |
-| Maximum number of Apex pagination cursor instances per 24-hour period |	200,000	| 200,000 |
+**Per-Transaction Limits**
 
+| Limit |	Value |	
+| :--- | :--- |
+| Maximum rows across all Apex cursors | 50,000,000 |
+| Maximum Cursor.fetch calls | 100 |
+| Maximum Apex pagination cursor instances | 50 |
+| Maximum rows across all Apex pagination cursors |	100,000 |
+| Maximum rows per page (pagination cursor)	| 2,000 |
+
+**Per-24-Hour Daily Org Limits**
+
+| Limit |	Value |	
+| :--- | :--- |
+| Maximum number of Apex cursors per day |	10,000	| 
+| Maximum cumulative number of new cursor rows and pagination cursor rows per 24-hour period |	100,000,000 |
+| Maximum number of Apex pagination cursor instances per 24-hour period |	200,000	|
 
 • Apex Cursor is technically still in Beta, but it’s pretty solid for standard queries as long as there are no subqueries
-
+👉 [View Cursor Method in SF Document](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/PagingUtility)
 👉 [View Utility Code on GitHub](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-Apex/PagingUtility)
 
 ## 4. Are there other ways? (Advanced Techniques)
