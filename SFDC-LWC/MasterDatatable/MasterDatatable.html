@@ -1,0 +1,24 @@
+<template>
+    <lightning-card>
+        <template if:true={tableData}>        
+            <c-custom-datatable
+            key-field="Id"
+            data={tableData} 
+            columns={columns} 
+            draft-values={saveDraftValues} 
+            onsave={handleSave}
+            ontoggleselect={handletoggleselect}
+            onlookupselect={handleLookupSelect}
+            oncellchange={handleCellChange}
+            oncancel={handleCancel}
+            sorted-by={sortBy}
+            sorted-direction={sortDirection}
+            onsort={doSorting}
+            hide-checkbox-column 
+            show-row-number-column
+            >     
+            </c-custom-datatable>
+        </template>
+    </lightning-card>
+ 
+ </template>
