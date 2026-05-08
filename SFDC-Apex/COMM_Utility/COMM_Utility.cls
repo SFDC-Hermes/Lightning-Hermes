@@ -1,4 +1,4 @@
-public without sharing class COMM_Util {
+public without sharing class COMM_Utility {
     @AuraEnabled(cacheable=true)
     public static List<PicklistWrap> getPicklistWrap(String objectName, String fieldName) {
 
