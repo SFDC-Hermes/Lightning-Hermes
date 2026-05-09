@@ -77,6 +77,62 @@ export default class MasterDatatable extends LightningElement {
         });
     }
 
+    updateDraftValuesAndData(updateItem) {
+        const copyDraftValues = [...this.saveDraftValues];
+        const itemIndex = copyDraftValues.findIndex(item => item.Id === updateItem.Id);
+
+        if (itemIndex > -1) {
+            copyDraftValues[itemIndex] = { ...copyDraftValues[itemIndex], ...updateItem };
+        } else {
+            copyDraftValues.push(updateItem);
+        }
+        this.saveDraftValues = copyDraftValues;
+    }
+
+    updateDataValues(updateItem) {
+        this._tableData = this._tableData.map(item => {
+            if (item.Id === updateItem.Id) {
+                return { ...item, ...updateItem };
+            }
+            return item;
+        });
+    }
+
+    handleCellChange(event) {
+        const draftValues = event.detail.draftValues || [];
+        draftValues.forEach(ele => {
+            const cleanUpdateItem = {};
+            Object.keys(ele).forEach(key => {
+                if (ele[key] !== undefined) {
+                    cleanUpdateItem[key] = ele[key];
+                }
+            });
+            if (Object.keys(cleanUpdateItem).length > 1) {
+                this.updateDraftValuesAndData(cleanUpdateItem);
+            }
+        });
+    }
+
+    handletoggleselect(event) {
+        event.stopPropagation();
+        const { context, value, fieldName } = event.detail.data;
+        const updatedItem = { Id: context, [fieldName]: value };
+        this.updateDraftValuesAndData(updatedItem);
+    }
+
+    handlePicklistChanged(event) {
+        event.stopPropagation();
+        const { context, value } = event.detail.data;
+        const fieldName = this.multiPicklistFieldApiName;
+        if (!fieldName) {
+            console.warn('multiPicklistFieldApiName is not configured');
+            return;
+        }
+        const updatedItem = { Id: context, [fieldName]: value };
+        this.updateDraftValuesAndData(updatedItem);
+        this.updateDataValues(updatedItem);
+    }
+
     async handleLookupSelect(event) {
         event.stopPropagation();
         const { context, value, fieldName } = event.detail.data;
@@ -100,7 +156,7 @@ export default class MasterDatatable extends LightningElement {
 
     handleCancel() {
         this.saveDraftValues = [];
-        const datatable = this.template.querySelector('c-wj-custom-datatable');
+        const datatable = this.template.querySelector('c-custom-datatable');
         if (datatable) {
             datatable.draftValues = [];
         }
