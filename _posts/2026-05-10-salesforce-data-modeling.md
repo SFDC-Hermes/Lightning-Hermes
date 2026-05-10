@@ -18,9 +18,10 @@ Today, we’ll break down the two primary relationship types: **Master-Detail** 
 
 ## 🚨 1. Before Modeling Object Relationships
 
-**I highly recommend reading these two documents before starting your data modeling. From my experience, once a relationship is established, it's extremely difficult to revert. This is especially true when converting from Master-Detail to Lookup, as many roll-up summary fields may already be dependent on that relationship.**
+**I highly recommend** reading these two documents before starting your data modeling. From my experience, once a relationship is established, it's extremely difficult to revert. This is especially true when converting from Master-Detail to Lookup, as many roll-up summary fields may already be dependent on that relationship.
 
 👉 [View SF Document about Relationships](https://help.salesforce.com/s/articleView?id=platform.overview_of_custom_object_relationships.htm&type=5)
+
 👉 [View SF Document about Considerations for Object Relationships](https://help.salesforce.com/s/articleView?id=platform.relationships_considerations.htm&type=5)
 
 ---
@@ -29,9 +30,9 @@ Today, we’ll break down the two primary relationship types: **Master-Detail** 
 Think of a Master-Detail relationship as a **tightly coupled** parent-child bond. The child (Detail) cannot exist without its parent (Master).
 ### Key Characteristics:
 * **Mandatory Parent:** A child record must have a parent at all times.
-* **Cascade Delete:** If you delete the Master record, all related Detail records are automatically deleted.
+* **Cascade Delete:** If delete the Master record, all related Detail records are automatically deleted.
 * **Security Inheritance:** The child record does not have its own "Owner" field. Instead, it **inherits the sharing and security settings** of the Master.
-* **Roll-up Summary:** This is the biggest advantage. You can create fields on the Master object to calculate the SUM, MIN, MAX, or COUNT of child records.
+* **Roll-up Summary:** This is the biggest advantage. Create fields on the Master object to calculate the SUM, MIN, MAX, or COUNT of child records.
   
 ## Behaviors of master-detail relationships:
 
@@ -52,6 +53,7 @@ A Lookup relationship is a **loosely coupled** association. Two objects are link
 ---
 
 ## 📊 Comparison at a Glance
+
 | Feature | Master-Detail | Lookup |
 | :--- | :--- | :--- |
 | **Coupling** | Tight (Strongly linked) | Loose (Independent) |
@@ -70,8 +72,8 @@ In large-scale enterprise systems, the choice between Master-Detail (MD) and Loo
 **The Pitfall of Inherited Visibility**
 
 When faced with complex visibility requirements—such as when a parent record’s access isn't enough to cover diverse regional needs—stakeholders often suggest switching to a Master-Detail relationship. The allure is clear: child records automatically inherit the parent's security settings. But this "convenience" is a double-edged sword.
-- Zero Granularity: In an MD relationship, the child record loses its independent sharing model. If a future requirement demands that a user see a specific child record without having access to the parent "Master," the architecture fails.
-- Over-Privileging: To grant access to a single child record, you are forced to open up the parent record, violating the Principle of Least Privilege.
+- **Zero Granularity**: In an MD relationship, the child record loses its independent sharing model. If a future requirement demands that a user see a specific child record without having access to the parent "Master," the architecture fails.
+- **Over-Privileging**: To grant access to a single child record, you are forced to open up the parent record, violating the Principle of Least Privilege.
 
 **The "Scale" Misconception**
   
