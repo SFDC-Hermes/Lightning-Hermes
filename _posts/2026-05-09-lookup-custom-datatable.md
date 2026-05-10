@@ -57,14 +57,15 @@ For CustomDatatable to render a lookup input within a cell, we need a dedicated 
 This component doesn't just display a search bar; it must implement a specific interface to communicate seamlessly with the datatable's inline editing engine.
 
 **Key Technical Aspects**
-1. **Interface Compliance (Standard Methods)**
+
+**1. Interface Compliance (Standard Methods)**
 methods like focus(), validity, and checkValidity(). These are not optional. When the datatable enters edit mode and focuses on a cell, it looks for these standard LWC input methods.
 
 focus(): Ensures that when a user clicks the edit icon, the cursor is automatically placed in the record picker.
 
 Validation: By providing validity and checkValidity(), we ensure the datatable can include this custom field in its standard error-handling lifecycle.
 
-2. **Advanced Event Strategy**: lookupselect
+**2. Advanced Event Strategy**: lookupselect
 
 In LWC, events are encapsulated within their component’s Shadow DOM by default. However, for a Custom Datatable Type, the event must travel a long and restricted path to reach its destination. This is where bubbles and composed become mandatory.
 
@@ -87,7 +88,9 @@ Setting composed: true is what gives the event the **permission** to cross that 
 **Why both are required here?**
 
 In architecture, the event journey looks like this:
+
 lightning-record-picker → lookupType (Shadow Boundary 1) → Datatable Cell (Shadow Boundary 2) → CustomDatatable.
+
 To ensure our handleLookupSelect in the CustomDatable catches the change, must enable both to allow the event to "bubble" and stay "composed" across these nested layers.
 
 ### ⚠️ Architect's Note: The Encapsulation Trade-off
@@ -96,7 +99,7 @@ Setting composed: true should be done with caution. It breaks the principle of e
 
 However, in the case of Extending Datatables, it is a deliberate architectural choice to facilitate communication between a deeply nested custom editor and its parent.
 
-3. **UX Polish**: Automatic Blur
+**3. UX Polish**: Automatic Blur
 
 ```javascript
 const picker = this.template.querySelector('lightning-record-picker');
@@ -175,8 +178,8 @@ async handleLookupSelect(event) {
 
 ```
 
-## 5. Architectural Takeaway: The "Base Table" Vision
-This CustomDatatable serves as the underlying engine. By wrapping this inside a CoreDatatable (or BaseTable), you can add global features like Server-side Paging and Global Search.
+## 5. Architectural Takeaway: The "Master Datable" Vision
+This CustomDatatable serves as the underlying engine. By wrapping this inside a Master Datable, you can add global features like Server-side Paging and Global Search.
 
 Standardization: Extends the platform's native look and feel.
 
