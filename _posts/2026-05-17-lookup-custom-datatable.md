@@ -54,9 +54,9 @@ export default class CustomDatatable extends LightningDatatable {
 ```
 
 ---
-## 2. How to Use: Column Configuration
+## 2. Usage: Column Configuration
 
-When using this custom component in your parent LWC, configure the columns as follows. Note that you must set editable: true and provide the necessary typeAttributes.
+In your parent component, configure the columns as follows. Note that editable: true must be set, and the context attribute is mapped to the record Id for precise row tracking.
 
 ```javascript
 Columns = [
@@ -78,19 +78,26 @@ Columns = [
 
 ---
 
-## 3. How to detect changes 
+## 3. Backend Support: Dynamic Record Resolution
+When a user selects a record in the lookup, the frontend usually only receives the Record ID. To display the Record Name immediately without a full page refresh, we need a dynamic Apex helper.
 
-How to Perform Dynamic Queries Using recordId in ApexIn Salesforce development, often need to handle multiple objects with a single Apex method. 
-
-Instead of hardcoding the object name, you can pass the recordId as a parameter and use it to identify the object type dynamically.
-
-To achieve this, use the following code snippet to retrieve the Object API Name:
+Using getSobjectType() allows a single Apex method to handle various objects dynamically:
 
 ```java
-  String objectApiName = recordId.getSobjectType().getDescribe().getName();
+    @AuraEnabled(cacheable=true)
+    public static String getRecordName(Id recordId) {
+    if (recordId == null) return null;
+    String objectApiName = recordId.getSobjectType().getDescribe().getName();
+    String query = 'SELECT Name FROM ' + objectApiName + ' WHERE Id = :recordId LIMIT 1';
+    SObject res = Database.query(query);
+    return (String)res.get('Name');
+    }
 ```
 
 By using this approach can construct a Dynamic SOQL query that works for any object, making Apex code much more reusable and flexible.
+
+## 4. Event Handling: Detecting Changes
+We capture the custom event from our lookup template and update the internal state. We use stopPropagation() to prevent the event from bubbling up unnecessarily, maintaining a clean event flow.
 
 ```javascript
 
@@ -117,6 +124,13 @@ async handleLookupSelect(event) {
 
 ```
 
+## 5. Architectural Takeaway: The "Base Table" Vision
+This CustomDatatable serves as the underlying engine. By wrapping this inside a CoreDatatable (or BaseTable), you can add global features like Server-side Paging and Global Search.
+
+Standardization: Extends the platform's native look and feel.
+
+Security: Inherits Salesforce's standard security and sharing models.
+
 ### ⚠️ Required Dependency
 
 This component relies on the **lookupType** component to handle the specific rendering of the switch. Make sure to deploy both:
@@ -129,12 +143,5 @@ This component relies on the **lookupType** component to handle the specific ren
 
 --- 
 
-## 3. Key Architectural Takeaways
-
-Standardization: By extending the base class, we keep the look and feel consistent with the rest of Salesforce Lightning.
-
-Context Binding: Passing the Id as a context attribute is crucial. It allows the component to return the exact record ID when a value is changed.
-
-Scalability: You can easily add more custom types (like file uploaders or custom lookups) by adding them to the customTypes object.
 
 
