@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "LWC : Extending Lightning Datatable (2)"
-date: 2026-05-09
+date: 2026-05-17
 categories:
   - Development
 tags:
