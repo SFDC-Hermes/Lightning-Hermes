@@ -70,11 +70,11 @@ Validation: By providing validity and checkValidity(), we ensure the datatable c
 In LWC, events are encapsulated within their component’s Shadow DOM by default. However, for a Custom Datatable Type, the event must travel a long and restricted path to reach its destination. This is where bubbles and composed become mandatory.
 
 ```javascript
-    const lookupEvent = new CustomEvent('lookupselect', {
-    composed: true,
-    bubbles: true,
-    cancelable: true ...
-    }
+const lookupEvent = new CustomEvent('lookupselect', {
+composed: true,
+bubbles: true,
+cancelable: true ...
+}
 ```
 **bubbles: true** (The Vertical Ascent)
 
@@ -138,14 +138,14 @@ When a user selects a record in the lookup, the frontend usually only receives t
 Using getSobjectType() allows a single Apex method to handle various objects dynamically:
 
 ```java
-    @AuraEnabled(cacheable=true)
-    public static String getRecordName(Id recordId) {
+@AuraEnabled(cacheable=true)
+public static String getRecordName(Id recordId) {
     if (recordId == null) return null;
     String objectApiName = recordId.getSobjectType().getDescribe().getName();
     String query = 'SELECT Name FROM ' + objectApiName + ' WHERE Id = :recordId LIMIT 1';
     SObject res = Database.query(query);
     return (String)res.get('Name');
-    }
+}
 ```
 
 By using this approach can construct a Dynamic SOQL query that works for any object, making Apex code much more reusable and flexible.
@@ -156,25 +156,22 @@ We capture the custom event from our lookup template and update the internal sta
 ```javascript
 
 async handleLookupSelect(event) {
-        event.stopPropagation();
-        const { context, value, fieldName } = event.detail.data;
-
-        let realRecordName = '';
-        if (value) {
-            try {
-                realRecordName = await getRecordName({ recordId: value });
-            } catch (error) {
-                console.error('Record name fetch failed:', error);
-                realRecordName = 'Unknown';
-            }
+    event.stopPropagation();
+    const { context, value, fieldName } = event.detail.data;
+    let realRecordName = '';
+    if (value) {
+        try {
+            realRecordName = await getRecordName({ recordId: value });
+        } catch (error) {
+            console.error('Record name fetch failed:', error);
+            realRecordName = 'Unknown';
         }
-
-        const draftItem = { Id: context, [fieldName]: value };
-        this.updateDraftValuesAndData(draftItem);
-
-        const displayFieldName = fieldName + '_Name';
-        this.updateDataValues({Id: context, [fieldName]: value, [displayFieldName]: realRecordName});
     }
+    const draftItem = { Id: context, [fieldName]: value };
+    this.updateDraftValuesAndData(draftItem);
+    const displayFieldName = fieldName + '_Name';
+    this.updateDataValues({Id: context, [fieldName]: value, [displayFieldName]: realRecordName});
+}
 
 ```
 
