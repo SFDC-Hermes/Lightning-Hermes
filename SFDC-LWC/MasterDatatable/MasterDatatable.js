@@ -15,6 +15,9 @@ export default class MasterDatatable extends LightningElement {
     @track pickListOptions;
     @track multiPickListOptions;
 
+    @track sortBy;
+    @track sortDirection;
+
     @api
     get tableData() {
         return this._tableData;
@@ -215,6 +218,26 @@ export default class MasterDatatable extends LightningElement {
             return item;
         });
     }
+
+    doSorting(event) {
+        this.sortBy = event.detail.fieldName;
+        this.sortDirection = event.detail.sortDirection;
+        this.sortData(this.sortBy, this.sortDirection);
+    }
+
+    sortData(fieldname, direction) {
+        let parseData = JSON.parse(JSON.stringify(this.tableData));
+        let keyValue = (a) => {
+            return a[fieldname];
+        };
+        let isReverse = direction === 'asc' ? 1: -1;
+        parseData.sort((x, y) => {
+            x = keyValue(x) ? keyValue(x) : '';
+            y = keyValue(y) ? keyValue(y) : '';
+            return isReverse * ((x > y) - (y > x));
+        });
+        this.tableData = parseData;
+    }   
 
     handleCancel() {
         this.saveDraftValues = [];
