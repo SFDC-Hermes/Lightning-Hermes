@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "LWC : Extending Lightning Datatable (2)"
-date: 2026-05-17
+date: 2026-05-09
 categories:
   - Development
 tags:
@@ -32,9 +32,9 @@ Refer to the previously implemented codebase to maintain consistency in field ma
 
 ---
 
-## 1. Core Implementation: CustomDatatable.js
+## 1. Core Implementation: CustomDatatable.js, LookupType.js, LokkupLinkCell.js
 
-To add new types, we define customTypes in our JavaScript file. This tells the datatable which template to render for specific type attributes.
+1.1 To add new types, we define customTypes in our JavaScript file. This tells the datatable which template to render for specific type attributes.
 
 ```javascript
 import LightningDatatable from 'lightning/datatable';
@@ -52,6 +52,57 @@ export default class CustomDatatable extends LightningDatatable {
     };
 }
 ```
+
+1.2  The Bridge Component: lookupType.js
+For CustomDatatable to render a lookup input within a cell, we need a dedicated component that wraps lightning-record-picker. 
+This component doesn't just display a search bar; it must implement a specific interface to communicate seamlessly with the datatable's inline editing engine.
+
+**Key Technical Aspects**
+1. Interface Compliance (Standard Methods)
+methods like focus(), validity, and checkValidity(). These are not optional. When the datatable enters edit mode and focuses on a cell, it looks for these standard LWC input methods.
+
+focus(): Ensures that when a user clicks the edit icon, the cursor is automatically placed in the record picker.
+
+Validation: By providing validity and checkValidity(), we ensure the datatable can include this custom field in its standard error-handling lifecycle.
+
+2. Advanced Event Strategy: lookupselect
+In LWC, events are encapsulated within their component’s Shadow DOM by default. However, for a Custom Datatable Type, the event must travel a long and restricted path to reach its destination. This is where bubbles and composed become mandatory.
+
+```javascript
+    const lookupEvent = new CustomEvent('lookupselect', {
+    composed: true,
+    bubbles: true,
+    cancelable: true ...
+    }
+```
+bubbles: true (The Vertical Ascent)
+By default, events do not bubble. Setting this to true allows the event to move up from the lightning-record-picker to our lookupType component's root.
+
+composed: true (Breaking the Boundary)
+This is the most critical part. In a datatable, our lookupType is nested inside a Shadow Root created by the datatable engine. Standard bubbling stops at the first shadow boundary it hits.
+Setting composed: true is what gives the event the **permission** to cross that boundary and reach the CustomDatatable. Without it, the event is trapped inside the cell's private DOM.
+
+Why both are required here?
+In architecture, the event journey looks like this:
+lightning-record-picker → lookupType (Shadow Boundary 1) → Datatable Cell (Shadow Boundary 2) → CustomDatatable.
+To ensure our handleLookupSelect in the CustomDatable catches the change, must enable both to allow the event to "bubble" and stay "composed" across these nested layers.
+
+⚠️ Architect's Note: The Encapsulation Trade-off
+
+Setting composed: true should be done with caution. It breaks the principle of encapsulation by allowing internal events to leak into the outer DOM. 
+
+However, in the case of Extending Datatables, it is a deliberate architectural choice to facilitate communication between a deeply nested custom editor and its parent.
+
+3. UX Polish: Automatic Blur
+
+```javascript
+const picker = this.template.querySelector('lightning-record-picker');
+if (picker) {
+    picker.blur();
+}
+```
+
+After a user selects a record, we manually trigger blur(). This signals to the datatable that editing is "finished" for this cell, allowing for a smoother "commit-on-select" experience.
 
 ---
 ## 2. Usage: Column Configuration
