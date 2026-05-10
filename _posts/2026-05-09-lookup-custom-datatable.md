@@ -15,14 +15,11 @@ The standard lightning-datatable is a powerful tool, but it has its limitations�
 
 This post covers how to implement a custom datatable that supports specialized column types.
 
----
-
 ## 🚀 Key Features
 
 * **Lookup Field Support:** Enables seamless inline editing with a native-looking **Record Picker** for searching and selecting records.
 * **Reusable Architecture:** Extends the standard `LightningDatatable` while maintaining all original functionalities.
 
----
 
 ## 0. Implementation Reference
 
@@ -30,7 +27,6 @@ Refer to the previously implemented codebase to maintain consistency in field ma
 
 👉 [Previous Code Overview](https://sfdc-hermes.github.io/SFDC-Hermes/development/2026/03/13/custom-datatable.html)
 
----
 
 ## 1. Core Implementation
 
@@ -111,7 +107,6 @@ if (picker) {
 
 After a user selects a record, we manually trigger blur(). This signals to the datatable that editing is "finished" for this cell, allowing for a smoother "commit-on-select" experience.
 
----
 ## 2. Usage: Column Configuration
 
 In your parent component, configure the columns as follows. Note that editable: true must be set, and the context attribute is mapped to the record Id for precise row tracking.
@@ -133,8 +128,6 @@ Columns = [
         },
   ]
 ```
-
----
 
 ## 3. Backend Support: Dynamic Record Resolution
 When a user selects a record in the lookup, the frontend usually only receives the Record ID. To display the Record Name immediately without a full page refresh, we need a dynamic Apex helper.
