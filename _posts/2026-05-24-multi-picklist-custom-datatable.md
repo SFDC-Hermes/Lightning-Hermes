@@ -35,14 +35,14 @@ To add new types, we define customTypes in our JavaScript file. This tells the d
 
 ```javascript
 import LightningDatatable from 'lightning/datatable';
-import multiselectPicklistTemplate from './multiselectPicklistTemplate.html';
+import multiPicklistTemplate from './multiselectPicklistTemplate.html';
 
 
 export default class CustomDatatable extends LightningDatatable {
     static customTypes = {
         multipicklistColumn: {
-            template: multiselectPicklistTemplate,
-            editTemplate: multiselectPicklistTemplate,
+            template: multiPicklistTemplate,
+            editTemplate: multiPicklistTemplate,
             standardCellLayout: true,
             typeAttributes: ['label', 'placeholder', 'options', 'value', 'context', 'variant','name']
         }
