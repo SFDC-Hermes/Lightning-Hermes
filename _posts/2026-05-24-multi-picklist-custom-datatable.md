@@ -27,3 +27,25 @@ Refer to the previously implemented codebase to maintain consistency in field ma
 
 👉 [Previous Code Overview](https://sfdc-hermes.github.io/SFDC-Hermes/development/2026/03/13/custom-datatable.html)
 
+## 1. Core Implementation
+
+### 1.1 CustomDatable.js 
+
+To add new types, we define customTypes in our JavaScript file. This tells the datatable which template to render for specific type attributes.
+
+```javascript
+import LightningDatatable from 'lightning/datatable';
+import multiselectPicklistTemplate from './multiselectPicklistTemplate.html';
+
+
+export default class CustomDatatable extends LightningDatatable {
+    static customTypes = {
+        multipicklistColumn: {
+            template: multiselectPicklistTemplate,
+            editTemplate: multiselectPicklistTemplate,
+            standardCellLayout: true,
+            typeAttributes: ['label', 'placeholder', 'options', 'value', 'context', 'variant','name']
+        }
+    };
+}
+```
