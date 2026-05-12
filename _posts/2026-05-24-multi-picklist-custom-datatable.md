@@ -49,3 +49,40 @@ export default class CustomDatatable extends LightningDatatable {
     };
 }
 ```
+
+## 2. Usage: Column Configuration
+
+In your parent component, configure the columns as follows. Note that editable: false must be set, and the context attribute is mapped to the record Id for precise row tracking.
+
+```javascript
+const columns = [
+    { label: 'Name', fieldName: 'Name', editable: true },
+    { label: 'Phone', fieldName: 'Phone', type: 'phone', editable: true },
+    {
+        label: 'Prospect', fieldName: 'Prospect', type: 'multiPicklistTemplate', editable: false, typeAttributes: {
+            placeholder: 'Choose Type', options: { fieldName: 'pickListOptions' }, 
+            value: { fieldName: 'multiUnit__c' },
+            context: { fieldName: 'Id' } 
+        }
+    },
+    
+]
+```
+
+## 3. Backend Support: Dynamic Record Resolution
+When a user selects a record in the lookup, the frontend usually only receives the Record ID. To display the Record Name immediately without a full page refresh, we need a dynamic Apex helper.
+
+Using getSobjectType() allows a single Apex method to handle various objects dynamically:
+
+```java
+@AuraEnabled(cacheable=true)
+public static String getRecordName(Id recordId) {
+    if (recordId == null) return null;
+    String objectApiName = recordId.getSobjectType().getDescribe().getName();
+    String query = 'SELECT Name FROM ' + objectApiName + ' WHERE Id = :recordId LIMIT 1';
+    SObject res = Database.query(query);
+    return (String)res.get('Name');
+}
+```
+
+By using this approach can construct a Dynamic SOQL query that works for any object, making Apex code much more reusable and flexible.
