@@ -69,20 +69,20 @@ const columns = [
 ]
 ```
 
-## 3. Backend Support: Dynamic Record Resolution
-When a user selects a record in the lookup, the frontend usually only receives the Record ID. To display the Record Name immediately without a full page refresh, we need a dynamic Apex helper.
+## 3. Frontend Support: Dynamic Record Resolution
 
-Using getSobjectType() allows a single Apex method to handle various objects dynamically:
+To make the Multi-Picklist functional within a lightning-datatable, the frontend must dynamically fetch and map picklist options. Using the UI Object Info API is the best practice here, as it ensures your component remains metadata-aware.
 
-```java
-@AuraEnabled(cacheable=true)
-public static String getRecordName(Id recordId) {
-    if (recordId == null) return null;
-    String objectApiName = recordId.getSobjectType().getDescribe().getName();
-    String query = 'SELECT Name FROM ' + objectApiName + ' WHERE Id = :recordId LIMIT 1';
-    SObject res = Database.query(query);
-    return (String)res.get('Name');
+Why use UI API instead of Hardcoding?
+Admin-Friendly: If an administrator adds or removes a value in the Setup, the component updates automatically without a code redeployment.
+
+Record Type Awareness: Different Record Types often have different available picklist values. getPicklistValues allows you to filter options based on the specific recordTypeId.
+
+Consistency: It ensures the labels and values in your datatable perfectly match the Salesforce schema.
+
+```javascript
+
+import { getPicklistValues, getObjectInfo } from 'lightning/uiObjectInfoApi';
 }
 ```
 
-By using this approach can construct a Dynamic SOQL query that works for any object, making Apex code much more reusable and flexible.
