@@ -73,7 +73,6 @@ const columns = [
 
 To make the Multi-Picklist functional within a lightning-datatable, the frontend must dynamically fetch and map picklist options. Using the UI Object Info API is the best practice here, as it ensures your component remains metadata-aware.
 
-Why use UI API instead of Hardcoding?
 Admin-Friendly: If an administrator adds or removes a value in the Setup, the component updates automatically without a code redeployment.
 
 Record Type Awareness: Different Record Types often have different available picklist values. getPicklistValues allows you to filter options based on the specific recordTypeId.
