@@ -59,7 +59,7 @@ const columns = [
     { label: 'Name', fieldName: 'Name', editable: true },
     { label: 'Phone', fieldName: 'Phone', type: 'phone', editable: true },
     {
-        label: 'Prospect', fieldName: 'Prospect', type: 'multiPicklistTemplate', editable: false, typeAttributes: {
+        label: 'MultiUnit', fieldName: 'multiUnit__c', type: 'multiPicklistTemplate', editable: false, typeAttributes: {
             placeholder: 'Choose Type', options: { fieldName: 'pickListOptions' }, 
             value: { fieldName: 'multiUnit__c' },
             context: { fieldName: 'Id' } 
