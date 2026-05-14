@@ -44,7 +44,7 @@ export default class CustomDatatable extends LightningDatatable {
             template: multiPicklistTemplate,
             editTemplate: multiPicklistTemplate,
             standardCellLayout: true,
-            typeAttributes: ['label', 'placeholder', 'options', 'value', 'context', 'variant','name']
+            typeAttributes: ['label', 'placeholder', 'options', 'value', 'context', 'fieldName']
         }
     };
 }
@@ -56,17 +56,21 @@ In your parent component, configure the columns as follows. Note that editable: 
 
 ```javascript
 const columns = [
-    { label: 'Name', fieldName: 'Name', editable: true },
-    { label: 'Phone', fieldName: 'Phone', type: 'phone', editable: true },
     {
-        label: 'MultiUnit', fieldName: 'multiUnit__c', type: 'multiPicklistTemplate', editable: false, typeAttributes: {
-            placeholder: 'Choose Type', options: { fieldName: 'pickListOptions' }, 
+        label: 'MultiUnit',
+        fieldName: 'multiUnit__c',
+        type: 'multiPicklistColumn',
+        editable: false,
+        typeAttributes: {
+            placeholder: 'Choose Type',
+            options: this._multiPickListOptions, 
             value: { fieldName: 'multiUnit__c' },
-            context: { fieldName: 'Id' } 
+            context: { fieldName: 'Id' },
+            fieldName: 'multiUnit__c'
         }
-    },
-    
+    }
 ]
+
 ```
 
 ## 3. Frontend Support: Dynamic Record Resolution
