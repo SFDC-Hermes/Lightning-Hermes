@@ -1,0 +1,65 @@
+.slds-dropdown {
+    padding: 0px !important;
+    border: 1px solid #dddbda;
+    border-radius: .25rem;
+}
+
+.recordListBox {
+    margin-top: 0px !important;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.slds-listbox li {
+    padding: .45rem 0.7rem !important;
+    display: flex;
+    align-items: center;
+}
+
+.eachItem:hover {
+    background-color: #F3F3F3;
+    cursor: pointer;
+}
+
+.verticalAlign {
+    cursor: pointer;
+    padding: 0px 5px !important;
+}
+
+.inputBox {
+    width: 100% !important;
+}
+
+.inputBox input {
+    padding-left: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0,0,0,0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,0,0,0.4);
+}
+
+.slds-dropdown_fluid {
+    margin-top: 0px;
+    width: 100%;
+}
+
+.showUpperDropDown {
+    transform: translate3d(0px, -210px, 0px); 
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+}

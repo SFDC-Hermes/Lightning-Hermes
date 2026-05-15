@@ -1,1 +1,37 @@
+.slds-table_edit_container, 
+.slds-cell-edit {
+    overflow: visible !important;
+}
 
+.slds-grid .slds-hyphenate,
+.slds-grid .slds-truncate {
+    width: 100%;
+    overflow: visible !important;
+}
+
+.picklist-section .slds-dropdown {
+    position: fixed !important; 
+    
+    left: auto; 
+    top: auto;
+    margin: 0 !important;
+    
+    display: block !important;
+    background: white !important;
+    border: 1px solid #dddbda !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.16) !important;
+    
+    max-height: 250px !important;
+    overflow-y: auto !important;
+    min-width: 200px;
+    z-index: 9999 !important;
+}
+
+lightning-datatable {
+    min-height: 350px !important; 
+}
+
+.slds-listbox_vertical .slds-listbox__item {
+    display: flex !important;
+    width: 100% !important;
+}

@@ -8,6 +8,7 @@
  * Ver   Date         Author        Modification
  * 1.0   2026-03-13   SFDC-Hermes   Initial Version
  * 1.1   2026-05-04   SFDC-Hermes   Add Lookup field type
+ * 1.2   2026-05-15   SFDC-Hermes   Add Multi-Picklist field type
 
  **/
 import { LightningElement } from 'lwc';
@@ -25,6 +26,11 @@ export default class CustomDatatable extends LightningDatatable {
                 editTemplate: picklistEditable,
                 standardCellLayout: true,
                 typeAttributes : ['label', 'placeholder', 'options', 'value', 'context', 'variant','name']
+            },
+            multiPicklistColumn: {
+            template: multiselectPicklistTemplate,
+            standardCellLayout: true,
+            typeAttributes : ['label', 'placeholder', 'options', 'value', 'context', 'fieldName']
             },
             toggle: {
                 template:  toggleTemplate,
