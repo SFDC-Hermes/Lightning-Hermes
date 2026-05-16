@@ -60,4 +60,48 @@ export default class Datatable extends LightningElement {
     }
     this.processData(this._rawData); 
     }
+
+    updateDraftValuesAndData(updateItem) {
+        const copyDraftValues = [...this.saveDraftValues];
+        const itemIndex = copyDraftValues.findIndex(item => item.Id === updateItem.Id);
+
+        if (itemIndex > -1) {
+            copyDraftValues[itemIndex] = { ...copyDraftValues[itemIndex], ...updateItem };
+        } else {
+            copyDraftValues.push(updateItem);
+        }
+        this.saveDraftValues = copyDraftValues;
+
+        this._tableData = this._tableData.map(item => {
+            if (item.Id === updateItem.Id) {
+                return { ...item, ...updateItem };
+            }
+            return item;
+        });
+    }
+
+    updateDataValues(updateItem) {
+        this._tableData = this._tableData.map(item => {
+            if (item.Id === updateItem.Id) {
+                return { ...item, ...updateItem };
+            }
+            return item;
+        });
+    }
+
+    handleCellChange(event) {
+        console.log('Normal field type handle cell change');
+        const draftValues = event.detail.draftValues || [];
+        draftValues.forEach(ele => {
+            const cleanUpdateItem = {};
+            Object.keys(ele).forEach(key => {
+                if (ele[key] !== undefined) {
+                    cleanUpdateItem[key] = ele[key];
+                }
+            });
+            if (Object.keys(cleanUpdateItem).length > 1) {
+                this.updateDraftValuesAndData(cleanUpdateItem);
+            }
+        });
+    }
 }
