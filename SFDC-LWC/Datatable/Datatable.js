@@ -104,4 +104,18 @@ export default class Datatable extends LightningElement {
             }
         });
     }
+
+    handleCancel() {
+        this.saveDraftValues = [];
+        const datatable = this.template.querySelector('c-custom-datatable');
+        if (datatable) {
+            datatable.draftValues = [];
+        }
+        this.dispatchEvent(new CustomEvent('canceldata'));
+    }
+
+    ShowToast(title, message, variant, mode = 'dismissable') {
+        const evt = new ShowToastEvent({ title, message, variant, mode });
+        this.dispatchEvent(evt);
+    }
 }
