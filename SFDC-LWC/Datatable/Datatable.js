@@ -55,10 +55,10 @@ export default class Datatable extends LightningElement {
     }
 
     refreshTableData() {
-    if (!this._rawData || this._rawData.length === 0) {
-        return;
-    }
-    this.processData(this._rawData); 
+        if (!this._rawData || this._rawData.length === 0) {
+            return;
+        }
+        this.processData(this._rawData); 
     }
 
     updateDraftValuesAndData(updateItem) {
