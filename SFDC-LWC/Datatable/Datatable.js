@@ -90,7 +90,7 @@ export default class Datatable extends LightningElement {
     }
 
     handleCellChange(event) {
-        console.log('Normal field type handle cell change');
+        console.log('Normal field type cell change');
         const draftValues = event.detail.draftValues || [];
         draftValues.forEach(ele => {
             const cleanUpdateItem = {};
@@ -103,6 +103,53 @@ export default class Datatable extends LightningElement {
                 this.updateDraftValuesAndData(cleanUpdateItem);
             }
         });
+    }
+
+    handletoggleselect(event) {
+        console.log('Boolean/Toggle field type cell change');
+        event.stopPropagation();
+        const { context, value, fieldName } = event.detail.data;
+        const normalizedValue = (value === 'true' || value === true);
+
+        const updatedItem = { Id: context, [fieldName]: normalizedValue };
+        console.log('1',updatedItem);
+        this.updateDraftValuesAndData(updatedItem);
+    }
+
+    handlePicklistChanged(event) {
+        console.log('PickList/Multi-Picklist field type cell change');
+        event.stopPropagation();
+        const { context, value, fieldName } = event.detail.data;
+        
+        if (!fieldName) {
+            console.error('fieldName is missing in picklist event');
+            return;
+        }
+
+        const updatedItem = { Id: context, [fieldName]: value };
+        this.updateDraftValuesAndData(updatedItem);
+    }
+
+    async handleLookupSelect(event) {
+        console.log('LookUp field type cell change');
+        event.stopPropagation();
+        const { context, value, fieldName } = event.detail.data;
+
+        let realRecordName = '';
+        if (value) {
+            try {
+                realRecordName = await getRecordName({ recordId: value });
+            } catch (error) {
+                console.error('Record name fetch failed:', error);
+                realRecordName = 'Unknown';
+            }
+        }
+
+        const draftItem = { Id: context, [fieldName]: value };
+        this.updateDraftValuesAndData(draftItem);
+
+        const displayFieldName = fieldName + '_Name';
+        this.updateDataValues({ Id: context, [fieldName]: value, [displayFieldName]: realRecordName });
     }
 
     handleCancel() {
