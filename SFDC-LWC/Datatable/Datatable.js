@@ -105,7 +105,7 @@ export default class Datatable extends LightningElement {
         });
     }
 
-    handletoggleselect(event) {
+    handleToggleChange(event) {
         console.log('Boolean/Toggle field type cell change');
         event.stopPropagation();
         const { context, value, fieldName } = event.detail.data;
@@ -116,7 +116,7 @@ export default class Datatable extends LightningElement {
         this.updateDraftValuesAndData(updatedItem);
     }
 
-    handlePicklistChanged(event) {
+    handlePicklistChange(event) {
         console.log('PickList/Multi-Picklist field type cell change');
         event.stopPropagation();
         const { context, value, fieldName } = event.detail.data;
@@ -130,7 +130,7 @@ export default class Datatable extends LightningElement {
         this.updateDraftValuesAndData(updatedItem);
     }
 
-    async handleLookupSelect(event) {
+    async handleLookupChange(event) {
         console.log('LookUp field type cell change');
         event.stopPropagation();
         const { context, value, fieldName } = event.detail.data;
