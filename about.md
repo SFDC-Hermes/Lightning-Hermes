@@ -7,7 +7,7 @@ author_profile: true
 
 # 👋 Hi, I'm Hermes
 
-I am a **Salesforce Developer** with a focus on building secure, scalable, and high-performance architectures. With over 2 years of experience in the ecosystem, I obsess over **Clean Code** and the art of turning complex business requirements into elegant technical solutions.
+I am a **Salesforce Developer** with a focus on building secure, scalable, and high-performance architectures. With over few years of experience in the ecosystem, I obsess over **Clean Code** and the art of turning complex business requirements into elegant technical solutions.
 
 ---
 
@@ -22,7 +22,7 @@ I am a **Salesforce Developer** with a focus on building secure, scalable, and h
 
 ### 🏆 Professional Highlights
 
-* **Certified Expert:** Holder of **13+ Salesforce Certifications**, including Application Architect and the rare **AgentBlazer Legend** title.
+* **Certified Expert:** Holder of **10+ Salesforce Certifications**, including Application Architect and the rare **AgentBlazer Legend** title.
 * **Industry Experience:** Delivered successful E2E system implementations and problem-solving for **global leaders in the Energy and Manufacturing sectors.**
 * **Continuous Growth:** I believe in "Learning by Doing." I maintain several open-source utility libraries and security frameworks on my GitHub.
 
