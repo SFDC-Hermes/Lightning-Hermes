@@ -152,6 +152,68 @@ export default class Datatable extends LightningElement {
         this.updateDataValues({ Id: context, [fieldName]: value, [displayFieldName]: realRecordName });
     }
 
+    handleSave(event) {
+        try {
+            if (!this.objectInfo || !this.objectInfo.data) {
+                this.ShowToast('Error', 'Metadata is loading. Please try again later.', 'error');
+                return;
+            }
+
+            const validFields = this.objectInfo.data.fields;
+            const dataTableStandardDrafts = event.detail.draftValues || [];
+            const allDrafts = JSON.parse(JSON.stringify(this.saveDraftValues));
+
+            dataTableStandardDrafts.forEach(standardDraft => {
+                const cleanDraft = {};
+                Object.keys(standardDraft).forEach(key => {
+                    if (standardDraft[key] !== undefined) {
+                        cleanDraft[key] = standardDraft[key];
+                    }
+                });
+
+                const existing = allDrafts.find(d => d.Id === cleanDraft.Id);
+                if (existing) {
+                    Object.assign(existing, cleanDraft);
+                } else if (Object.keys(cleanDraft).length > 1) {
+                    allDrafts.push(cleanDraft);
+                }
+            });
+
+            if (allDrafts.length === 0) return;
+
+            const recordInputs = allDrafts.map(draft => {
+                const fields = {};
+                Object.keys(draft).forEach(key => {
+                    if (key === 'Id' || (validFields && validFields[key])) {
+                        fields[key] = draft[key];
+                    }
+                });
+                return { fields };
+            });
+
+            const promises = recordInputs.map(recordInput => updateRecord(recordInput));
+
+            Promise.all(promises)
+                .then(() => {
+                    this.ShowToast('Success', 'All changes have been saved!', 'success');
+
+                    this.saveDraftValues = [];
+                    const datatable = this.template.querySelector('c-wj-custom-datatable');
+                    if (datatable) {
+                        datatable.draftValues = [];
+                    }
+                    this.dispatchEvent(new CustomEvent('refreshdata'));
+                })
+                .catch(error => {
+                    console.error('Save failed:', error);
+                    this.ShowToast('Error', 'An error occurred while saving.', 'error');
+                });
+
+        } catch (jsError) {
+            console.error('handleSave error:', jsError);
+        }
+    }
+
     handleCancel() {
         this.saveDraftValues = [];
         const datatable = this.template.querySelector('c-custom-datatable');
