@@ -1,0 +1,15 @@
+<template>
+    <lightning-card title="Datatable" icon-name="standard:account">
+        <template if:true={fetchedRecords}>
+            <c-wj-datatable
+                columns={columns}
+                table-data={fetchedRecords}
+                object-api-name="Account">
+            </c-wj-datatable>
+        </template>
+        
+        <template if:false={fetchedRecords}>
+            <div class="slds-p-around_medium">Loading records...</div>
+        </template>
+    </lightning-card>
+</template>
