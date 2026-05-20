@@ -42,4 +42,26 @@ public without sharing class COMM_Utility {
             throw new AuraHandledException(e.getMessage());
         }           
     }
+
+    @AuraEnabled(cacheable=true)
+    public static List<SObject> getRecords(String objectName, String fieldQuery, String whereQuery, Integer limits) {
+        if (String.isBlank(objectName) || String.isBlank(fieldQuery)) {
+            return new List<SObject>();
+        }
+
+        Integer limitQuery = (limits == null) ? 50000 : limits;
+
+        String safeObjectName = objectName.deleteWhitespace();
+        String safeFields = fieldQuery.trim();
+
+        String queryString = 'SELECT ' + safeFields + ' FROM ' + safeObjectName;
+
+        if(String.isNotBlank(whereQuery)){
+            queryString += ' WHERE ' + whereQuery.trim();
+        }
+
+        queryString += ' LIMIT ' + limitQuery; 
+
+        return Database.query(queryString, AccessLevel.USER_MODE);
+    }
 }
