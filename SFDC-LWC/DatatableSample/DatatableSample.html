@@ -1,11 +1,11 @@
 <template>
     <lightning-card title="Datatable" icon-name="standard:account">
         <template if:true={fetchedRecords}>
-            <c-wj-datatable
+            <c-datatable
                 columns={columns}
                 table-data={fetchedRecords}
                 object-api-name="Account">
-            </c-wj-datatable>
+            </c-datatable>
         </template>
         
         <template if:false={fetchedRecords}>
