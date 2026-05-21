@@ -158,7 +158,7 @@ Then, replace the content with the following configuration. This setup uses a "T
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
-    "experimentalDecorators": true,
+    "experimentalDecorators": false,
     "emitDecoratorMetadata": false, 
 
     /* LWC Architect Standards */
