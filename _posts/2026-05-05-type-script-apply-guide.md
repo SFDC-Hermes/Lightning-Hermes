@@ -19,7 +19,7 @@ In this guide, we will set up the essential foundation—Node.js and VS Code—w
 
 ---
 
-## 0. The Hard Truth: The "Decorator Errpr"
+## 0. The Hard Truth: The "Decorator Error"
 Before you begin, we must address the elephant in the room: Salesforce LWC does not "natively" run TypeScript.
 
 While Salesforce provides build-time support, the standard TypeScript compiler (tsc) and the LWC engine often fight over Decorators (@api, @track, @wire). If you use tsc -w (Watch Mode) with default settings, it will "helpfully" transpile your decorators into a complex polyfill like this:
