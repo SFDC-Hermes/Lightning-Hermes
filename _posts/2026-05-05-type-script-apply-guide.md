@@ -139,8 +139,8 @@ Then, replace the content with the following configuration. This setup uses a "T
     "outDir": ".", 
 
     /* Environment Settings */
-    "target": "es2022",
-    "lib": ["es2022", "dom"],
+    "target": "ESNext",
+    "lib": ["ESNext", "dom"],
     "moduleResolution": "bundler",
     "module": "ESNext",
     "types": ["@salesforce/lightning-types"],
@@ -167,7 +167,7 @@ Then, replace the content with the following configuration. This setup uses a "T
     "noUncheckedSideEffectImports": true,
     "skipLibCheck": true,
     "moduleDetection": "force",
-    "noEmit": false
+    "noEmit": true
   },
   "include": [
         "**/*.ts",
