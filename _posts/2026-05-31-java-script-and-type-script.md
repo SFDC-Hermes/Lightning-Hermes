@@ -18,3 +18,14 @@ Modern Salesforce development is no longer just about basic scripting; it's abou
 While Salesforce now provides official build-time support for TypeScript in LWC, we must understand the technical landscape: the platform fundamentally runs on JavaScript, and the Org only stores transpiled code. This means the 'Source of Truth' must shift from the Org to Git, marking a true transition to Source-Driven Development. In this post, we’ll explore why embracing TypeScript—despite the current infrastructural shifts—is an essential step toward building a more stable and resilient Salesforce ecosystem.
 
 ---
+
+## 2. Java-Script
+
+about java-script 
+
+## 3. Type-Script 
+
+about type-script 
+
+## 4. Type-script in salesforce
+
