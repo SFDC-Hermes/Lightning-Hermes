@@ -87,5 +87,26 @@ Consistency: It ensures the labels and values in your datatable perfectly match 
 
 import { getPicklistValues, getObjectInfo } from 'lightning/uiObjectInfoApi';
 }
+
 ```
+
+### ⚠️ Required Dependency
+
+This component relies on the **Multi-Picklist Type** component to handle the specific rendering of the switch. Make sure to deploy both:
+- `customDatatable`
+- `MultiPicklistColumn`
+- `MultiSelectPicklist` - 
+
+👉 [MultiPicklistColumn Component](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/MultiPicklistColumn)
+👉 [MultiSelectPicklist Component](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/MultiSelectPicklist)
+
+### ⚠️ Unresolved Problem 
+
+Just a quick heads-up: this component is still a work in progress.
+
+The main roadblock I'm currently facing is with the inline edit dropdown layout. When the datatable has only one or two records, the physical height of the component is too short, and the dropdown gets clipped by the parent container instead of popping out smoothly over the table.
+
+I've tried tackling this layout trap by tweaking dynamic inline styles in LWC JS and even injecting global CSS through Static Resources, but I guess I'm still a bit green when it comes to mastering these complex CSS overrides inside Salesforce tables.
+
+I'm pretty sure there's an LWC guru among my readers who knows exactly how to crack this riddle! Haha.
 
