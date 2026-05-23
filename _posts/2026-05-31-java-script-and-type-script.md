@@ -42,6 +42,20 @@ TypeScript acts as a strongly typed superset of JavaScript, injecting compile-ti
 
 ---
 
+### Quick Comparison: JavaScript vs TypeScript
+
+To summarize the architectural shift, here is a quick breakdown of how both languages behave within the enterprise application landscape:
+
+| Feature | JavaScript (JS) | TypeScript (TS) |
+| :--- | :--- | :--- |
+| **Type System** | Dynamic (Resolved at runtime) | Static (Resolved at compile-time) |
+| **Error Detection** | Runtime (Caught by users or QA) | Compile-time (Caught instantly in IDE) |
+| **IDE Support** | Basic Autocomplete | Advanced Intellisense & Navigation |
+| **Refactoring Confidence** | Low (Requires global manual search) | High (Compiler flags broken references) |
+| **Salesforce Execution** | Native platform environment | Transpiled to JS during build pipeline |
+| **Alignment with Apex** | Structural mismatch (Loose contracts) | Strong parity (Shared OOP contracts) |
+| **Source of Truth** | Org-centric (Can change on-the-fly) | Git-centric (Source-Driven Development) |
+
 ## 4. TypeScript in Salesforce
 
 Salesforce has introduced full TypeScript support for LWC starting from the Spring '26 release. However, since the Salesforce platform execution environment runs on JavaScript, TypeScript code must be transpiled into JavaScript during the build and deployment process.
