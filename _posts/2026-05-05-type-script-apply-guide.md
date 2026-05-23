@@ -134,6 +134,7 @@ Then, replace the content with the following configuration. This setup uses a "T
   "compilerOptions": {
     "checkJs": false, 
     "allowJs": true,
+    
     /* File Layout */
     "rootDir": ".", 
     "outDir": ".", 
@@ -146,37 +147,36 @@ Then, replace the content with the following configuration. This setup uses a "T
     "types": ["@salesforce/lightning-types"],
     "sourceMap": false,
     "declaration": false,
-    "declarationMap": true,
+    "declarationMap": false, 
 
-    /* Path Mapping: Resolving 'c/component' imports */
-    "baseUrl": ".",
     "paths": {
-      "c/*": ["force-app/main/default/lwc/*"]
+      "c/*": ["./force-app/main/default/lwc/*"] 
     },
 
     /* Stricter Typechecking Options */
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
-    "experimentalDecorators": false,
-    "emitDecoratorMetadata": false, 
+    
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true, 
 
     /* LWC Architect Standards */
     "verbatimModuleSyntax": true,
-    "isolatedModules": true, // Required: LWC compiler transpiles files individually
+    "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "skipLibCheck": true,
     "moduleDetection": "force",
     "noEmit": true
   },
   "include": [
-        "**/*.ts",
-        "../../../../.sfdx/typings/lwc/**/*.d.ts"
-    ],
-    "exclude": [
-        "**/__tests__/**",
-        "**/*.js"
-    ]
+    "**/*.ts",
+    "../../../../.sfdx/typings/lwc/**/*.d.ts"
+  ],
+  "exclude": [
+    "**/__tests__/**",
+    "**/*.js"
+  ]
 }
 
 ```
