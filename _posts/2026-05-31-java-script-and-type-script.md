@@ -56,10 +56,36 @@ To summarize the architectural shift, here is a quick breakdown of how both lang
 | **Alignment with Apex** | Structural mismatch (Loose contracts) | Strong parity (Shared OOP contracts) |
 | **Source of Truth** | Org-centric (Can change on-the-fly) | Git-centric (Source-Driven Development) |
 
-## 4. TypeScript in Salesforce
+## 4. Why TypeScript in Salesforce?
+
+Integrating TypeScript into your Salesforce front-end workflow isn't just about adopting a modern industry standard—it directly solves several platform-specific pain points:
+
+* **Strict Contracts with Apex Wrappers:** When fetching complex data structures via `@AuraEnabled` methods, you can define TypeScript interfaces that perfectly mirror your Apex inner classes. This ensures that any change in the backend data shape is instantly caught on the frontend during compilation.
+* **Early Validation of Schema References:** Instead of waiting for a failed deployment or a runtime error to discover a misspelled custom field API name, static typing flags these discrepancies instantly inside your local IDE.
+* **Enforcing Git-Centric DevOps:** Because the Salesforce Org only stores the compiled, plain JavaScript binaries, adopting TypeScript inherently shifts the "Source of Truth" to your Git repository. This acts as an automated architectural guardrail that enforces true Source-Driven Development.
+* **Accelerated DX via Intellisense:** Strongly typed environments provide rich autocomplete and definition tracking for standard wire adapters (`getRecord`, `updateRecord`) and custom event payloads, significantly shrinking the development lifecycle.
+
+---
+
+## 5. Configuration & Build Essentials
 
 Salesforce has introduced full TypeScript support for LWC starting from the Spring '26 release. However, since the Salesforce platform execution environment runs on JavaScript, TypeScript code must be transpiled into JavaScript during the build and deployment process.
 
-When developing in TypeScript, you might encounter issues where LWC decorators like `@api` are not transformed correctly. This is typically caused by a configuration mismatch rather than a limitation of the compiler. The LWC compiler requires the decorator syntax to be preserved exactly as-is. Therefore, to ensure a successful build, you must configure your `tsconfig.json` by setting `experimentalDecorators` to `false` (or omitting it) and targeting `ESNext`.
+### The LWC Decorator Gotcha
+
+When developing in TypeScript, you might encounter issues where LWC decorators like `@api` or `@wire` are not transformed correctly. This is typically caused by a configuration mismatch rather than a limitation of the compiler. 
+
+The LWC compiler requires the decorator syntax to be preserved exactly as-is. Therefore, to ensure a successful build, you must configure your `tsconfig.json` by setting `experimentalDecorators` to `false` (or omitting it) and targeting `ESNext`.
+
+```json
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "experimentalDecorators": false,
+    "module": "ESNext"
+  }
+}
+
+```
 
 👉 [Previous TypeScript Apply Post](https://sfdc-hermes.github.io/SFDC-Hermes/development/2026/05/05/type-script)
