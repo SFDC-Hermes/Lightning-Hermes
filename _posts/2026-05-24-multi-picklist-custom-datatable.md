@@ -152,5 +152,3 @@ This component relies on the **Multi-Picklist Type** component to handle the spe
 👉 [MultiSelectPicklist Component](https://github.com/SFDC-Hermes/Lightning-Hermes/tree/main/SFDC-LWC/MultiSelectPicklist)
 
 ```
-
-```
