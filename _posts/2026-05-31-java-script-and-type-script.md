@@ -51,7 +51,6 @@ To summarize the architectural shift, here is a quick breakdown of how both lang
 | **Type System** | Dynamic (Resolved at runtime) | Static (Resolved at compile-time) |
 | **Error Detection** | Runtime (Caught by users or QA) | Compile-time (Caught instantly in IDE) |
 | **IDE Support** | Basic Autocomplete | Advanced Intellisense & Navigation |
-| **Refactoring Confidence** | Low (Requires global manual search) | High (Compiler flags broken references) |
 | **Salesforce Execution** | Native platform environment | Transpiled to JS during build pipeline |
 | **Alignment with Apex** | Structural mismatch (Loose contracts) | Strong parity (Shared OOP contracts) |
 | **Source of Truth** | Org-centric (Can change on-the-fly) | Git-centric (Source-Driven Development) |
@@ -67,25 +66,5 @@ Integrating TypeScript into your Salesforce front-end workflow isn't just about 
 
 ---
 
-## 5. Configuration & Build Essentials
-
-Salesforce has introduced full TypeScript support for LWC starting from the Spring '26 release. However, since the Salesforce platform execution environment runs on JavaScript, TypeScript code must be transpiled into JavaScript during the build and deployment process.
-
-### The LWC Decorator Gotcha
-
-When developing in TypeScript, you might encounter issues where LWC decorators like `@api` or `@wire` are not transformed correctly. This is typically caused by a configuration mismatch rather than a limitation of the compiler. 
-
-The LWC compiler requires the decorator syntax to be preserved exactly as-is. Therefore, to ensure a successful build, you must configure your `tsconfig.json` by setting `experimentalDecorators` to `false` (or omitting it) and targeting `ESNext`.
-
-```json
-{
-  "compilerOptions": {
-    "target": "ESNext",
-    "experimentalDecorators": false,
-    "module": "ESNext"
-  }
-}
-
-```
 
 👉 [Previous TypeScript Apply Post](https://sfdc-hermes.github.io/SFDC-Hermes/development/2026/05/05/type-script)
