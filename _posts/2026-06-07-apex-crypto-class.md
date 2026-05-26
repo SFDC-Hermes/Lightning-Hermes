@@ -32,3 +32,5 @@ Instead of spinning up costly external middleware just to handle payload encrypt
 In this post, we’ll explore how to leverage the Apex `Crypto` class to build secure outbound interfaces, protect sensitive data, and implement industry-standard cryptographic patterns natively in Salesforce.
 
 ---
+
+👉 [Previous Crypto Apex Class Document](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_understanding.htm)
