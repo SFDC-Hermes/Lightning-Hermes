@@ -33,4 +33,4 @@ In this post, we’ll explore how to leverage the Apex `Crypto` class to build s
 
 ---
 
-👉 [Previous Crypto Apex Class Document](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_understanding.htm)
+👉 [Previous Crypto Apex Class Document](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_restful_crypto.htm)
