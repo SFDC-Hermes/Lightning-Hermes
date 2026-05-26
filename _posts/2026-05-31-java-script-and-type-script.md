@@ -52,8 +52,7 @@ To summarize the architectural shift, here is a quick breakdown of how both lang
 | **Error Detection** | Runtime (Caught by users or QA) | Compile-time (Caught instantly in IDE) |
 | **IDE Support** | Basic Autocomplete | Advanced Intellisense & Navigation |
 | **Salesforce Execution** | Native platform environment | Transpiled to JS during build pipeline |
-| **Alignment with Apex** | Structural mismatch (Loose contracts) | Strong parity (Shared OOP contracts) |
-| **Source of Truth** | Org-centric (Can change on-the-fly) | Git-centric (Source-Driven Development) |
+| **Alignment with Apex** | Structural mismatch | Strong parity (Shared OOP contracts) |
 
 ## 4. Why TypeScript in Salesforce?
 
