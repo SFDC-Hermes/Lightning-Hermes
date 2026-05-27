@@ -40,6 +40,7 @@ In the past, Salesforce supported DES and Triple DES for its cryptographic algor
 Salesforce Crypto Class Technical Specifications:
 
 Encryption Algorithm: AES (Advanced Encryption Standard) with 128, 192, and 256-bit keys
+
 AES128, AES128-CBC
 AES192, AES192-CBC
 AES256, AES256-CBC
