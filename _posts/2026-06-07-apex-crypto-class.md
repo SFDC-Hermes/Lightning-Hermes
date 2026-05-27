@@ -33,4 +33,15 @@ In this post, we’ll explore how to leverage the Apex `Crypto` class to build s
 
 ---
 
+## 2. Available Algorithm 
+
+In the past, Salesforce supported DES and Triple DES for its cryptographic algorithms. However, as these algorithms became internationally recognized as vulnerable and deprecation was highly recommended, Salesforce discontinued their support. Currently, it exclusively supports AES. The supported encryption algorithms are as follows:
+
+AES128, AES128-CBC
+AES192, AES192-CBC
+AES256, AES256-CBC
+AES256-GCM
+
+
+
 👉 [Previous Crypto Apex Class Document](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_restful_crypto.htm)
