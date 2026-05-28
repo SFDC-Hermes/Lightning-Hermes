@@ -50,4 +50,33 @@ Cipher Mode & Padding: Supports CBC mode with PKCS7/PKCS5 padding, and GCM (Galo
 
 Data Integrity & Hashing: Supports HMAC (SHA-256, SHA-512) and Digital Signatures (RSA/ECDSA) for message authentication and non-repudiation.
 
+## 3. Real-World Implementation Patterns
+
+When integrating with third-party APIs, raw cryptographic data cannot be transmitted as raw strings or binary Blobs. They must be handled carefully using Apex `Blob` methods and formatted via `EncodingUtil` (Base64 or Hex) to ensure safe HTTP transport.
+
+### 3.1 Outbound Payload Encryption using AES256 (With Managed IV)
+
+When sending highly sensitive data (such as financial payloads or personally identifiable information) to an external system, symmetric encryption is the standard defense. 
+
+Using `Crypto.encryptWithManagedIV()` is the platform best practice. Salesforce automatically generates a secure, random Initialization Vector (IV), executes the encryption, and prepends the IV to the cipher text so you don't have to manage it manually.
+
+```java
+public class CryptoClass {
+    public static String encryptOutboundPayload(String plainText, Blob privateKey) {
+        if (String.isBlank(plainText) || privateKey == null) {
+            return null;
+        }
+        
+        // 1. Convert the plain text string into a binary Blob
+        Blob dataToEncrypt = Blob.valueOf(plainText);
+        
+        // 2. Encrypt using AES256 with an automatically managed Initialization Vector (IV)
+        Blob encryptedBlob = Crypto.encryptWithManagedIV('AES256', privateKey, dataToEncrypt);
+        
+        return EncodingUtil.base64Encode(encryptedBlob);
+    }
+}
+
+```
+
 👉 [Previous Crypto Apex Class Document](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_restful_crypto.htm)
