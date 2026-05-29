@@ -9,6 +9,5 @@ tags:
   - Salesforce
   - Java Script
   - UI/UX
-  - HTML
   - Modeling
 ---
