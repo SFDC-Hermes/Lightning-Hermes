@@ -89,4 +89,33 @@ public class CryptoClass {
 
 ```
 
+### 3.2 Securing Webhooks via HMAC-SHA256 Signatures
+
+While symmetric encryption obfuscates the payload, many standard webhooks require an assertion of message authenticity without the overhead of full decryption. This is achieved via a Hash-based Message Authentication Code (HMAC). 
+
+By sharing a secret key with the external system, Salesforce can sign the outbound request body. The receiver calculates the identical hash to ensure the payload was not intercepted or altered by a Man-in-the-Middle (MitM) attack.
+
+```java
+    /**
+     * @description Generates a hex-encoded HMAC-SHA256 signature for API header verification
+     * @param requestBody The raw HTTP request body string
+     * @param secretKey The pre-shared secret string
+     * @return Hex-encoded signature string
+     */
+    public static String generateHMAC(String requestBody, String secretKey) {
+        if (requestBody == null || secretKey == null) {
+            return null;
+        }
+        
+        Blob targetBlob = Blob.valueOf(requestBody);
+        Blob keyBlob = Blob.valueOf(secretKey);
+        
+        // Generate Message Authentication Code (MAC) natively
+        Blob hmacBlob = Crypto.generateMac('HmacSHA256', targetBlob, keyBlob);
+        
+        return EncodingUtil.convertToHex(hmacBlob);
+    }
+
+```
+
 👉 [Previous Crypto Apex Class Document](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_restful_crypto.htm)
