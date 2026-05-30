@@ -118,4 +118,21 @@ By sharing a secret key with the external system, Salesforce can sign the outbou
 
 ```
 
+## 4. Architect's Note: Enterprise Key Lifecycle Management
+
+An encryption architecture is only as secure as its key storage mechanism. Implementing a flawless Crypto class method yields zero defensive value if your private keys are compromised.
+
+Never Hardcode Secrets: Storing private keys or webhook tokens as plain strings inside Apex classes exposes them to anyone with metadata visibility or source repository access.
+
+Leverage Protected Custom Metadata: Store encryption secrets within Protected Custom Metadata Types inside a managed package environment. This keeps them entirely invisible to subscriber org admins.
+
+Utilize Named Credentials: When orchestrating outbound calls requiring client certificates or asymmetric signatures, generate the keystore entries via Salesforce's native Certificate and Key Management setup and reference them cleanly via Named Credentials.
+
+## 5. Summary & Performance Considerations
+
+When extending your Salesforce org to interact with compliance-heavy external networks, the native Crypto class provides a performant, platform-managed perimeter.
+
+However, keep the platform limits in mind: cryptographic functions process data as Blob data types. Converting large, multi-megabyte payloads into binary arrays can aggressively spike your transaction's Apex Heap Limit (6MB synchronous / 12MB asynchronous). Always validate your payload data footprint before executing heavy cryptographic transformations.
+
+
 👉 [Previous Crypto Apex Class Document](https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_classes_restful_crypto.htm)
