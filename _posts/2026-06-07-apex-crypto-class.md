@@ -50,6 +50,16 @@ Cipher Mode & Padding: Supports CBC mode with PKCS7/PKCS5 padding, and GCM (Galo
 
 Data Integrity & Hashing: Supports HMAC (SHA-256, SHA-512) and Digital Signatures (RSA/ECDSA) for message authentication and non-repudiation.
 
+### 2.1 Alignment with Global Compliance Standards (NIST & FIPS)
+
+The transition away from legacy algorithms like DES and 3DES isn't just a Salesforce platform update; it is a strict enforcement of international cryptographic compliance. 
+
+According to the **NIST (National Institute of Standards and Technology)** guidelines, block ciphers with a 64-bit block size (such as Triple DES) are susceptible to practical collision attacks (e.g., the Sweet32 vulnerability). Consequently, modern enterprise architectures mandate the use of **AES (Advanced Encryption Standard)** with minimum key lengths of 128 bits, though 256-bit keys are preferred for future-proofing sensitive data.
+
+Furthermore, the choice between cipher modes dictates your system's vulnerability posture:
+ **AES-CBC (Cipher Block Chaining):** Reliable but requires a unique Initialization Vector (IV) for every operation. It is vulnerable to padding oracle attacks if the decryption errors are improperly handled by the external API.
+ **AES-GCM (Galois/Counter Mode):** Widely recognized as the industry gold standard for modern HTTP integrations (such as TLS 1.3). It provides **AEAD (Authenticated Encryption with Associated Data)**, meaning it encrypts the payload and verifies its integrity simultaneously, neutralizing padding oracle threats entirely.
+
 ## 3. Real-World Implementation Patterns
 
 When integrating with third-party APIs, raw cryptographic data cannot be transmitted as raw strings or binary Blobs. They must be handled carefully using Apex `Blob` methods and formatted via `EncodingUtil` (Base64 or Hex) to ensure safe HTTP transport.
