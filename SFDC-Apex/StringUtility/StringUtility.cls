@@ -7,6 +7,7 @@
  * Modifications Log 
  * Ver   Date         Author        Modification
  * 1.0   2026-04-12   SFDC-Hermes   Initial Version
+ * 1.1   2026-06-02   SFDC-Hermes   String to field type 
  **/
 public with sharing class StringUtility {
     private static final Integer MAX_BYTE_LIMIT = 90;
@@ -45,5 +46,102 @@ public with sharing class StringUtility {
         }
 
         return result;
+    }
+
+    // 1.1   2026-06-02   SFDC-Hermes   String to field type 
+
+    private static String normalizeString(Object rawValue) {
+        String stringValue = String.valueOf(rawValue);
+        if (stringValue == null) {
+            return null;
+        }
+
+        String normalized = stringValue.trim();
+        return (normalized == 'null') ? null : normalized;
+    }
+
+    private static Decimal parseDecimalValue(Object rawValue) {
+        if (rawValue instanceof Decimal) {
+            return (Decimal) rawValue;
+        }
+        if (rawValue instanceof Integer || rawValue instanceof Long || rawValue instanceof Double) {
+            return Decimal.valueOf(String.valueOf(rawValue));
+        }
+
+        String normalized = normalizeString(rawValue);
+        if (String.isBlank(normalized)) {
+            return null;
+        }
+
+        normalized = normalized.replace(',', '');
+        if (normalized.startsWith('(') && normalized.endsWith(')')) {
+            normalized = '-' + normalized.substring(1, normalized.length() - 1);
+        }
+        return Decimal.valueOf(normalized);
+    }
+
+    private static Date parseDateValue(Object rawValue) {
+        if (rawValue instanceof Date) {
+            return (Date) rawValue;
+        }
+        if (rawValue instanceof Datetime) {
+            return ((Datetime) rawValue).dateGmt();
+        }
+
+        String normalized = normalizeString(rawValue);
+        if (String.isBlank(normalized)) {
+            return null;
+        }
+
+        if (normalized.contains('T') || normalized.endsWith('Z')) {
+            Datetime parsedDateTime = parseDateTimeValue(normalized);
+            return parsedDateTime == null ? null : parsedDateTime.dateGmt();
+        }
+        if (normalized.length() >= 10) {
+            normalized = normalized.substring(0, 10);
+        }
+        return Date.valueOf(normalized);
+    }
+
+    private static Datetime parseDateTimeValue(Object rawValue) {
+        if (rawValue instanceof Datetime) {
+            return (Datetime) rawValue;
+        }
+        if (rawValue instanceof Date) {
+            Date dateValue = (Date) rawValue;
+            return Datetime.newInstanceGmt(dateValue, Time.newInstance(0, 0, 0, 0));
+        }
+
+        String normalized = normalizeString(rawValue);
+        if (String.isBlank(normalized)) {
+            return null;
+        }
+
+        String gmtValue = normalizeDateTimeForGmtParse(normalized);
+        try {
+            return Datetime.valueOfGmt(gmtValue);
+        } catch (Exception e) {
+            return Datetime.valueOf(gmtValue);
+        }
+    }
+
+    private static String normalizeDateTimeForGmtParse(String rawText) {
+        String normalized = rawText.trim().replace('T', ' ');
+
+        if (normalized.endsWith('Z')) {
+            normalized = normalized.substring(0, normalized.length() - 1);
+        }
+
+        Integer dotIndex = normalized.indexOf('.');
+        if (dotIndex > -1) {
+            normalized = normalized.substring(0, dotIndex);
+        }
+
+        if (normalized.length() == 10) {
+            normalized += ' 00:00:00';
+        } else if (normalized.length() == 16) {
+            normalized += ':00';
+        }
+        return normalized;
     }
 }
