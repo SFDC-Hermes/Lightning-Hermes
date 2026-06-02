@@ -80,6 +80,12 @@ public with sharing class StringUtility {
         }
     }
 
+    private static Boolean isDecimalLikeType(Schema.DisplayType fieldType) {
+        return fieldType == Schema.DisplayType.Double
+            || fieldType == Schema.DisplayType.Currency
+            || fieldType == Schema.DisplayType.Percent;
+    }
+
     private static String normalizeString(Object rawValue) {
         String stringValue = String.valueOf(rawValue);
         if (stringValue == null) {
