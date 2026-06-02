@@ -50,6 +50,36 @@ public with sharing class StringUtility {
 
     // 1.1   2026-06-02   SFDC-Hermes   String to field type 
 
+    private static Object convertFieldValue(String fieldName, Object rawValue, Schema.DescribeFieldResult targetField) {
+        if (rawValue == null) {
+            return null;
+        }
+
+        Schema.DisplayType fieldType = targetField.getType();
+        try {
+            if (fieldType == Schema.DisplayType.Date) {
+                return parseDateValue(rawValue);
+            }
+            if (isDecimalLikeType(fieldType)) {
+                return parseDecimalValue(rawValue);
+            }
+            if (fieldType == Schema.DisplayType.Integer) {
+                Decimal decimalValue = parseDecimalValue(rawValue);
+                return decimalValue == null ? null : decimalValue.intValue();
+            }
+            if (fieldType == Schema.DisplayType.Datetime) {
+                return parseDateTimeValue(rawValue);
+            }
+
+            String textValue = normalizeString(rawValue);
+            return String.isBlank(textValue) ? null : textValue;
+        } catch (Exception e) {
+            throw new IllegalArgumentException(
+                'Field conversion failed. field=' + fieldName + ', value=' + String.valueOf(rawValue)
+            );
+        }
+    }
+
     private static String normalizeString(Object rawValue) {
         String stringValue = String.valueOf(rawValue);
         if (stringValue == null) {
