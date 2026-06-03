@@ -22,6 +22,7 @@ In the LWC framework, component relationships follow a strict, predictable archi
 
 ---
 
+```text
 +------------------------------------------+
 |             Parent Component             |
 |  (Manages State, Coordinates Children)   |
@@ -35,3 +36,4 @@ v                 |
 |              Child Component             |
 |   (Renders UI, Captures User Input)      |
 +------------------------------------------+
+```
