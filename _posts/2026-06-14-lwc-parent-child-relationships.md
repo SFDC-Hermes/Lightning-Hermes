@@ -21,3 +21,17 @@ This requires a deep understanding of component composition—specifically, how 
 In the LWC framework, component relationships follow a strict, predictable architectural contract: **"Data Down, Events Up."** Mastering this directional data flow is essential for ensuring robust system predictability, seamless UI/UX execution, and optimal performance across your Salesforce application.
 
 ---
+
++------------------------------------------+
+|             Parent Component             |
+|  (Manages State, Coordinates Children)   |
++--------------------+---------------------+
+|                 ^
+[Data Down]     |                 |    [Events Up]
+Public Properties |                 |   Custom Events
+(@api publicProp)|                 |   (new CustomEvent)
+v                 |
++--------------------+---------------------+
+|              Child Component             |
+|   (Renders UI, Captures User Input)      |
++------------------------------------------+
