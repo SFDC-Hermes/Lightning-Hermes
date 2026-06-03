@@ -28,9 +28,9 @@ In the LWC framework, component relationships follow a strict, predictable archi
 |  (Manages State, Coordinates Children)   |
 +--------------------+---------------------+
 |                 ^
-[Data Down]     |                 |    [Events Up]
-Public Properties |                 |   Custom Events
-(@api publicProp)|                 |   (new CustomEvent)
+[Data Down]       |               |    [Events Up]
+Public Properties |               |   Custom Events
+(@api publicProp) |               |   (new CustomEvent)
 v                 |
 +--------------------+---------------------+
 |              Child Component             |
