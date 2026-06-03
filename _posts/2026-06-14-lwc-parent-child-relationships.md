@@ -22,6 +22,10 @@ In the LWC framework, component relationships follow a strict, predictable archi
 
 ---
 
+## 1. The Architectural Pattern: "Data Down, Events Up"
+
+To maintain predictability and prevent loose state management, LWC enforces a strict unidirectional data flow. Components do not inherently share a bi-directional data binding mechanism; instead, communication is highly structured depending on the direction of the data pipeline.
+
 ```text
 +------------------------------------------+
 |             Parent Component             |
