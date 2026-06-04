@@ -11,15 +11,13 @@ tags:
   - TypeScript 
 ---
 
-## 1. Overview
-
 Modern Salesforce development is no longer just about basic scripting; it's about building scalable, enterprise-grade applications. Transitioning from JavaScript to TypeScript can significantly reduce runtime errors and improve developer productivity. Let’s explore the key differences and why TypeScript is becoming a favorite in the ecosystem.
 
 While Salesforce now provides official build-time support for TypeScript in LWC, we must understand the technical landscape: the platform fundamentally runs on JavaScript, and the Org only stores transpiled code. This means the 'Source of Truth' must shift from the Org to Git, marking a true transition to Source-Driven Development. In this post, we’ll explore why embracing TypeScript—despite the current infrastructural shifts—is an essential step toward building a more stable and resilient Salesforce ecosystem.
 
 ---
 
-## 2. JavaScript: The Dynamic Standard
+## 1. JavaScript: The Dynamic Standard
 
 JavaScript has been the undisputed backbone of web development and the native execution layer for Lightning Web Components. As a dynamically typed language, it offers incredible flexibility and rapid prototyping capabilities. 
 
@@ -31,7 +29,7 @@ Without compile-time static analysis, tracking data integrity across deeply nest
 
 ---
 
-## 3. TypeScript: The Type-Safe Superset
+## 2. TypeScript: The Type-Safe Superset
 
 TypeScript acts as a strongly typed superset of JavaScript, injecting compile-time type checking, strict interfaces, and advanced IDE intellisense directly into the LWC development workflow.
 
@@ -54,7 +52,7 @@ To summarize the architectural shift, here is a quick breakdown of how both lang
 | **Salesforce Execution** | Native platform environment | Transpiled to JS during build pipeline |
 | **Alignment with Apex** | Structural mismatch | Strong parity (Shared OOP contracts) |
 
-## 4. Why TypeScript in Salesforce?
+## 3. Why TypeScript in Salesforce?
 
 Integrating TypeScript into your Salesforce front-end workflow isn't just about adopting a modern industry standard—it directly solves several platform-specific pain points:
 
