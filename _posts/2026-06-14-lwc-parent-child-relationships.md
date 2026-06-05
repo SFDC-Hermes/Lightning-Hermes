@@ -48,8 +48,48 @@ To maintain predictability and prevent loose state management, LWC enforces a st
 
 ## 3. Communication Patterns with Code Snippets
 
-Let’s look at a clean, production-ready implementation of how this contract operates in JavaScript and HTML.
-
 ### 3.1 Passing Data Down & Invoking Child Methods
 
 Beyond public properties, a parent can also trigger imperative logic inside a child component by invoking a **Public Method** decorated with `@api`.
+
+#### Child Component (`childComponent.js`)
+
+```javascript
+import { LightningElement, api } from 'lwc';
+export default class ChildComponent extends LightningElement {
+   @api displayLabel; // Public Property received from parent
+   // Public Method exposed to parent execution
+   @api
+   refreshView() {
+       console.log('Child view refreshed for: ' + this.displayLabel);
+   }
+}
+```
+
+#### Parent Component Template (parentComponent.html)
+
+```html
+<template>
+<c-child-component
+       class="child-node"
+       display-label={parentStateValue}>
+</c-child-component>
+<lightning-button
+       label="Trigger Child Refresh"
+       onclick={handleTrigger}>
+</lightning-button>
+</template>
+```
+#### Parent Component Controller (parentComponent.js)
+
+```javascript
+import { LightningElement } from 'lwc';
+export default class ParentComponent extends LightningElement {
+   parentStateValue = 'Enterprise Payload';
+   handleTrigger() {
+       const childComponent = this.template.querySelector('.child-node');
+       if (childComponent) {
+           childComponent.refreshView(); // Invoking the public method
+       }
+   }
+}
