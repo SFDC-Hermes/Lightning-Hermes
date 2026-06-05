@@ -48,6 +48,13 @@ To maintain predictability and prevent loose state management, LWC enforces a st
 
 ## 3. Communication Patterns with Code Snippets
 
+### ⚠️ Critical Naming Convention: CamelCase to Kebab-Case Mapping
+Before reviewing the markup, we must understand LWC's strict HTML tag naming rules. While JavaScript classes and component folders use `camelCase` or `PascalCase` (e.g., `childComponent`), HTML elements are case-insensitive.
+To bridge this gap, **Salesforce automatically maps any uppercase letter to a lowercase letter preceded by a hyphen (`-`)**.
+* Component Folder: `childComponent` ➔ HTML Tag: `<c-child-component>`
+* Property Name: `displayLabel` ➔ HTML Attribute: `display-label`
+Failing to apply this kebab-case conversion in your templates will cause the LWC compiler to fail or result in your public properties silently remaining unmapped.
+
 ### 3.1 Passing Data Down & Invoking Child Methods
 
 Beyond public properties, a parent can also trigger imperative logic inside a child component by invoking a **Public Method** decorated with `@api`.
