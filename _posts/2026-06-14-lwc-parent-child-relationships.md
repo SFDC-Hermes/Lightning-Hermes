@@ -100,3 +100,40 @@ export default class ParentComponent extends LightningElement {
        }
    }
 }
+
+### 3.2 Dispatching Events Up
+
+When the child needs to signal an action back to its coordinator, it instantiates a `CustomEvent`.
+
+#### Child Component Controller (`childComponent.js`)
+
+```javascript
+import { LightningElement } from 'lwc';
+
+export default class ChildComponent extends LightningElement {
+    
+    handleSelection(event) {
+        const selectedId = event.target.dataset.id;
+
+        // Constructing the custom event payload
+        const selectEvent = new CustomEvent('itemselect', {
+            detail: { id: selectedId }
+        });
+        
+        // Dispatching up the vertical line
+        this.dispatchEvent(selectEvent);
+    }
+}
+
+```
+
+#### Parent Component Template (`parentComponent.html`)
+
+```html
+<template>
+    <c-child-component 
+        onitemselect={handleItemSelection}>
+    </c-child-component>
+</template>
+
+```
