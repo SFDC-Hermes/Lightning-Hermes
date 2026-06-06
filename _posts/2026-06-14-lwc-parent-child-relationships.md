@@ -137,3 +137,18 @@ export default class ChildComponent extends LightningElement {
 </template>
 
 ```
+
+## 4. UI/UX Modeling Best Practices: Smart vs. Dumb Components
+
+When dividing your user interface into component hierarchies, apply the **Separation of Concerns (SoC)** principle by separating your architecture into **Smart (Container)** and **Dumb (Presentational)** components.
+
+| Component Type | Role & Responsibility | Architectural Behavior |
+| --- | --- | --- |
+| **Smart (Container)** | Manages state, orchestrates logic, triggers wire adapters, calls Apex controllers. | State Owner. Coordinates multiple sub-components. |
+| **Dumb (Presentational)** | Focuses entirely on UI/UX rendering, style presentation, and user interaction capture. | Purely reactive. Relies 100% on props down and events up. |
+
+### Why This Separation Matters:
+
+* **High Reusability:** Presentational components (like a custom card layout or a search input) become highly reusable across entirely different objects because they do not contain hardcoded Salesforce data dependencies.
+* **Testability:** Isolating business logic into a single container component simplifies Jest unit testing, as mock data only needs to be injected into the main coordinator.
+* **UI/UX Consistency:** Ensures that UI adjustments inside presentational layouts scale universally across your system without risking data corruption.
