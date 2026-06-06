@@ -152,3 +152,7 @@ When dividing your user interface into component hierarchies, apply the **Separa
 * **High Reusability:** Presentational components (like a custom card layout or a search input) become highly reusable across entirely different objects because they do not contain hardcoded Salesforce data dependencies.
 * **Testability:** Isolating business logic into a single container component simplifies Jest unit testing, as mock data only needs to be injected into the main coordinator.
 * **UI/UX Consistency:** Ensures that UI adjustments inside presentational layouts scale universally across your system without risking data corruption.
+
+## 5. Summary
+
+Designing robust component structures in LWC requires strict discipline regarding data boundaries. By respecting the unidirectional data flow—passing reactive properties down via @api and bubbling transactional changes up via CustomEvent—you construct highly modular, enterprise-grade user interfaces that are easy to maintain, scale, and refactor.
