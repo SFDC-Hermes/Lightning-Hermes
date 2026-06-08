@@ -1,14 +1,14 @@
 ---
 layout: single
-title: "Salesforce : Interface with Rest API "
+title: "Salesforce : Designing Resilient REST API Interfaces"
 date: 2026-06-21
 categories:
   - Development
 tags:
-  - Apex
+  - LWC
   - Salesforce
-  - Interface
-  - Data Architect
+  - Apex
+  - REST API
 ---
 
 ## 1. Overview: The Integration Landscape (REST vs. SOAP)
