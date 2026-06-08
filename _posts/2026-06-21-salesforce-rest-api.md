@@ -30,3 +30,11 @@ REST has become the industry standard for modern web integrations due to its sim
 * **Scalability:** Because it is stateless, REST APIs scale exceptionally well in high-volume, transactional environments.
 
 ---
+
+
+### 1.2 SOAP API: The Rigid, Enterprise-Grade Protocol
+SOAP is a highly structured, strict protocol that has long been the backbone of legacy enterprise systems, financial networks, and corporate ERPs.
+* **Contract-Driven (WSDL):** SOAP relies strictly on the **WSDL (Web Services Description Language)**, an XML-based contract that rigidly defines the exact structure of requests and responses. This ensures absolute compile-time data integrity between endpoints.
+* **Payload Restriction:** It exclusively supports **XML**. While XML guarantees strict typing and schema validation, its verbose nature introduces noticeable parsing overhead and increased payload sizes compared to JSON.
+* **Enterprise Security & ACID Compliance:** SOAP natively supports advanced WS-Security standards and transactional reliability, making it a frequent requirement for banking, legacy on-premise systems, and scenarios where multi-step transactional rollbacks are mandatory.
+---
