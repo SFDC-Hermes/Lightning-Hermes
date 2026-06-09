@@ -48,11 +48,8 @@ While the protocol sets the rules of engagement, the data format handles the act
 | **Data Types** | Supports Arrays, Numbers, Strings, Booleans natively. | Treats everything as textual strings by default. |
 | **Schema Validation** | Optional (JSON Schema). | Strict, built-in validation via XSD. |
 
-#### ⚠️ Real-World Gotcha: Native XmlStreamReader vs. CDATA
-When dealing with legacy XML integrations, Salesforce’s native **`XmlStreamReader`** introduces a critical roadblock: it cannot gracefully parse **CDATA** blocks (`<![CDATA[ ... ]]>`)—which external ERPs frequently use to embed raw HTML, SQL, or nested JSON.
-**Why it breaks in practice:**
-* **Token Skipping & Data Loss:** `XmlStreamReader` often skips or truncates text tokens nested inside CDATA boundaries, causing silent data corruption.
-* **Brittle Namespace Scoping:** Dynamic changes in XML namespace prefixes (`xmlns:soap`) easily break the streaming logic, forcing brittle, hardcoded string-matching.
-* **High Maintenance:** Handling complex nested streams requires convoluted loops that heavily degrade code readability and maintainability.
-**The Workaround:**
-To bypass these platform limits, I had to abandon `XmlStreamReader` and utilize a **custom external XML reader utility** that treats the payload as a raw string matrix to isolate CDATA buffers safely. This exact engineering hurdle is why **JSON remains the superior, defensive choice** for modern enterprise contracts.
+#### ⚠️ Real-World Gotcha: Native XmlStreamReader vs. Community XMLParser
+When dealing with legacy XML integrations, Salesforce’s native **`XmlStreamReader`** introduces a critical roadblock: it cannot gracefully parse **CDATA** blocks (`<![CDATA[ ... ]]>`)—which external ERPs frequently use to embed raw HTML, SQL, or nested JSON payloads.
+* **The Native Problem (Token Skipping):** The native `XmlStreamReader` often skips or truncates text tokens nested inside CDATA boundaries, causing silent data loss and requiring convoluted, unmaintainable loops to bypass.
+* **The Solution (Bypassing with `XMLParser`):** To resolve this platform limitation, I abandoned raw native stream handling and utilized a widely adopted community open-source **`XMLParser`** utility class. This wrapper treats the payload as a raw string matrix to safely isolate and extract CDATA buffers without risking token degradation.
+This exact engineering hurdle is why **JSON remains the superior, defensive choice** for modern enterprise contracts whenever you have the authority to negotiate the interface schema.
