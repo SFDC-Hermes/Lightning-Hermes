@@ -38,3 +38,12 @@ SOAP is a highly structured, strict protocol that has long been the backbone of 
 * **Payload Restriction:** It exclusively supports **XML**. While XML guarantees strict typing and schema validation, its verbose nature introduces noticeable parsing overhead and increased payload sizes compared to JSON.
 * **Enterprise Security & ACID Compliance:** SOAP natively supports advanced WS-Security standards and transactional reliability, making it a frequent requirement for banking, legacy on-premise systems, and scenarios where multi-step transactional rollbacks are mandatory.
 ---
+
+### 1.3 Deep Dive: Serialization Payloads (JSON vs. XML)
+While the protocol sets the rules of engagement, the data format handles the actual payload weight. When designing RESTful interfaces that are capable of consuming or producing **both JSON and XML**, evaluating the serialization payload becomes critical.
+| Serialization Feature | JSON (JavaScript Object Notation) | XML (Extensible Markup Language) |
+| :--- | :--- | :--- |
+| **Readability & Weight** | Lightweight, minimalist, key-value syntax. | Verbose, uses opening/closing tags. |
+| **Parsing Overhead** | Extremely low. Native JSON serialization in Apex. | Higher. Requires DOM or SAX parsing trees. |
+| **Data Types** | Supports Arrays, Numbers, Strings, Booleans natively. | Treats everything as textual strings by default. |
+| **Schema Validation** | Optional (JSON Schema). | Strict, built-in validation via XSD. |
