@@ -68,3 +68,10 @@ req.setEndpoint('callout:My_External_ERP_Endpoint/v1/sync');
 req.setMethod('POST');
 
 ```
+
+## 3. Managing Governor Limits: Callout Boundaries
+Every outbound HTTP request must play by the rules of the Salesforce multitenant framework. Two critical boundaries must be managed:
+
+The "Callout Before DML" Rule: You cannot execute an HTTP request if there is an uncommitted DML transaction pending in the current context. Always ensure your architectural workflow triggers all external REST integration calls before saving records to the database.
+
+Timeout Constraints: Synchronous callouts are limited to a maximum cumulative timeout of 120 seconds per transaction. For high-volume bulk synchronizations, decouple the transaction loop using asynchronous patterns like Queueable Apex or Batch Apex.
