@@ -69,9 +69,15 @@ req.setMethod('POST');
 
 ```
 
-## 3. Managing Governor Limits: Callout Boundaries
-Every outbound HTTP request must play by the rules of the Salesforce multitenant framework. Two critical boundaries must be managed:
+## 3. Managing Governor Limits: The Integration Guardrails
 
-The "Callout Before DML" Rule: You cannot execute an HTTP request if there is an uncommitted DML transaction pending in the current context. Always ensure your architectural workflow triggers all external REST integration calls before saving records to the database.
+Every outbound HTTP request must play by the strict rules of the Salesforce multitenant framework. For an integration engineer, ignoring these boundaries will inevitably cause transaction crashes in production. Here are the five critical guardrails you must architect around:
 
-Timeout Constraints: Synchronous callouts are limited to a maximum cumulative timeout of 120 seconds per transaction. For high-volume bulk synchronizations, decouple the transaction loop using asynchronous patterns like Queueable Apex or Batch Apex.
+### 3.1 The "Callout Before DML" Rule 
+
+You cannot execute an HTTP request if there is an uncommitted DML transaction pending in the current context. If you insert a record and then immediately call a REST API, the system throws a `System.CalloutException: You have uncommitted work pending`.
+  * *The Fix:* Always architect your transactional sequence to trigger all external REST integration calls **before** saving or updating records to the database via DML.
+
+### 3.2 Timeout Constraints (The 120-Second Limit) 
+Synchronous callouts are capped at a maximum cumulative timeout of **120 seconds** per transaction. By default, the platform sets a 10-second timeout if not specified.
+  * *The Fix:* Always set defensive timeouts using `req.setTimeout()`. For high-volume bulk synchronizations that exceed two minutes, decouple the transaction loop using asynchronous patterns like `Queueable Apex` or `Batch Apex`.
