@@ -81,3 +81,7 @@ You cannot execute an HTTP request if there is an uncommitted DML transaction pe
 ### 3.2 Timeout Constraints (The 120-Second Limit) 
 Synchronous callouts are capped at a maximum cumulative timeout of **120 seconds** per transaction. By default, the platform sets a 10-second timeout if not specified.
   * *The Fix:* Always set defensive timeouts using `req.setTimeout()`. For high-volume bulk synchronizations that exceed two minutes, decouple the transaction loop using asynchronous patterns like `Queueable Apex` or `Batch Apex`.
+    
+### 3.3 The 100-Callout Cap & The Danger of Loops:** Salesforce restricts a single transaction to a maximum of **100 HTTP callouts**.
+ * *The Trap:* A common anti-pattern is executing a callout inside a `for` loop (e.g., iterating over a trigger batch). If the batch size exceeds 100, the transaction immediately crashes with a `System.LimitException`.
+ * *The Fix:* Always bulkify your integration architecture. Instead of making 100 individual REST calls for 100 records, negotiate with the external system to accept a **composite batch payload** (a single JSON array) in one single HTTP request.
