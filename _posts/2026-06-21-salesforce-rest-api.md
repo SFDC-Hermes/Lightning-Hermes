@@ -79,13 +79,18 @@ You cannot execute an HTTP request if there is an uncommitted DML transaction pe
   * *The Fix:* Always architect your transactional sequence to trigger all external REST integration calls **before** saving or updating records to the database via DML.
 
 ### 3.2 Timeout Constraints (The 120-Second Limit) 
+
 Synchronous callouts are capped at a maximum cumulative timeout of **120 seconds** per transaction. By default, the platform sets a 10-second timeout if not specified.
   * *The Fix:* Always set defensive timeouts using `req.setTimeout()`. For high-volume bulk synchronizations that exceed two minutes, decouple the transaction loop using asynchronous patterns like `Queueable Apex` or `Batch Apex`.
     
-### 3.3 The 100-Callout Cap & The Danger of Loops:** Salesforce restricts a single transaction to a maximum of **100 HTTP callouts**.
+### 3.3 The 100-Callout Cap & The Danger of Loops
+
+Salesforce restricts a single transaction to a maximum of **100 HTTP callouts.
  * *The Trap:* A common anti-pattern is executing a callout inside a `for` loop (e.g., iterating over a trigger batch). If the batch size exceeds 100, the transaction immediately crashes with a `System.LimitException`.
  * *The Fix:* Always bulkify your integration architecture. Instead of making 100 individual REST calls for 100 records, negotiate with the external system to accept a **composite batch payload** (a single JSON array) in one single HTTP request.
 
-* **3.4 Heap Size Thresholds (6MB Synchronous / 12MB Asynchronous):** Cryptographic conversions, heavy XML/JSON string mapping, and handling raw binary Blobs consume a massive memory footprint.
+### 3.4 Heap Size Thresholds (6MB Synchronous / 12MB Asynchronous)
+
+Cryptographic conversions, heavy XML/JSON string mapping, and handling raw binary Blobs consume a massive memory footprint.
  * *The Trap:* When fetching or sending large transactional datasets, parsing the response into custom Apex classes can instantly trigger an `Apex heap size exceeded` exception.
  * *The Fix:* For high-volume payloads, keep your data structures lean, minimize the use of temporary state variables, and leverage asynchronous processing (Queueable/Batch Apex) to double your heap runway from 6MB to 12MB.
