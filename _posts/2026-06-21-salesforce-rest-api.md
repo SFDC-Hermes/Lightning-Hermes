@@ -53,3 +53,18 @@ When dealing with legacy XML integrations, Salesforce’s native **`XmlStreamRea
 * **The Native Problem (Token Skipping):** The native `XmlStreamReader` often skips or truncates text tokens nested inside CDATA boundaries, causing silent data loss and requiring convoluted, unmaintainable loops to bypass.
 * **The Solution (Bypassing with `XMLParser`):** To resolve this platform limitation, I abandoned raw native stream handling and utilized a widely adopted community open-source **`XMLParser`** utility class. This wrapper treats the payload as a raw string matrix to safely isolate and extract CDATA buffers without risking token degradation.
 This exact engineering hurdle is why **JSON remains the superior, defensive choice** for modern enterprise contracts whenever you have the authority to negotiate the interface schema.
+
+## 2. Secure Authentication: Named Credentials
+
+When establishing an outbound REST connection, hardcoding endpoints, client secrets, or bearer tokens inside Apex classes is a critical security vulnerability. Salesforce provides **Named Credentials** to securely abstract authentication management.
+
+By using Named Credentials, Apex code remains clean and environment-agnostic, calling a symbolic name rather than a raw URL string:
+
+```apex
+
+// Abstracted callout utilizing platform-secured Named Credentials
+HttpRequest req = new HttpRequest();
+req.setEndpoint('callout:My_External_ERP_Endpoint/v1/sync');
+req.setMethod('POST');
+
+```
