@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Apex: Salesforce Apex Class"
+title: "Apex: Salesforce Apex  Crypto Class"
 date: 2026-06-07
 categories:
   - Development
@@ -9,8 +9,6 @@ tags:
   - Salesforce
   - Crypto Class
 ---
-
-## 1. Overview
 
 In modern enterprise architecture, Salesforce rarely operates as an isolated island. It is constantly communicating with external ecosystems—whether it's syncing financial records with an on-premise ERP, sending customer payloads to a legacy billing system, or orchestrating webhooks with third-party APIs.
 
