@@ -94,3 +94,9 @@ Salesforce restricts a single transaction to a maximum of **100 HTTP callouts.
 Cryptographic conversions, heavy XML/JSON string mapping, and handling raw binary Blobs consume a massive memory footprint.
  * *The Trap:* When fetching or sending large transactional datasets, parsing the response into custom Apex classes can instantly trigger an `Apex heap size exceeded` exception.
  * *The Fix:* For high-volume payloads, keep your data structures lean, minimize the use of temporary state variables, and leverage asynchronous processing (Queueable/Batch Apex) to double your heap runway from 6MB to 12MB.
+
+### 3.5 Concurrent Long-Running Request Limit (The 5-Second Trap)
+
+Salesforce monitors transactions that take longer than 5 seconds to execute. If your org triggers more than **10 concurrent long-running requests, the platform blocks any subsequent requests, causing severe system-wide performance degradation (`ConcurrentPerOrgMaxed`).
+ * *The Trap:* If an external ERP suffers from high network latency and your synchronous Apex is waiting 20–30 seconds for a response, it blocks a valuable execution thread.
+ * *The Fix:* If the external system is inherently slow or processes heavy computations, decouple the integration immediately by shifting to an **asynchronous fire-and-forget** design pattern instead of holding up synchronous threads.
