@@ -12,8 +12,6 @@ tags:
   - Modeling
 ---
 
-## 0. Overview
-
 When building complex, enterprise-grade user interfaces in Lightning Web Components (LWC), modularity is key. Instead of creating massive, monolithic components that are difficult to test and maintain, modern UI modeling encourages breaking the interface down into smaller, decoupled pieces.
 
 This requires a deep understanding of component composition—specifically, how parent and child components communicate and manage state. 
