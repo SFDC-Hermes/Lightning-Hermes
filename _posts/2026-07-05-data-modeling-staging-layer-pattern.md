@@ -16,3 +16,15 @@ When designing high-volume inbound interfaces, writing incoming API payloads dir
 To decouple the external network layer from core business operations, a Data Architect should implement the **Staging (Interface / IF) Object Pattern**. The IF Object acts as an isolated, asynchronous data buffer that safe-keeps incoming transactional payloads before parsing and distribution.
 
 ---
+
+## 1. Rigid vs. Flexible Staging Architecture
+
+Depending on the governance maturity of the external ecosystem, your staging schema strategy must balance structural constraint with runtime flexibility:
+
+### 1.1 Structured ERP Environments (SAP, Oracle)
+When receiving records from enterprise-grade systems like SAP or Oracle, data structures are typically highly standardized, rigidly typed, and legally governed. For these specific interfaces, your Salesforce IF Object can mirror the target field data types (e.g., Currency, Date, or Number fields) directly on its custom schema. This ensures compliance right at the ingestion perimeter.
+
+### 1.2 Legacy or Non-Standard APIs (The Need for Flexibility)
+In contrast, many custom third-party systems or legacy middle-wares emit highly volatile or loosely formatted payloads. If you enforce strict data types on the IF Object for these volatile sources, a single malformed date string or an unhandled floating-point anomaly will cause the API ingestion boundary to crash entirely.
+
+To solve this, **I highly recommend and enforce an "All-String Staging" architectural strategy:**
