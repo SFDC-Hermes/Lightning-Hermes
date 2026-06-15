@@ -27,3 +27,8 @@ If your domain is unverified, emails will be silently dropped or hard-bounced by
 
 ## 2. Comparing Compliance Strategies: DKIM Keys vs. Authorized Domains
 To prove domain ownership and satisfy the modern compliance matrix, Salesforce provides two distinct architectural paths. For optimal deliverability and domain governance, **implementing DKIM (DomainKeys Identified Mail) is the industry best practice.**
+
+| Strategy | Verification Mechanism | DNS Record Required | Architect's Verdict |
+| :--- | :--- | :--- | :--- |
+| **DKIM Key**<br>(Recommended) | Attaches a cryptographic digital signature to the email header to prove authenticity and guarantee the payload wasn't tampered with mid-transit. | CNAME<br>(2 records: Main & Alternate Selector) | **Highly Recommended.** It fully satisfies the platform domain validation rule while drastically improving email deliverability. It minimizes the risk of your business emails landing in the recipient's spam folder. Salesforce completely automates the key rotation cycle. |
+| **Authorized Email Domains** | A lighter list-based registry that validates ownership via a single handshake code. | TXT<br>(Salesforce Verification Code) | **Alternative Only.** This method validates domain ownership but does not inject advanced cryptographic signing into the email headers. It should only be used as a temporary fallback if your corporate IT infrastructure cannot immediately deploy a DKIM configuration. |
