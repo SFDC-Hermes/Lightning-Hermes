@@ -24,3 +24,6 @@ This change is not a mere recommendation; it is a **hard enforcement**. This sec
 * Flow Builder `Send Email` actions
 * Imperative Apex integrations executing `Messaging.SingleEmailMessage`
 If your domain is unverified, emails will be silently dropped or hard-bounced by receiving mail servers, breaking critical business communication flows.
+
+## 2. Comparing Compliance Strategies: DKIM Keys vs. Authorized Domains
+To prove domain ownership and satisfy the modern compliance matrix, Salesforce provides two distinct architectural paths. For optimal deliverability and domain governance, **implementing DKIM (DomainKeys Identified Mail) is the industry best practice.**
