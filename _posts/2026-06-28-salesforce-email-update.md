@@ -32,3 +32,27 @@ To prove domain ownership and satisfy the modern compliance matrix, Salesforce p
 | :--- | :--- | :--- | :--- |
 | **DKIM Key**<br>(Recommended) | Attaches a cryptographic digital signature to the email header to prove authenticity and guarantee the payload wasn't tampered with mid-transit. | CNAME<br>(2 records: Main & Alternate Selector) | **Highly Recommended.** It fully satisfies the platform domain validation rule while drastically improving email deliverability. It minimizes the risk of your business emails landing in the recipient's spam folder. Salesforce completely automates the key rotation cycle. |
 | **Authorized Email Domains** | A lighter list-based registry that validates ownership via a single handshake code. | TXT<br>(Salesforce Verification Code) | **Alternative Only.** This method validates domain ownership but does not inject advanced cryptographic signing into the email headers. It should only be used as a temporary fallback if your corporate IT infrastructure cannot immediately deploy a DKIM configuration. |
+
+## 3. Implementation Guide: Configuring and Activating DKIM Keys
+
+To ensure uninterrupted automated business alerts from your org, follow this production-ready setup pipeline to establish your DKIM foundation:
+
+### 3.1 Generating the DKIM Key in Salesforce
+1. Navigate to **Setup** ➔ Search for **DKIM Keys** in the Quick Find box.
+2. Click **Create New Key**.
+3. Select a key size of **2048-bit** (the modern standard for robust asymmetric encryption; avoid the legacy 1024-bit option unless strictly restricted by old network hardware).
+4. Enter a unique string for the **Selector** and **Alternate Selector** (e.g., `sf1` and `sf2`). Salesforce requires two selectors to perform seamless, zero-downtime automated key rotations behind the scenes.
+5. Provide your exact domain name (e.g., `yourcompany.com`) and choose your desired domain match pattern, then save.
+
+### 3.2 Updating the Corporate DNS Records
+Once saved, Salesforce generates the exact public key details mapped to two CNAME records.
+* Export these CNAME configurations and route them to your corporate IT Infrastructure/Network routing team.
+* The network team must publish these CNAME records into your public corporate DNS registrar (e.g., AWS Route 53, Cloudflare, GoDaddy).
+* Allow a buffer window for global DNS propagation (typically taking anywhere from a few minutes up to a couple of hours).
+
+### 3.3 Activating the Key
+* Once DNS propagation is complete, return to the **DKIM Keys** list view in Salesforce.
+* Click into your generated key and select **Activate**.
+* Upon successful activation, Salesforce instantly starts signing all outbound mail payloads originating from that domain with an enterprise-grade digital signature, completely clearing the modern verification guardrails.
+
+---
