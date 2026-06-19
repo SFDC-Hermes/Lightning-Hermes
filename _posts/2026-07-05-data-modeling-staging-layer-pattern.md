@@ -28,3 +28,33 @@ When receiving records from enterprise-grade systems like SAP or Oracle, data st
 In contrast, many custom third-party systems or legacy middle-wares emit highly volatile or loosely formatted payloads. If you enforce strict data types on the IF Object for these volatile sources, a single malformed date string or an unhandled floating-point anomaly will cause the API ingestion boundary to crash entirely.
 
 To solve this, **I highly recommend and enforce an "All-String Staging" architectural strategy:**
+
+        [Inbound Rest Payload]
+                │
+                ▼
+┌───────────────────────────────────────┐
+│       Salesforce IF Object            │
+│  * Every data field is a String/Text  │ ───► Ingestion 100% Guaranteed
+└───────────────────────────────────────┘
+                │
+                | (Asynchronous Apex Trigger / Batch)
+                ▼ 
+┌───────────────────────────────────────┐
+│        Apex Data Converter            │ ───► Handles Safe Casts & Logging
+└───────────────────────────────────────┘
+                │
+                ▼
+┌───────────────────────────────────────┐
+│     Core Transactional Object         │ ───► Clean, Validated Records
+│  * Account / Order__c                 │
+└───────────────────────────────────────┘
+
+---
+
+## 2. Architectural Advantages of the All-String Strategy
+
+* **Guaranteed Inbound Ingestion:** By mapping every incoming attribute to a `String` (or Long Text Area) field on the IF Object, Salesforce will always successfully ingest, instantiate, and commit the raw data into the staging record—regardless of typographical formatting errors.
+* **Isolated Conversion Control:** Once the payload is safely preserved inside the database, an isolated Apex Handler or Batch class takes over. This processing engine manages data type conversion explicitly using robust parsing methods (e.g., `Decimal.valueOf()`, `Date.valueOf()`) surrounded by defensive `try-catch` blocks.
+* **Graceful Fault Tolerance:** If a type conversion failure occurs on row #42, the processor logs a granular error matrix directly onto that specific IF Object record for admin review, while allowing rows #1 through #41 to successfully commit to the target objects. No data is silently dropped.
+
+---
