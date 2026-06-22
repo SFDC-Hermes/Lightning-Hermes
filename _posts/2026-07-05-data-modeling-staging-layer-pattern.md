@@ -29,6 +29,7 @@ In contrast, many custom third-party systems or legacy middle-wares emit highly 
 
 To solve this, **I highly recommend and enforce an "All-String Staging" architectural strategy:**
 
+```text
         [Inbound Rest Payload]
                 │
                 ▼
@@ -49,7 +50,7 @@ To solve this, **I highly recommend and enforce an "All-String Staging" architec
 │  * Account / Order__c                 │
 └───────────────────────────────────────┘
 
----
+```
 
 ## 2. Architectural Advantages of the All-String Strategy
 
