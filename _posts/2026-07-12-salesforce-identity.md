@@ -14,3 +14,7 @@ tags:
 
 In an enterprise IT infrastructure, forcing users to maintain separate credentials for every cloud application is a critical governance anti-pattern. It introduces password fatigue, elevates security vulnerabilities, and complicates user lifecycle management during onboarding and offboarding.
 To solve this, modern enterprise architectures decouple user identity from individual applications using **Single Sign-On (SSO)**.
+
+To solve this, modern enterprise architectures decouple user identity from individual applications using **Single Sign-On (SSO)**.
+When establishing inbound user authentication for a Salesforce Org, **SAML 2.0 (Security Assertion Markup Language)** is the gold standard protocol. SAML 2.0 is an XML-based open standard that safely exchanges authentication and authorization data between trusted security domains, allowing a user to authenticate once and gain seamless access to Salesforce.
+
