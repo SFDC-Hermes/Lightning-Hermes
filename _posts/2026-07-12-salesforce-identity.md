@@ -20,3 +20,15 @@ When establishing inbound user authentication for a Salesforce Org, **SAML 2.0 (
 
 ## 1. Core Architecture: Identity Provider (IdP) vs. Service Provider (SP)
 Before diving into the configuration matrix, a Identity Architect must clearly distinguish the roles within a SAML handshake. The entire trust relationship hinges on two entities:
+
+```text
+┌──────────────────────────┐                      ┌──────────────────────────┐
+│  Identity Provider (IdP) │                      │  Service Provider (SP)   │
+│                          │   SAML Assertion     │                          │
+│   (Okta, Azure AD, etc.) ├─────────────────────►│     (Salesforce Org)     │
+│   * Authenticates User   │   (Signed XML)       │     * Consumes Token     │
+│   * Issues Identity      │                      │     * Grants Org Access  │
+└──────────────────────────┘                      └──────────────────────────┘
+```
+* **The Identity Provider (IdP):** The source of truth for corporate credentials. This is the centralized system responsible for authenticating the user's identity (e.g., Okta, Microsoft Entra ID/Azure AD, Ping Identity). The IdP verifies who the user is and generates a secure, digitally signed XML document called a **SAML Assertion**.
+* **The Service Provider (SP):** The target application the user is attempting to access—in this scenario, **Salesforce**. Salesforce does not see or validate the user's actual password. Instead, it relies entirely on its cryptographic trust relationship with the IdP, consuming the incoming SAML Assertion to verify validity and seamlessly provision the user session.
