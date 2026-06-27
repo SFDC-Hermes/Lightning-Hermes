@@ -32,3 +32,25 @@ Before diving into the configuration matrix, a Identity Architect must clearly d
 ```
 * **The Identity Provider (IdP):** The source of truth for corporate credentials. This is the centralized system responsible for authenticating the user's identity (e.g., Okta, Microsoft Entra ID/Azure AD, Ping Identity). The IdP verifies who the user is and generates a secure, digitally signed XML document called a **SAML Assertion**.
 * **The Service Provider (SP):** The target application is **Salesforce**. Salesforce does not see or validate the user's actual password. Instead, it relies entirely on its cryptographic trust relationship with the IdP, consuming the incoming SAML Assertion to verify validity and seamlessly provision the user session.
+
+## 2. Authentication Flows: IdP-Initiated vs. SP-Initiated
+
+When designing an enterprise SSO matrix, you must architect for two distinct authentication lifecycles based on how the user kicks off their login journey.
+
+### 2.1 IdP-Initiated SSO (Identity Provider First)
+In this workflow, the user starts inside the corporate application portal (e.g., an Okta dashboard or Microsoft My Apps portal).
+
+1. The user clicks on the **Salesforce tile** inside their corporate portal.
+2. The IdP authenticates the active corporate session, generates a signed SAML Assertion, and forces an HTTP POST request to redirect the user's browser directly to the Salesforce **Assertion Consumer Service (ACS) URL**.
+3. Salesforce parses the token, validates the cryptographic signature against the stored certificate, and opens the user session.
+
+### 2.2 SP-Initiated SSO (Service Provider First)
+This workflow occurs when a user navigates directly to your Salesforce instance URL (e.g., `https://*.my.salesforce.com`) or attempts to open a bookmarked deep link to a specific record.
+
+1. The user hits the Salesforce **My Domain** login page.
+2. Salesforce detects that SSO is enabled and automatically redirects the user's browser to the IdP’s single sign-on URL along with a `SAMLRequest` parameter.
+3. The IdP prompts the user for credentials (or uses their desktop active directory session).
+4. Once verified, the IdP sends the signed SAML Assertion back to Salesforce's ACS URL via the browser.
+5. Salesforce consumes the assertion, authenticates the user, and redirects them to the initial deep-linked asset.
+
+---
