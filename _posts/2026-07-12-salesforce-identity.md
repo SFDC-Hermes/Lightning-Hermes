@@ -38,7 +38,7 @@ Before diving into the configuration matrix, a Identity Architect must clearly d
 When designing an enterprise SSO matrix, you must architect for two distinct authentication lifecycles based on how the user kicks off their login journey.
 
 ### 2.1 IdP-Initiated SSO (Identity Provider First)
-In this workflow, the user starts inside the corporate application portal (e.g., an Okta dashboard or Microsoft My Apps portal).
+In this workflow, the user starts inside the corporate application portal.
 
 1. The user clicks on the **Salesforce tile** inside their corporate portal.
 2. The IdP authenticates the active corporate session, generates a signed SAML Assertion, and forces an HTTP POST request to redirect the user's browser directly to the Salesforce **Assertion Consumer Service (ACS) URL**.
