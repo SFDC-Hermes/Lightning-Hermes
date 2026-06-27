@@ -30,7 +30,7 @@ Before diving into the configuration matrix, a Identity Architect must clearly d
 │   * Issues Identity      │                      │     * Grants Org Access  │
 └──────────────────────────┘                      └──────────────────────────┘
 ```
-* **The Identity Provider (IdP):** The source of truth for corporate credentials. This is the centralized system responsible for authenticating the user's identity (e.g., Okta, Microsoft Entra ID/Azure AD, Ping Identity). The IdP verifies who the user is and generates a secure, digitally signed XML document called a **SAML Assertion**.
+* **The Identity Provider (IdP):** The source of truth for corporate credentials. This is the centralized system responsible for authenticating the user's identity. The IdP verifies who the user is and generates a secure, digitally signed XML document called a **SAML Assertion**.
 * **The Service Provider (SP):** The target application is **Salesforce**. Salesforce does not see or validate the user's actual password. Instead, it relies entirely on its cryptographic trust relationship with the IdP, consuming the incoming SAML Assertion to verify validity and seamlessly provision the user session.
 
 ## 2. Authentication Flows: IdP-Initiated vs. SP-Initiated
