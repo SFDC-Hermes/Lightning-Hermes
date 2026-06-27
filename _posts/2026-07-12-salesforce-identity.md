@@ -54,3 +54,12 @@ This workflow occurs when a user navigates directly to your Salesforce instance 
 5. Salesforce consumes the assertion, authenticates the user, and redirects them to the initial deep-linked asset.
 
 ---
+
+## 3. Architect's Checklist for Core SSO Deployment
+Before turning on the SAML switcher in a production environment, ensure your architecture accounts for the following fundamental guardrails:
+
+Federation ID Case Sensitivity: Salesforce matches the incoming SAML NameID directly to the FederationIdentifier field on the User object. Ensure your IdP emits this string with exact case parity; minor typographical casing variations will cause authentication failures.
+
+Certificate Lifecycle Governance: SAML assertions rely on asymmetric cryptographic signatures. Identity Providers sign assertions with a certificate, and Salesforce verifies it using a corresponding public key. Set a calendar reminder for certificate expiration dates. When a security certificate expires, the entire SSO pipe breaks instantly, locking out your entire enterprise workforce.
+
+The Administrator Fallback Gate: Always maintain at least one system administrator account that bypasses the SSO routing rules. If your IdP goes down globally, an administrator must still be able to access Salesforce via the standard login window (login.salesforce.com) to manage emergency response actions.
