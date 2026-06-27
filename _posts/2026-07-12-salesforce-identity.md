@@ -56,7 +56,6 @@ This workflow occurs when a user navigates directly to your Salesforce instance 
 ---
 
 ## 3. Architect's Checklist for Core SSO Deployment
-Before turning on the SAML switcher in a production environment, ensure your architecture accounts for the following fundamental guardrails:
 
 Federation ID Case Sensitivity: Salesforce matches the incoming SAML NameID directly to the FederationIdentifier field on the User object. Ensure your IdP emits this string with exact case parity; minor typographical casing variations will cause authentication failures.
 
