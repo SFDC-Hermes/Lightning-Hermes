@@ -28,3 +28,9 @@ A Profile defines a user’s core operational identity within the platform. Ever
 * **Page Layout Assignments:** Determining which interface layouts are rendered for specific record types.
 * **IP Restrictions & Login Hours:** Enforcing network-level perimeter controls.
 * **Default Record Types:** Defining the standard data shapes when a user instantiates a new record.
+
+### 1.2 Permission Sets: The Extensions (0 to Many Per User)
+If a Profile is the "baseline foundation," Permission Sets are the "functional building blocks." Instead of altering a profile to grant additional access to a handful of users, architects deploy Permission Sets to grant incremental permissions on-the-fly. They expand a user’s access to:
+* Specific custom objects or sensitive fields (FLS).
+* Apex class or Visualforce page execution rights.
+* System permissions (e.g., "Modify All Data" or "Export Reports").
