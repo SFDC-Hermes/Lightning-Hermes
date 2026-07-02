@@ -18,6 +18,9 @@ In a multi-tenant enterprise environment, data security and access governance ar
 Salesforce manages this authorization layer using two core metadata pillars: **Profiles** and **Permission Sets**.
 Historically, Profiles carried the heavy lifting of user permissions. However, modern Salesforce architecture has shifted toward a more modular, agile security framework. Understanding how to balance these two components is critical to building a scalable, easily maintainable security model that avoids profile bloat.
 
+This specific insight helped clarify my dilemma between profile-based and permission-based setups, serving as the primary catalyst for writing this article.
+👉 [View Salesforce Document](https://admin.salesforce.com/blog/2026/the-salesforce-admins-guide-to-profiles-and-permissions)
+
 ## 1. Core Concepts: The "One-to-Many" Security Matrix
 To build a clean access structure, it is helpful to view Profiles and Permission Sets through a strict architectural hierarchy:
 ### 1.1 Profiles: The Baseline (Maximum 1 Per User)
