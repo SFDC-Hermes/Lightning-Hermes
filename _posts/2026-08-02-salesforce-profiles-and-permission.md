@@ -34,3 +34,17 @@ If a Profile is the "baseline foundation," Permission Sets are the "functional b
 * Specific custom objects or sensitive fields (FLS).
 * Apex class or Visualforce page execution rights.
 * System permissions (e.g., "Modify All Data" or "Export Reports").
+
+
+## 2. The Modern Best Practice: Minimum Access Architecture
+
+In the past, organizations fell into the trap of creating a unique Profile for every minor business variation (e.g., `Sales User - Region A`, `Sales User - Region B`), leading to hundreds of unmanageable profiles. 
+
+The modern Salesforce consensus—and official platform direction—enforces a **"Minimum Access Profile"** strategy:
+
+| Architectural Layer | Assignment Rule | Purpose in Modern Org |
+| :--- | :--- | :--- |
+| **Minimum Access Profile** | Assigned to ALL standard users. | Grants zero CRUD permissions by default. Only handles Login Hours, IP ranges, and base Page Layout configurations. |
+| **Permission Sets / Groups** | Layered on top based on exact job functions. | Grants explicit object, field, and system access dynamically as the user's role requires. |
+
+By decoupling functional permissions from the core Profile, you reduce administrative overhead, streamline security audits, and ensure your Salesforce environment remains resilient against organizational restructuring.
