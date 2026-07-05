@@ -62,7 +62,7 @@ To design an ironclad security model, you must establish a strict boundary betwe
 └───────────────────────────┬────────────────────────────┘
                             │ (Must be granted first)
                             ▼
-┌────────────────────────────────────────────────────────┐
+┌──────────────────────────────────────────────────────────┐
 │  Role Hierarchy / Sharing:   "Which records can you see?"│ ──► Controls Row-Level Visibility
-└────────────────────────────────────────────────────────┘
+└──────────────────────────────────────────────────────────┘
 ```
