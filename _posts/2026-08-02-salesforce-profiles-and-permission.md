@@ -48,3 +48,10 @@ The modern Salesforce consensus—and official platform direction—enforces a *
 | **Permission Sets / Groups** | Layered on top based on exact job functions. | Grants explicit object, field, and system access dynamically as the user's role requires. |
 
 By decoupling functional permissions from the core Profile, you reduce administrative overhead, streamline security audits, and ensure your Salesforce environment remains resilient against organizational restructuring.
+
+## 3. The Third Pillar: Roles vs. Permissions (The "What" vs. "Which" Riddle)
+
+Your article title highlights **Roles**, which is the single most common point of confusion for stakeholders entering the Salesforce ecosystem. To design an ironclad security model, you must establish a strict boundary between permissions and visibility:
+
+* **Profiles & Permission Sets (Object/Field Level):** Define **WHAT** a user can do with data. (e.g., "Can this user read or edit the Opportunity object? Can they see the 'Expected Revenue' field?")
+* **Roles (Record Level):** Define **WHICH** specific records a user can see or edit based on data ownership and the corporate hierarchy.
