@@ -66,3 +66,5 @@ To design an ironclad security model, you must establish a strict boundary betwe
 │  Role Hierarchy / Sharing:   "Which records can you see?"│ ──► Controls Row-Level Visibility
 └──────────────────────────────────────────────────────────┘
 ```
+
+The golden rule of Salesforce data governance is **"Open doors with Permission Sets, filter visibility with Roles."** Even if a user has a permission set granting "Modify All" on Accounts, their data footprint is contextualized by where they sit in the Role Hierarchy. Roles ensure that a regional sales representative can only see their own pipeline, while the VP of Sales enjoys roll-up visibility across the entire hierarchy.
