@@ -51,7 +51,18 @@ By decoupling functional permissions from the core Profile, you reduce administr
 
 ## 3. The Third Pillar: Roles vs. Permissions (The "What" vs. "Which" Riddle)
 
-Your article title highlights **Roles**, which is the single most common point of confusion for stakeholders entering the Salesforce ecosystem. To design an ironclad security model, you must establish a strict boundary between permissions and visibility:
+To design an ironclad security model, you must establish a strict boundary between permissions and visibility:
 
 * **Profiles & Permission Sets (Object/Field Level):** Define **WHAT** a user can do with data. (e.g., "Can this user read or edit the Opportunity object? Can they see the 'Expected Revenue' field?")
 * **Roles (Record Level):** Define **WHICH** specific records a user can see or edit based on data ownership and the corporate hierarchy.
+
+```text
+┌────────────────────────────────────────────────────────┐
+│  Profiles / Permission Sets: "What can you do?"        │ ──► Controls Object/Field CRUD
+└───────────────────────────┬────────────────────────────┘
+                            │ (Must be granted first)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│  Role Hierarchy / Sharing:   "Which records can you see?"│ ──► Controls Row-Level Visibility
+└────────────────────────────────────────────────────────┘
+```
