@@ -68,3 +68,12 @@ To design an ironclad security model, you must establish a strict boundary betwe
 ```
 
 The golden rule of Salesforce data governance is **"Open doors with Permission Sets, filter visibility with Roles."** Even if a user has a permission set granting "Modify All" on Accounts, their data footprint is contextualized by where they sit in the Role Hierarchy. Roles ensure that a regional sales representative can only see their own pipeline, while the VP of Sales enjoys roll-up visibility across the entire hierarchy.
+
+## 4. Advanced Modular Governance: Permission Set Groups & Muting
+Shifting to a "Minimum Access Profile" architecture means you will inevitably create a high volume of granular Permission Sets. Managing 50 separate permission sets for 1,000 users would quickly trigger administrative paralysis.
+To streamline this layer, modern architecture leverages **Permission Set Groups (PSGs)** and **Muting Permission Sets**:
+### 4.1 Bundling with Permission Set Groups
+A Permission Set Group bundles multiple granular permission sets together into a single, cohesive package mapped to a specific corporate persona (e.g., `Sales_Agent_Group` contains Core CRM Access, Quota Management, and Slack Integration permission sets). You assign the single group metadata to the user, drastically reducing user assignment clutter.
+### 4.2 Fine-Tuning with Muting Permission Sets
+What happens when a specific sub-team needs *all* the access within a Permission Set Group except for one sensitive delete permission? In the past, you had to clone the entire architecture.
+Today, you add a **Muting Permission Set** inside that specific group. The muting layer explicitly strips out or "silences" the single sensitive permission for that group, allowing you to reuse your existing permission sets without creating duplicate metadata.
