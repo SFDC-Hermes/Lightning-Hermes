@@ -83,5 +83,4 @@ The true catalyst of the 2026 Salesforce permissions roadmap is shifting from ma
 Relying on administrators or custom Apex triggers to manually assign Profiles, Roles, and Permission Set Groups when a user is hired or changes departments is highly error-prone. User Access Policies allow you to build declarative, automated rules that run natively on the platform:
 * **Criteria-Driven:** When a user record is created or updated where `Department == 'Sales'` and `Title == 'Account Executive'`, UAP automatically fires.
 * **Mass Action:** It instantly grants the appropriate **Role**, assigns the correct **Permission Set Groups**, and adds them to the necessary **Public Groups** or **Queues**.
-* **Offboarding/Migration Efficiency:** If the user moves to the Marketing department, UAP can dynamically revoke the old sales permissions and apply the marketing matrix in a single, atomic transaction.
 ---
