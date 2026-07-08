@@ -77,3 +77,11 @@ A Permission Set Group bundles multiple granular permission sets together into a
 ### 4.2 Fine-Tuning with Muting Permission Sets
 What happens when a specific sub-team needs *all* the access within a Permission Set Group except for one sensitive delete permission? In the past, you had to clone the entire architecture.
 Today, you add a **Muting Permission Set** inside that specific group. The muting layer explicitly strips out or "silences" the single sensitive permission for that group, allowing you to reuse your existing permission sets without creating duplicate metadata.
+
+## 5. Automation of the Modern Era: User Access Policies (UAP)
+The true catalyst of the 2026 Salesforce permissions roadmap is shifting from manual assignments to rule-based automation via **User Access Policies (UAP)**.
+Relying on administrators or custom Apex triggers to manually assign Profiles, Roles, and Permission Set Groups when a user is hired or changes departments is highly error-prone. User Access Policies allow you to build declarative, automated rules that run natively on the platform:
+* **Criteria-Driven:** When a user record is created or updated where `Department == 'Sales'` and `Title == 'Account Executive'`, UAP automatically fires.
+* **Mass Action:** It instantly grants the appropriate **Role**, assigns the correct **Permission Set Groups**, and adds them to the necessary **Public Groups** or **Queues**.
+* **Offboarding/Migration Efficiency:** If the user moves to the Marketing department, UAP can dynamically revoke the old sales permissions and apply the marketing matrix in a single, atomic transaction.
+---
