@@ -42,6 +42,7 @@ SOAP is a highly structured, strict protocol that has long been the backbone of 
 ### 1.3 Deep Dive: Serialization Payloads (JSON vs. XML)
 
 While the protocol sets the rules of engagement, the data format handles the actual payload weight. When designing RESTful interfaces that are capable of consuming or producing **both JSON and XML**, evaluating the serialization payload becomes critical.
+
 | Serialization Feature | JSON (JavaScript Object Notation) | XML (Extensible Markup Language) |
 | :--- | :--- | :--- |
 | **Readability & Weight** | Lightweight, minimalist, key-value syntax. | Verbose, uses opening/closing tags. |
