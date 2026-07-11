@@ -57,9 +57,9 @@ To design an ironclad security model, you must establish a strict boundary betwe
 * **Roles (Record Level):** Define **WHICH** specific records a user can see or edit based on data ownership and the corporate hierarchy.
 
 ```text
-┌────────────────────────────────────────────────────────┐
-│  Profiles / Permission Sets: "What can you do?"        │ ──► Controls Object/Field CRUD
-└───────────────────────────┬────────────────────────────┘
+┌───────────────────────────────────────────────────────────┐
+│  Profiles / Permission Sets: "What can you do?"           │ ──► Controls Object/Field CRUD
+└───────────────────────────┬───────────────────────────────┘
                             │ (Must be granted first)
                             ▼
 ┌──────────────────────────────────────────────────────────┐
