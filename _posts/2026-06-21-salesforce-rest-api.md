@@ -11,7 +11,6 @@ tags:
   - REST API
 ---
 
-## 1. Overview: The Integration Landscape (REST vs. SOAP)
 
 In an enterprise Salesforce ecosystem, data architecture extends far beyond the boundaries of a single cloud. As a Data Architect or integration engineer, designing a seamless data exchange strategy between Salesforce and external applications is one of the most critical structural decisions you will make. 
 
@@ -20,6 +19,7 @@ When it comes to web service integrations, Salesforce provides two foundational 
 Choosing between them is not merely a matter of developer preference; it is an architectural trade-off involving performance, data volume, system constraints, and contract governance.
 
 ---
+## 1. The Integration Landscape (REST vs. SOAP)
 
 ### 1.1 REST API: The Lightweight, Modern Standard
 
@@ -40,6 +40,7 @@ SOAP is a highly structured, strict protocol that has long been the backbone of 
 ---
 
 ### 1.3 Deep Dive: Serialization Payloads (JSON vs. XML)
+
 While the protocol sets the rules of engagement, the data format handles the actual payload weight. When designing RESTful interfaces that are capable of consuming or producing **both JSON and XML**, evaluating the serialization payload becomes critical.
 | Serialization Feature | JSON (JavaScript Object Notation) | XML (Extensible Markup Language) |
 | :--- | :--- | :--- |
