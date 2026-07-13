@@ -41,7 +41,10 @@ The architecture fundamentally relies on **Asymmetric Cryptography** (Public/Pri
 │                          │  (access_token)      │                          │
 └──────────────────────────┘                      └──────────────────────────┘
 ```
-JWT Construction: The external server builds a JSON payload containing specific claims required by Salesforce, including the Connected App's Client ID (iss), the target Salesforce login URL (aud), the username of the integration user (sub), and an expiration timestamp (exp).
-Cryptographic Signing: The server encrypts and signs this payload using its local Private Key (typically using the RS256 algorithm).
-The Token Request: The server transmits this signed string via an HTTP POST request directly to the Salesforce token endpoint (/services/oauth2/token).
-Validation and Issuance: Salesforce intercepts the request, maps the incoming Client ID to the corresponding Connected App, and uses the pre-uploaded Public Certificate to verify the digital signature. If the signature matches, Salesforce immediately returns an ephemeral access_token.
+**JWT Construction**: The external server builds a JSON payload containing specific claims required by Salesforce, including the Connected App's Client ID (iss), the target Salesforce login URL (aud), the username of the integration user (sub), and an expiration timestamp (exp).
+
+**Cryptographic Signing**: The server encrypts and signs this payload using its local Private Key (typically using the RS256 algorithm).
+
+**The Token Request**: The server transmits this signed string via an HTTP POST request directly to the Salesforce token endpoint (/services/oauth2/token).
+
+**Validation and Issuance**: Salesforce intercepts the request, maps the incoming Client ID to the corresponding Connected App, and uses the pre-uploaded Public Certificate to verify the digital signature. If the signature matches, Salesforce immediately returns an ephemeral access_token.
