@@ -48,3 +48,9 @@ The architecture fundamentally relies on **Asymmetric Cryptography** (Public/Pri
 **The Token Request**: The server transmits this signed string via an HTTP POST request directly to the Salesforce token endpoint (/services/oauth2/token).
 
 **Validation and Issuance**: Salesforce intercepts the request, maps the incoming Client ID to the corresponding Connected App, and uses the pre-uploaded Public Certificate to verify the digital signature. If the signature matches, Salesforce immediately returns an ephemeral access_token.
+
+## 2. Deep Dive: The OAuth 2.0 Client Credentials Flow
+If the cryptographic complexity of managing public/private key pairs introduces too much technical friction for your infrastructure team, Salesforce provides a highly efficient alternative: the OAuth 2.0 Client Credentials Flow.
+Unlike the JWT flow, this pattern utilizes a Symmetric Shared Secret architecture. The client authenticates by directly presenting its client_id and client_secret (effectively acting as the application’s username and password) to the token endpoint.
+
+
