@@ -53,4 +53,18 @@ The architecture fundamentally relies on **Asymmetric Cryptography** (Public/Pri
 If the cryptographic complexity of managing public/private key pairs introduces too much technical friction for your infrastructure team, Salesforce provides a highly efficient alternative: the OAuth 2.0 Client Credentials Flow.
 Unlike the JWT flow, this pattern utilizes a Symmetric Shared Secret architecture. The client authenticates by directly presenting its client_id and client_secret (effectively acting as the application’s username and password) to the token endpoint.
 
+### 2.1 The Client Credentials Handshake Lifecycle
+
+```text
+┌──────────────────────────┐                      ┌──────────────────────────┐
+│     External Server      │                      │      Salesforce Org      │
+│                          │  1. POST /token      │                          │
+│   * Pulls Client ID &    ├─────────────────────►│   * Validates Secret     │
+│     Secret from Vault    │ (id & secret params) │   * Maps to Integration  │
+│                          │                      │     User Context         │
+│   * Consumes Token       │◄─────────────────────┤                          │
+│   * Executes API Calls   │  2. Returns JSON     │   * Issues Access Token  │
+│                          │  (access_token)      │                          │
+└──────────────────────────┘                      └──────────────────────────┘
+```
 
