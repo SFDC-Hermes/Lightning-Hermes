@@ -73,3 +73,6 @@ The Token Request: The external server makes a direct HTTP POST request to the S
 Context Binding: Salesforce catches the request, validates the credentials, and automatically binds the incoming session to a specific Integration User pre-configured on the Connected App setup page.
 
 Token Issuance: Salesforce returns a secure access_token. The external server attaches this token to the HTTP header (Authorization: Bearer <access_token>) to securely execute target REST/SOAP APIs.
+
+## 3. Architectural Showdown: JWT Bearer vs. Client Credentials
+Choosing between these two headless patterns is a classic engineering trade-off between Security Rigor and Operational Simplicity.
