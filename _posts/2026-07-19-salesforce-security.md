@@ -68,3 +68,6 @@ Unlike the JWT flow, this pattern utilizes a Symmetric Shared Secret architectur
 └──────────────────────────┘                      └──────────────────────────┘
 ```
 
+The Token Request: The external server makes a direct HTTP POST request to the Salesforce token endpoint (/services/oauth2/token) using the application/x-www-form-urlencoded format, passing the raw client_id and client_secret.
+Context Binding: Salesforce catches the request, validates the credentials, and automatically binds the incoming session to a specific Integration User pre-configured on the Connected App setup page.
+Token Issuance: Salesforce returns a secure access_token. The external server attaches this token to the HTTP header (Authorization: Bearer <access_token>) to securely execute target REST/SOAP APIs.
