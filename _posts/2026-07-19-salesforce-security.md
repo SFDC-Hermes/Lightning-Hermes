@@ -40,18 +40,21 @@ The architecture fundamentally relies on **Asymmetric Cryptography** (Public/Pri
 │   * Executes API Calls   │  2. Returns JSON     │   * Issues Access Token  │
 │                          │  (access_token)      │                          │
 └──────────────────────────┘                      └──────────────────────────┘
+
 ```
-**JWT Construction**: The external server builds a JSON payload containing specific claims required by Salesforce, including the Connected App's Client ID (iss), the target Salesforce login URL (aud), the username of the integration user (sub), and an expiration timestamp (exp).
 
-**Cryptographic Signing**: The server encrypts and signs this payload using its local Private Key (typically using the RS256 algorithm).
+1. **JWT Construction:** The external server builds a JSON payload containing specific claims required by Salesforce, including the Connected App's Client ID (`iss`), the target Salesforce login URL (`aud`), the username of the integration user (`sub`), and an expiration timestamp (`exp`).
+2. **Cryptographic Signing:** The server encrypts and signs this payload using its local **Private Key** (typically using the RS256 algorithm).
+3. **The Token Request:** The server transmits this signed string via an HTTP POST request directly to the Salesforce token endpoint (`/services/oauth2/token`).
+4. **Validation and Issuance:** Salesforce intercepts the request, maps the incoming Client ID to the corresponding Connected App, and uses the pre-uploaded **Public Certificate** to verify the digital signature. If the signature matches, Salesforce immediately returns an ephemeral `access_token`.
 
-**The Token Request**: The server transmits this signed string via an HTTP POST request directly to the Salesforce token endpoint (/services/oauth2/token).
-
-**Validation and Issuance**: Salesforce intercepts the request, maps the incoming Client ID to the corresponding Connected App, and uses the pre-uploaded Public Certificate to verify the digital signature. If the signature matches, Salesforce immediately returns an ephemeral access_token.
+---
 
 ## 2. Deep Dive: The OAuth 2.0 Client Credentials Flow
-If the cryptographic complexity of managing public/private key pairs introduces too much technical friction for your infrastructure team, Salesforce provides a highly efficient alternative: the OAuth 2.0 Client Credentials Flow.
-Unlike the JWT flow, this pattern utilizes a Symmetric Shared Secret architecture. The client authenticates by directly presenting its client_id and client_secret (effectively acting as the application’s username and password) to the token endpoint.
+
+If the cryptographic complexity of managing public/private key pairs introduces too much technical friction for your infrastructure team, Salesforce provides a highly efficient alternative: the **OAuth 2.0 Client Credentials Flow**.
+
+Unlike the JWT flow, this pattern utilizes a **Symmetric Shared Secret architecture**. The client authenticates by directly presenting its `client_id` and `client_secret` (effectively acting as the application’s username and password) to the token endpoint.
 
 ### 2.1 The Client Credentials Handshake Lifecycle
 
@@ -66,13 +69,30 @@ Unlike the JWT flow, this pattern utilizes a Symmetric Shared Secret architectur
 │   * Executes API Calls   │  2. Returns JSON     │   * Issues Access Token  │
 │                          │  (access_token)      │                          │
 └──────────────────────────┘                      └──────────────────────────┘
+
 ```
 
-The Token Request: The external server makes a direct HTTP POST request to the Salesforce token endpoint (/services/oauth2/token) using the application/x-www-form-urlencoded format, passing the raw client_id and client_secret.
+1. **The Token Request:** The external server makes a direct HTTP POST request to the Salesforce token endpoint (`/services/oauth2/token`) using the `application/x-www-form-urlencoded` format, passing the raw `client_id` and `client_secret`.
+2. **Context Binding:** Salesforce catches the request, validates the credentials, and automatically binds the incoming session to a specific **Integration User** pre-configured on the Connected App setup page.
+3. **Token Issuance:** Salesforce returns a secure `access_token`. The external server attaches this token to the HTTP header (`Authorization: Bearer <access_token>`) to securely execute target REST/SOAP APIs.
 
-Context Binding: Salesforce catches the request, validates the credentials, and automatically binds the incoming session to a specific Integration User pre-configured on the Connected App setup page.
-
-Token Issuance: Salesforce returns a secure access_token. The external server attaches this token to the HTTP header (Authorization: Bearer <access_token>) to securely execute target REST/SOAP APIs.
+---
 
 ## 3. Architectural Showdown: JWT Bearer vs. Client Credentials
-Choosing between these two headless patterns is a classic engineering trade-off between Security Rigor and Operational Simplicity.
+
+Choosing between these two headless patterns is a classic engineering trade-off between **Security Rigor** and **Operational Simplicity**.
+
+| Feature / Criteria | JWT Bearer Token Flow | Client Credentials Flow |
+| --- | --- | --- |
+| **Authentication Type** | Asymmetric Cryptography (Public/Private Key) | Symmetric Shared Secret (Client Secret) |
+| **Payload Over the Wire** | Signed Assertion String (No secrets transmitted) | Raw `client_secret` (Password transmitted via TLS) |
+| **Setup Complexity** | **High** (Requires Keystore generation, OpenSSL, JWT library) | **Low** (Simple HTTP POST parameters) |
+| **Maintenance Overhead** | **High** (Certificates expire and must be rotated manually) | **Low** (Secrets do not expire unless manually rotated) |
+| **Security Compliance** | **Maximum** (Preferred by financial, banking, and high-security systems) | **Standard** (Ideal for internal secure microservices) |
+
+---
+
+## 4. Security Hardening: Mitigating Client Credentials Risks with Named Credentials
+
+
+```
