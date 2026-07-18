@@ -94,5 +94,41 @@ Choosing between these two headless patterns is a classic engineering trade-off 
 
 ## 4. Security Hardening: Mitigating Client Credentials Risks with Named Credentials
 
+The primary architectural vulnerability of the **Client Credentials Flow** is the management of the static `client_secret`. If a developer accidentally hardcodes this secret into plaintext configuration files or commits it to a public repository, the entire integration endpoint is instantly compromised.
+
+To eliminate this vulnerability when Salesforce acts as the client orchestrating outbound server-to-server calls, the platform enforces a specialized abstraction layer: **Named Credentials**.
+
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│                        SALESFORCE PLATFORM CORE                        │
+│                                                                        │
+│  ┌───────────────────┐               ┌──────────────────────────────┐  │
+│  │    Apex Code      │               │       Named Credential       │  │
+│  │                   │               │                              │  │
+│  │ Callout Reference ├──────────────►│ * Secures Client ID & Secret │  │
+│  │ (No Secrets No URLs)│             │ * Automates OAuth Handshake  │  │
+│  └───────────────────┘               └──────────────┬───────────────┘  │
+└─────────────────────────────────────────────────────┼──────────────────┘
+                                                      │
+                                                      ▼ Outbound Request via TLS
+                                        ┌──────────────────────────────┐
+                                        │         External ERP         │
+                                        └──────────────────────────────┘
+
+```
+
+### 5.1 The Security Value of Named Credentials
+
+By registering the Client Credentials inside a Named Credential, you achieve enterprise-grade governance:
+
+* **Zero Code Exposure:** Your Apex code never touches the raw `client_id` or `client_secret`. Instead, Apex simply calls the symbolic credential link:
+
+```apex
+HttpRequest req = new HttpRequest();
+req.setEndpoint('callout:Secure_ERP_Endpoint/api/v1/data');
+req.setMethod('POST');
+
+```
+
 
 ```
