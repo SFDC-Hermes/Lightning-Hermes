@@ -130,5 +130,18 @@ req.setMethod('POST');
 
 ```
 
+* **Automated Token Management:** Salesforce natively manages the token lifecycle. The platform securely stores the shared secret within its encrypted internal metadata vault, automatically fires the outbound `client_credentials` POST request under the hood, caches the resulting bearer token, and attaches it to your outbound requests seamlessly.
+* **Separation of Duties (SoD):** Developers write the code infrastructure using the abstract callout pointer, while system administrators or security operations teams populate the actual sensitive production secrets directly within the secured setup UI.
 
-```
+> 💡 **Architect's Note for Inbound Scenarios:**
+> When the direction is reversed (an external server is calling *into* Salesforce via Client Credentials), the external engineering team must mimic this defensive posture. They should never hardcode the Salesforce Consumer Secret in their application scripts; instead, they must store it securely inside an external cloud vault (such as **AWS Secrets Manager**, **Azure Key Vault**, or **HashiCorp Vault**) and inject it dynamically at runtime.
+
+---
+
+## 6. Conclusion
+
+For modern enterprise data movement, securing server-to-server endpoints requires matching the right OAuth protocol to your team's operational capabilities.
+
+If your organization has the infrastructure to manage certificate lifecycles, the **JWT Bearer Flow** offers maximum security by ensuring no secrets ever travel across the wire. If rapid development and low maintenance are prioritized, the **Client Credentials Flow** is the ideal choice—provided you eliminate shared secret vulnerabilities by anchoring the credentials within platform-secured containers like **Named Credentials**.
+
+
