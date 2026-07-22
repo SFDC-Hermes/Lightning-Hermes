@@ -6,4 +6,7 @@ categories:
   - Development
 tags:
   - Salesforce
+  - Apex
+  - LWC
+  - File Related List View
 ---
