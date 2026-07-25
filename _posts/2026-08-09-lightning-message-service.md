@@ -23,3 +23,21 @@ However, modern enterprise Lightning Pages are composed of **unrelated component
 To solve this decoupling problem without resorting to legacy, unmaintained pub/sub utility libraries, Salesforce provides the **Lightning Message Service (LMS)**.
 
 ---
+
+## 1. Core Architecture: The Publish-Subscribe Pattern
+
+LMS acts as a platform-native, lightweight event bus built directly into the Salesforce User Interface layer. It allows LWC, Aura, and Visualforce components on the same Lightning Page to publish and subscribe to messages via a custom metadata definition called a **Lightning Message Channel**.
+
+```text
+
+┌──────────────────────────┐                      ┌──────────────────────────┐
+│   Publisher LWC          │                      │    Subscriber LWC        │
+│                          │   1. Publish Payload │                          │
+│  * Captures User Action  ├─────────────────────►│  * Listens to Channel    │
+│  * Calls publish()       │   via MessageChannel │  * Executes Callback     │
+│                          │                      │  * Updates Local UI      │
+└──────────────────────────┘                      └──────────────────────────┘
+
+```
+
+By decoupling the sender from the receiver through an abstract message channel, components remain completely independent, highly modular, and easily reusable across different flexipages.
