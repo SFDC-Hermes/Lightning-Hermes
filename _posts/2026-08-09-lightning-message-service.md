@@ -12,8 +12,6 @@ tags:
   - Frontend
 ---
 
-Overview: The Cross-DOM Communication Challenge
-
 In a standard Lightning Web Component (LWC) architecture, components residing in the same DOM tree communicate via straightforward parent-child patterns:
 * **Parent to Child:** Passing data down using public properties (`@api`).
 * **Child to Parent:** Bubbling events up using standard DOM `CustomEvent`.
