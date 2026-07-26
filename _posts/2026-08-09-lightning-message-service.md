@@ -39,3 +39,29 @@ LMS acts as a platform-native, lightweight event bus built directly into the Sal
 ```
 
 By decoupling the sender from the receiver through an abstract message channel, components remain completely independent, highly modular, and easily reusable across different flexipages.
+
+## 2. Step-by-Step Implementation Guide
+
+Implementing LMS requires three core artifacts: the Message Channel Metadata, the Publisher Component, and the Subscriber Component.
+
+Step 1: Create the Lightning Message Channel (.messageChannel-meta.xml)
+First, define the channel definition in your Salesforce DX project under the force-app/main/default/messageChannels directory.
+
+File: RecordSelectionChannel.messageChannel-meta.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="[http://soap.sforce.com/2006/04/metadata](http://soap.sforce.com/2006/04/metadata)">
+    <masterLabel>MessagingChannelLabel</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message channel used to broadcast record selection events across decoupled LWCs.</description>
+    <lightningMessageFields>
+        <fieldName>recordId</fieldName>
+        <description>The ID of the selected record.</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>source</fieldName>
+        <description>The name of the component broadcasting the event.</description>
+    </lightningMessageFields>
+</LightningMessageChannel>
+```
