@@ -45,6 +45,7 @@ By decoupling the sender from the receiver through an abstract message channel, 
 Implementing LMS requires three core artifacts: the Message Channel Metadata, the Publisher Component, and the Subscriber Component.
 
 Step 1: Create the Lightning Message Channel (.messageChannel-meta.xml)
+
 First, define the channel definition in your Salesforce DX project under the force-app/main/default/messageChannels directory.
 
 File: RecordSelectionChannel.messageChannel-meta.xml
@@ -64,4 +65,29 @@ File: RecordSelectionChannel.messageChannel-meta.xml
         <description>The name of the component broadcasting the event.</description>
     </lightningMessageFields>
 </LightningMessageChannel>
+```
+
+Step 2: The Publisher Component (Broadcasting Data)
+
+In the publishing LWC, import the channel reference from @salesforce/messageChannel and use the publish() method from lightning/messageService.
+
+```javascript
+import { LightningElement, wire } from 'lwc';
+import { publish, MessageContext } from 'lightning/messageService';
+import RECORD_SELECTION_CHANNEL from '@salesforce/messageChannel/RecordSelectionChannel__c';
+export default class PublisherLwc extends LightningElement {
+   // Wire the MessageContext to manage component lifecycle automatically
+   @wire(MessageContext)
+   messageContext;
+   handleRecordClick(event) {
+       const selectedRecordId = event.currentTarget.dataset.id;
+       // Construct the message payload matching your channel fields
+       const payload = {
+           recordId: selectedRecordId,
+           source: 'PublisherLwc'
+       };
+       // Broadcast the message to all active subscribers
+       publish(this.messageContext, RECORD_SELECTION_CHANNEL, payload);
+   }
+}
 ```
