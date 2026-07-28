@@ -91,3 +91,47 @@ export default class PublisherLwc extends LightningElement {
    }
 }
 ```
+
+### Step 3: The Subscriber Component (Listening for Data)
+
+In the subscribing LWC, import subscribe() and unsubscribe() from lightning/messageService. Listen to incoming messages in connectedCallback() and clean up the subscription in disconnectedCallback() to prevent memory leaks.
+
+```javascript
+import { LightningElement, wire } from 'lwc';
+import { subscribe, unsubscribe, MessageContext, APPLICATION_SCOPE } from 'lightning/messageService';
+import RECORD_SELECTION_CHANNEL from '@salesforce/messageChannel/RecordSelectionChannel__c';
+export default class SubscriberLwc extends LightningElement {
+   subscription = null;
+   selectedRecordId;
+   sourceComponent;
+   @wire(MessageContext)
+   messageContext;
+   connectedCallback() {
+       this.subscribeToMessageChannel();
+   }
+   disconnectedCallback() {
+       this.unsubscribeFromMessageChannel();
+   }
+   subscribeToMessageChannel() {
+       if (!this.subscription) {
+           this.subscription = subscribe(
+               this.messageContext,
+               RECORD_SELECTION_CHANNEL,
+               (message) => this.handleMessage(message),
+               { scope: APPLICATION_SCOPE } // Ensures messages are received even across utility bars or popups
+           );
+       }
+   }
+   handleMessage(message) {
+       this.selectedRecordId = message.recordId;
+       this.sourceComponent = message.source;
+   }
+   unsubscribeFromMessageChannel() {
+       if (this.subscription) {
+           unsubscribe(this.subscription);
+           this.subscription = null;
+       }
+   }
+}
+```
+
