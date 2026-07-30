@@ -133,5 +133,20 @@ export default class SubscriberLwc extends LightningElement {
        }
    }
 }
+
 ```
+
+## 3. Communication Patterns: Choosing the Right Tool
+
+Not all component communications require LMS. As an architect, choosing the simplest mechanism that satisfies your requirement prevents unnecessary complexity:
+
+| Communication Scenario | Recommended Pattern | Architectural Rationale |
+| --- | --- | --- |
+| **Parent ➔ Child** | Public Property (`@api`) | Direct DOM access; reactive data binding handles re-renders automatically. |
+| **Child ➔ Parent** | Custom Event (`CustomEvent`) | Standard DOM event bubbling up the direct hierarchy tree. |
+| **Unrelated LWC ↔ LWC** | **Lightning Message Service (LMS)** | Native platform solution; works seamlessly across flexipages and utility bars. |
+| **LWC ↔ Aura / Visualforce** | **Lightning Message Service (LMS)** | Cross-technology framework support supported directly by Salesforce core. |
+
+---
+
 
