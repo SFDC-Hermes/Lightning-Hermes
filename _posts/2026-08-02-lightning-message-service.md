@@ -150,6 +150,9 @@ Not all component communications require LMS. As an architect, choosing the simp
 ---
 
 ## 4. Architect's Best Practices for LMS
+
 Always Handle Cleanup: Failing to call unsubscribe() in disconnectedCallback() can cause memory leaks or duplicate execution callbacks when components are dynamically rendered/destroyed.
+
 Leverage APPLICATION_SCOPE Wisely: By default, LMS only listens to components active in the primary focus area. Use { scope: APPLICATION_SCOPE } when subscriber components live inside secondary page regions like the Utility Bar or background popups.
+
 Keep Payloads Primitive: Send minimal, primitive identifiers (like recordId strings) in the payload rather than large, complex JavaScript objects. Let the subscriber component fetch its own required dataset using @wire or Apex to maintain clean state boundaries.
