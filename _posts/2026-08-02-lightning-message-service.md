@@ -156,3 +156,9 @@ Always Handle Cleanup: Failing to call unsubscribe() in disconnectedCallback() c
 Leverage APPLICATION_SCOPE Wisely: By default, LMS only listens to components active in the primary focus area. Use { scope: APPLICATION_SCOPE } when subscriber components live inside secondary page regions like the Utility Bar or background popups.
 
 Keep Payloads Primitive: Send minimal, primitive identifiers (like recordId strings) in the payload rather than large, complex JavaScript objects. Let the subscriber component fetch its own required dataset using @wire or Apex to maintain clean state boundaries.
+
+## 5. Conclusion
+
+Lightning Message Service (LMS) is the definitive, native solution for orchestrating communication between independent components across an enterprise Salesforce page. By decoupling components with custom Message Channels, you ensure your front-end architecture remains modular, maintainable, and ready for future UI restructuring.
+
+
