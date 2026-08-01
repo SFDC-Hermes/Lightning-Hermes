@@ -18,4 +18,4 @@ In standard Salesforce record pages, the out-of-the-box **Files Related List** c
 2. **Direct Attachment Boundary:** Standard lists can only display `ContentDocumentLink` records directly attached to the *current* record (`LinkedEntityId = :recordId`). They cannot traverse record relationships (e.g., displaying files attached to child line items or related task records from the main parent page).
 3. **Lack of Advanced Granular Filters:** Standard components lack dynamic date-range filtering, author filtering, or logic to ignore auto-generated system images (such as embedded Rich Text images).
 
-To solve these requirements, we designed a custom Lightning Web Component (**`gscRelatedFileListView`**) equipped with a dynamic Apex SOQL engine, multi-column grid layouts, and extensive App Builder properties.
+To solve these requirements, we designed a custom Lightning Web Component (**`RelatedFileListView`**) equipped with a dynamic Apex SOQL engine, multi-column grid layouts, and extensive App Builder properties.
