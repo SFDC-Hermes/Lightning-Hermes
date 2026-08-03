@@ -11,3 +11,6 @@ tags:
   - Architecture
   - AgentBuilder
 ---
+
+
+The enterprise AI landscape in Salesforce has evolved beyond predefined branching logic and static conversational flows. Traditional chatbots relied on rigid decision trees, while early Copilots depended heavily on explicit user prompts to trigger single-step actions.
