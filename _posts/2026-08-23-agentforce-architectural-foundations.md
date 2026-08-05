@@ -28,7 +28,7 @@ Agentforce structures conversational and operational intelligence into three dis
 │                               MAIN AGENT                               │
 │  * Global Entry Point & Identity                                       │
 │  * Evaluates User Intent via Atlas Reasoning Engine                    │
-└───────────────────────────────────┬────────────────────────────────────┘
+└──────────────────────────────────┬────────────────────────────-────────┘
                                    │
                                    │ Routes Request
                                    ▼
@@ -36,7 +36,7 @@ Agentforce structures conversational and operational intelligence into three dis
 │                           SUB-AGENTS / TOPICS                          │
 │  * Domain-Specific Expertise (e.g., Billing, Tech Support, Leads)      │
 │  * Applies Local Instructions & Boundary Constraints                   │
-└───────────────────────────────────┬────────────────────────────────────┘
+└──────────────────────────────────┬────────────────────────────-────────┘
                                    │
                                    │ Triggers Atomic Logic
                                    ▼
