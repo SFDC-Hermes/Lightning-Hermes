@@ -71,3 +71,27 @@ Understanding where logic resides is critical to preventing intent leakage and e
 
 ---
 
+## 3. Decision Framework: When to Use What?
+
+Designing an efficient Agentforce implementation requires placing requirements into the correct layer of the hierarchy.
+
+### 🏢 When to Configure the Main Agent
+
+* **Single Front-Door Strategy:** You need a unified conversational endpoint across digital channels that handles authentication and global context.
+* **Global Security Guardrails:** You must enforce top-level policy constraints (e.g., "Never disclose internal employee IDs regardless of user prompt").
+* **Cross-Domain Routing:** The user's query may jump between vastly different business units (e.g., moving from a product inquiry to a billing dispute in a single session).
+
+### 🎯 When to Create Sub-Agents (Topics)
+
+* **Domain Separation:** When logic requires distinct business rules. For instance, `Billing_Support` requires access to financial records and payment gateways, whereas `Field_Service_Support` needs access to Work Orders and Asset telemetry.
+* **Instruction Scoping:** When detailed instructions would pollute the global prompt context. Grouping instructions into specialized Sub-Agents keeps the reasoning engine fast, accurate, and cost-effective.
+* **Role-Based Capability Scoping:** When certain business operations should only activate under specific contextual domains.
+
+### ⚙️ When to Build Actions
+
+* **Data Mutations & Side Effects:** Creating, updating, or deleting Salesforce records (e.g., updating an Account address or closing a Case).
+* **Deterministic Computations:** Calculating loan interest, complex pricing matrix evaluation, or inventory checks that require exact math rather than probabilistic AI estimates.
+* **External System Integration:** Calling third-party REST APIs via HTTP Callouts, MuleSoft Anypoint endpoints, or External Services.
+* **Structured Content Generation:** Executing a strict **Prompt Template** to summarize a Case or draft an email response.
+
+---
