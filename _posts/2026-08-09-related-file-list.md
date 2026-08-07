@@ -306,7 +306,3 @@ Administrators can configure object relationships, filter rules, and layout defa
 ## 8. Conclusion
 
 By pairing a decoupled Controller/Service backend with proactive date-range guardrails and cursor pagination, this custom file manager satisfies both user UI needs (grid views, cross-object files) and strict enterprise platform limits.
-
-```
-
-```
