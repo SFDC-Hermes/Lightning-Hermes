@@ -38,17 +38,17 @@ To maintain clean separation of concerns, the backend is split into a lightweigh
                                     │ Calls @AuraEnabled Methods
                                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
-│            CONTROLLER LAYER (CustomFileListController.cls)             │
+│            CONTROLLER LAYER (FileController.cls)                       │
 │  * Exposes @AuraEnabled API Endpoints                                  │
 │  * Houses Data Transfer Objects (DTOs: FileQueryRequest, FileDto, etc) │
 └───────────────────────────────────┬────────────────────────────────────┘
                                     │ Delegates Business Logic
                                     ▼
 ┌────────────────────────────────────────────────────────────────────────┐
-│             SERVICE LAYER (CustomFileListService.cls)                  │
+│             SERVICE LAYER (FileService.cls)                            │
 │  * Schema Introspection & Dynamic Field Resolution (isNameField)       │
 │  * Direct & Indirect SOQL Query Engine                                 │
-│  * Scalability Guardrails (fileLookbackMonths & Date Range Bounds)      │
+│  * Scalability Guardrails (fileLookbackMonths & Date Range Bounds)     │
 │  * Keyset Cursor Pagination (LastModifiedDate + Id)                    │
 │  * Record Ownership & Admin Delete Enforcement                         │
 └────────────────────────────────────────────────────────────────────────┘
@@ -59,21 +59,21 @@ To maintain clean separation of concerns, the backend is split into a lightweigh
 
 ## 3. Backend Implementation: Controller vs. Service Pattern
 
-### 3.1 The Controller Layer (`CustomFileListController.cls`)
+### 3.1 The Controller Layer (`FileController.cls`)
 
 The Controller contains zero business logic. It acts purely as a wrapper for `@AuraEnabled` endpoints and hosts the structured Data Transfer Objects (DTOs) passed between Apex and LWC.
 
 ```apex
-public with sharing class CustomFileListController {
+public with sharing class FileController {
 
     @AuraEnabled
     public static FileQueryResult getFilesByObjectRelation(FileQueryRequest request, FileQueryCursor cursor) {
-        return CustomFileListService.getFilesByObjectRelation(request, cursor);
+        return FileService.getFilesByObjectRelation(request, cursor);
     }
 
     @AuraEnabled
     public static DeletePermissionResult checkDeleteFilePermission(Id linkedEntityId) {
-        return CustomFileListService.checkDeleteFilePermission(linkedEntityId);
+        return FileService.checkDeleteFilePermission(linkedEntityId);
     }
 
     // =========================================================================
@@ -111,18 +111,18 @@ public with sharing class CustomFileListController {
 
 ```
 
-### 3.2 The Service Layer (`CustomFileListService.cls`)
+### 3.2 The Service Layer (`FileService.cls`)
 
 The Service layer handles data processing, schema validation, and dynamic query generation.
 
 ```apex
-public with sharing class CustomFileListService {
+public with sharing class FileService {
 
-    public static CustomFileListController.FileQueryResult getFilesByObjectRelation(
-        CustomFileListController.FileQueryRequest request,
-        CustomFileListController.FileQueryCursor cursor
+    public static FileController.FileQueryResult getFilesByObjectRelation(
+        FileController.FileQueryRequest request,
+        FileController.FileQueryCursor cursor
     ) {
-        CustomFileListController.FileQueryResult result = new CustomFileListController.FileQueryResult();
+        FileController.FileQueryResult result = new FileController.FileQueryResult();
         normalizeRequest(request);
 
         Map<String, Schema.SObjectType> globalDescribe = Schema.getGlobalDescribe();
