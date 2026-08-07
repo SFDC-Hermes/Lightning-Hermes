@@ -68,17 +68,20 @@ Role & Responsibility
 Reasoning Level
 Primary Configuration Asset
 
-Main Agent
+**Main Agent**
+
 Global routing, channel exposure, system identity, overarching guardrails.
 High-Level Intent Classification
 System Persona, Global Guardrails
 
-Sub-Agent (Topic)
+**Sub-Agent (Topic)**
+
 Contextual domain execution, local instruction scoping, capability classification.
 Tactical Domain Reasoning
 Natural Language Instructions, Scope Rules
 
-Actions
+**Actions**
+
 Executing discrete backend tasks (CRUD operations, external HTTP calls, calculations).
 Zero (Purely Deterministic)
 Apex, Flow, Prompt Template, MuleSoft
