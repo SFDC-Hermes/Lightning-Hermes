@@ -59,29 +59,15 @@ A **Sub-Agent** (historically structured as a *Topic* within the Builder) acts a
 
 **Actions** are the atomic, deterministic capabilities assigned to Sub-Agents. While the Main Agent and Sub-Agents handle *reasoning and routing*, Actions handle *execution*. They directly bridge AI reasoning with backend platform capabilities, leveraging standard Salesforce metadata like Apex classes, Auto-launched Flows, Prompt Templates, and MuleSoft API integrations.
 
+## 2. Architectural Comparison Matrix
+
+Understanding where logic resides is critical to preventing intent leakage and ensuring enterprise data security.
+
+| Architectural Layer | Role & Responsibility | Reasoning Level | Primary Configuration Asset |
+| --- | --- | --- | --- |
+| **Main Agent** | Global routing, channel exposure, system identity, overarching guardrails. | High-Level Intent Classification | System Persona, Global Guardrails |
+| **Sub-Agent (Topic)** | Contextual domain execution, local instruction scoping, capability classification. | Tactical Domain Reasoning | Natural Language Instructions, Scope Rules |
+| **Actions** | Executing discrete backend tasks (CRUD operations, external HTTP calls, calculations). | Zero (Purely Deterministic) | Apex, Flow, Prompt Template, MuleSoft |
+
 ---
 
-## 2. Architectural Comparison Matrix
-Understanding where logic resides is critical to preventing intent leakage and ensuring enterprise data security.
-Architectural Layer
-Role & Responsibility
-Reasoning Level
-Primary Configuration Asset
-
-**Main Agent**
-
-Global routing, channel exposure, system identity, overarching guardrails.
-High-Level Intent Classification
-System Persona, Global Guardrails
-
-**Sub-Agent (Topic)**
-
-Contextual domain execution, local instruction scoping, capability classification.
-Tactical Domain Reasoning
-Natural Language Instructions, Scope Rules
-
-**Actions**
-
-Executing discrete backend tasks (CRUD operations, external HTTP calls, calculations).
-Zero (Purely Deterministic)
-Apex, Flow, Prompt Template, MuleSoft
