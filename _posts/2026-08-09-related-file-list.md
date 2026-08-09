@@ -245,7 +245,7 @@ const GRID_OPTIONS = [
     { label: '8-Column View', value: 8, cells: [1, 2, 3, 4, 5, 6, 7, 8] }
 ];
 
-export default class CustomFileListView extends LightningElement {
+export default class RelatedFileListView extends LightningElement {
     @api headerTitle = 'Attached Files';
     @api gridOption = 4;
     
