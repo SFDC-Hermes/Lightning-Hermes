@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>66.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="headerTitle" type="String" label="Header Title" description="Header title for the file list." />
+            <property name="enableFileUpload" type="Boolean" label="Enable File Upload" description="If set to true, displays the 'Add File' button next to the search bar and the upload drop zone when empty. If false, hides the upload UI." />
+            <property name="enableDeleteFile" type="Boolean" label="Enable Delete File" description="If set to true, displays the file deletion button. If false, hides the delete UI." />
+            <property name="enableFileFilter" type="Boolean" label="Enable File Filter" description="If set to true, displays the filter button (Created Date / Created By) next to the search bar. If false, hides the filter UI." />
+            <property name="enableRelatedRecordMove" type="Boolean" label="Enable Related Record Move" description="If set to true, displays the record move button. If false, hides the move UI." />
+            <property name="isMessageChannelOpen" type="Boolean" default="false" label="Is Message Channel Open" description="If set to true, enables Lightning Message Channel communication. If false, disables it." />
+            <property name="parentObjectApiName" type="String" label="Parent Object API Name" description="API name of the parent object used for hierarchical queries." />
+            <property name="relatedObjectApiName" type="String" label="Related Object API Name" description="API name of the target object to which files are linked." />
+            <property name="relatedToParentField" type="String" label="Related To Parent Field" description="API name of the reference field on the related object targeting the parent object (e.g., Account__c)." />
+            <property name="firstField" type="String" label="First Field" description="Primary field for hierarchy query conditions (Optional, e.g., ParentId)." />
+            <property name="operator" type="String" label="Operator" description="Operator for hierarchy conditions (Optional, AND or OR)." />
+            <property name="secondField" type="String" label="Second Field" description="Secondary field for hierarchy query conditions (Optional, e.g., Parent.ParentId)." />
+            <property name="exceptField" type="String" label="Except Field" description="API name of the Boolean field to exclude from ContentVersion query conditions."/>
+            <property name="gridOption" type="String" label="Grid Option" description="Default number of grid columns (2, 4, or 8). Defaults to 4 if left blank." />
+            <property name="pageSize" type="Integer" label="Page Size" description="Number of items per page. Defaults to 40 if empty or less than 1." />
+            <property name="fileLookbackMonths" type="String" datasource="All,6,12,18,24,32,36" default="12" label="File Lookback Months" description="File search lookback period limit (in months). Configure on high-volume pages to prevent exceeding the 50,000 SOQL row limit. Selecting 'All' queries without date restrictions." />
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
