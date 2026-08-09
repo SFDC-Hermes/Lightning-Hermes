@@ -95,3 +95,16 @@ Designing an efficient Agentforce implementation requires placing requirements i
 * **Structured Content Generation:** Executing a strict **Prompt Template** to summarize a Case or draft an email response.
 
 ---
+
+## 4. Architect's Best Practices for Agentforce Builder
+
+1. **Keep Actions Atomic and Single-Purpose:** Do not build a single monolithic Apex Action that updates five unrelated objects. Keep Actions granular (e.g., `Get_Invoice_Details`, `Process_Refund`) so the Atlas Engine can chain them dynamically based on user intent.
+2. **Enforce Strict Sub-Agent Boundaries:** Write explicit negative guidelines in your Sub-Agent instructions (e.g., *"Do NOT attempt to process refunds in this Topic; redirect to the Billing Sub-Agent"*). This prevents topic drift.
+3. **Never Trust AI for Math or Governance:** Always delegate transactional logic, validation rules, and mathematical operations to deterministic **Actions** (Flow/Apex) rather than relying on natural language reasoning.
+4. **Leverage Flow for Safety & Human-in-the-Loop:** When an Action performs a destructive operation (e.g., cancelling a subscription), encapsulate the logic within a Flow that incorporates approval steps or confirmation prompts before execution.
+
+---
+
+## 5. Conclusion
+
+The power of Salesforce Agentforce lies in the separation of concerns. By delegating global entry to the **Main Agent**, domain expertise to **Sub-Agents**, and backend execution to **Actions**, architects can build modular, secure, and highly scalable AI workforces that operate safely within enterprise boundaries.
