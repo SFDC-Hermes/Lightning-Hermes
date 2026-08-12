@@ -1,0 +1,320 @@
+<template>
+    <section class="related-list-shell" aria-label="Attached Files">
+        <!-- Header Section -->
+        <header class="related-list-header">
+            <div class="header-left">
+                <lightning-icon icon-name="standard:file" size="small"></lightning-icon>
+                <h2 class="header-title">{resolvedHeaderTitle}</h2>
+                <span class="header-count">{fileCountLabel}</span>
+            </div>
+            <div class="header-actions">
+                <!-- Grid Column Layout Switcher -->
+                <div class="layout-switch-group" role="group" aria-label="Select Column Layout">
+                    <template for:each={gridButtons} for:item="option">
+                        <button
+                            key={option.value}
+                            type="button"
+                            class={option.buttonClass}
+                            data-value={option.value}
+                            onclick={handleGridChange}
+                            title={option.label}
+                            aria-label={option.label}>
+                            <span class="layout-icon">
+                                <template for:each={option.cells} for:item="cell">
+                                    <span key={cell} class="layout-icon-cell"></span>
+                                </template>
+                            </span>
+                        </button>
+                    </template>
+                </div>
+                
+                <!-- Search & Filter Controls -->
+                <div class="header-search-group">
+                    <div class="header-search">
+                        <lightning-input
+                            class="header-search-input"
+                            type="search"
+                            variant="label-hidden"
+                            label="Search File Name"
+                            placeholder="Search File Name"
+                            value={searchInputValue}
+                            onchange={handleSearchInput}
+                            onkeyup={handleSearchKeyup}>
+                        </lightning-input>
+                    </div>
+                    <lightning-button-icon
+                        icon-name="utility:search"
+                        variant="brand"
+                        alternative-text="Search"
+                        title="Search"
+                        onclick={handleSearchClick}>
+                    </lightning-button-icon>
+
+                    <!-- Filter Dropdown Trigger & Modal -->
+                    <template lwc:if={isFilterEnabled}>
+                        <lightning-button-icon
+                            icon-name="utility:filterList"
+                            variant={filterButtonVariant}
+                            alternative-text="Filter"
+                            title="Filter"
+                            onclick={handleOpenFilterModal}>
+                        </lightning-button-icon>
+
+                        <template lwc:if={isFilterModalOpen}>
+                            <div class="filter-dropdown" role="dialog" aria-label="Filter">
+                                <div class="filter-dropdown-header">
+                                    <span>Filter</span>
+                                </div>
+                                <div class="filter-form">
+                                    <lightning-input
+                                        type="date"
+                                        name="createdDateFrom"
+                                        label="Modified Date (From)"
+                                        value={filterDateFromInput}
+                                        onchange={handleFilterInputChange}>
+                                    </lightning-input>
+                                    <lightning-input
+                                        type="date"
+                                        name="createdDateTo"
+                                        label="Modified Date (To)"
+                                        value={filterDateToInput}
+                                        onchange={handleFilterInputChange}>
+                                    </lightning-input>
+
+                                    <!-- Created By Custom Lookup -->
+                                    <template lwc:if={showCreatedByLookup}>
+                                        <c-custom-lookup
+                                            label="Created By"
+                                            placeholder="Search User"
+                                            s-object-api-name="User"
+                                            fixed="true"
+                                            fit-result-list="true"
+                                            icon-name="standard:user"
+                                            where-clause={userWhereClause}
+                                            additional-fields={userAdditionalFields}
+                                            additional-display-fields={userDisplayFields}
+                                            onlookupupdate={handleFilterUserSelection}
+                                            data-target="createdByUser">
+                                        </c-custom-lookup>
+                                    </template>
+
+                                    <!-- Selected Created By Users Pill List -->
+                                    <template lwc:if={hasFilterCreatedByUsers}>
+                                        <div class="filter-selected-user-list filter-selected-user-list--created-by">
+                                            <template for:each={filterCreatedByUsers} for:item="user">
+                                                <div key={user.id} class="filter-selected-user">
+                                                    <span class="filter-selected-user-name">{user.name}</span>
+                                                    <lightning-button-icon
+                                                        icon-name="utility:close"
+                                                        variant="bare"
+                                                        size="x-small"
+                                                        alternative-text="Deselect"
+                                                        title="Deselect"
+                                                        data-id={user.id}
+                                                        onclick={handleClearFilterUser}>
+                                                    </lightning-button-icon>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <!-- Related Records Filter Section -->
+                                    <template lwc:if={isMessageChannelOpen}>
+                                        <div class="filter-related-section">
+                                            <div class="filter-related-section-label">{relatedRecordFilterLabel}</div>
+                                            <div class="filter-selected-user-list">
+                                                <template for:each={filterRelatedRecords} for:item="record">
+                                                    <div key={record.id} class="filter-selected-user">
+                                                        <span class="filter-selected-user-name">{record.name}</span>
+                                                        <lightning-button-icon
+                                                            icon-name="utility:close"
+                                                            variant="bare"
+                                                            size="x-small"
+                                                            alternative-text="Deselect"
+                                                            title="Deselect"
+                                                            data-id={record.id}
+                                                            onclick={handleClearFilterRelatedRecord}>
+                                                        </lightning-button-icon>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+
+                                <div class="filter-dropdown-footer">
+                                    <lightning-button
+                                        variant="neutral"
+                                        label="Reset"
+                                        onclick={handleResetFilter}>
+                                    </lightning-button>
+                                    <lightning-button
+                                        variant="neutral"
+                                        label="Close"
+                                        onclick={handleCloseFilterModal}>
+                                    </lightning-button>
+                                    <lightning-button
+                                        variant="brand"
+                                        label="Apply"
+                                        onclick={handleApplyFilter}>
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+
+                    <!-- Header Upload Button -->
+                    <template lwc:if={isUploadEnabled}>
+                        <lightning-button
+                            class="header-upload-btn"
+                            variant="neutral"
+                            label="Add File"
+                            onclick={handleOpenUploadModal}>
+                        </lightning-button>
+                    </template>
+                </div>
+            </div>
+        </header>
+
+        <!-- Body Section -->
+        <div class="related-list-body slds-var-p-horizontal_medium slds-var-p-bottom_medium">
+            <!-- Loading State -->
+            <template lwc:if={isLoading}>
+                <div class="slds-align_absolute-center slds-var-p-vertical_large">
+                    <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Error State -->
+            <template lwc:elseif={error}>
+                <div class="slds-text-color_error slds-var-p-vertical_medium">
+                    {error}
+                </div>
+            </template>
+
+            <!-- File Grid Display -->
+            <template lwc:elseif={hasFiles}>
+                <div class={fileGridClass}>
+                    <template for:each={files} for:item="file">
+                        <div key={file.documentId} class="file-tile">
+                            <div class="preview"
+                                 data-id={file.documentId}
+                                 onclick={handlePreview}
+                                 title={file.fileName}>
+                                <template lwc:if={isDeleteEnabled}>
+                                    <lightning-button-icon
+                                        icon-name="utility:close"
+                                        variant="bare-inverse"
+                                        size="medium"
+                                        alternative-text="Delete File"
+                                        title="Delete File"
+                                        class="preview-delete-btn"
+                                        data-document-id={file.documentId}
+                                        data-linked-entity-id={file.relatedRecordId}
+                                        onclick={handleDeleteFile}>
+                                    </lightning-button-icon>
+                                </template>
+                                <lightning-icon
+                                    icon-name={file.icon}
+                                    size="large"
+                                    class="fallback-icon">
+                                </lightning-icon>
+                                <img
+                                    src={file.thumbnailUrl}
+                                    alt={file.fileName}
+                                    class="thumb"
+                                    loading="lazy"
+                                    onerror={handleImageError} />
+                            </div>
+                            <div class="file-info">
+                                <div class="file-info-text">
+                                    <span class="file-name" title={file.fileName}>{file.fileName}</span>
+                                    <span class="related-record-name" title={file.relatedRecordName}>{file.relatedRecordName}</span>
+                                    <span class="related-created-date" title={file.fileMetaInfo}>{file.fileMetaInfo}</span>
+                                </div>
+                                <template lwc:if={isMoveEnabled}>
+                                    <div class="file-actions">
+                                        <lightning-button-icon
+                                            icon-name="utility:arrow_right"
+                                            variant="bare"
+                                            alternative-text="Navigate to Record"
+                                            title="Navigate to Record"
+                                            class="record-link-btn"
+                                            data-record-id={file.relatedRecordId}
+                                            data-object-api-name={file.relatedObjectApiName}
+                                            onclick={handleRecordPage}>
+                                        </lightning-button-icon>
+                                    </div>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Keyset Pagination Load More Button -->
+                <template lwc:if={canLoadMore}>
+                    <div class="load-more-wrap">
+                        <button type="button" class="load-more-btn" onclick={handleLoadMore}>
+                            <lightning-icon icon-name="utility:add" size="xx-small" alternative-text="Load More"></lightning-icon>
+                            <span>Load More</span>
+                        </button>
+                    </div>
+                </template>
+            </template>
+
+            <!-- Empty State -->
+            <template lwc:else>
+                <template lwc:if={showUploadEmptyState}>
+                    <div class="empty-upload-wrap">
+                        <div class="empty-upload-dropzone">
+                            <lightning-file-upload
+                                class="empty-upload-main"
+                                label="Upload Files"
+                                name="emptyFileUploaderMain"
+                                record-id={recordId}
+                                multiple
+                                onuploadfinished={handleUploadFinished}>
+                            </lightning-file-upload>
+                        </div>
+                    </div>
+                </template>
+                <template lwc:else>
+                    <div class="slds-illustration slds-illustration_small slds-align_absolute-center slds-var-p-vertical_large">
+                        <div class="slds-text-color_weak">{emptyMessage}</div>
+                    </div>
+                </template>
+            </template>
+        </div>
+
+        <!-- Upload File Modal -->
+        <template lwc:if={isUploadModalOpen}>
+            <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <button
+                            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close"
+                            onclick={handleCloseUploadModal}>
+                            <lightning-icon icon-name="utility:close" size="x-small"></lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                        <h2 class="slds-text-heading_medium">Add File</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <div class="modal-upload-dropzone">
+                            <lightning-file-upload
+                                class="modal-file-upload"
+                                label="Upload Files"
+                                name="modalFileUploader"
+                                record-id={recordId}
+                                multiple
+                                onuploadfinished={handleUploadFinished}>
+                            </lightning-file-upload>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+    </section>
+</template>
