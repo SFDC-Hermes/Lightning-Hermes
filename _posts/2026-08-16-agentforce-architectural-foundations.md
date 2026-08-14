@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Agentforce Architecture: Deconstructing Main Agents, Sub-Agents, and Actions"
-date: 2026-08-23
+date: 2026-08-16
 categories:
   - Agentforce
 tags:
