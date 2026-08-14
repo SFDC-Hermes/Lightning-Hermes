@@ -38,6 +38,7 @@ Before an external client can issue a single HTTP request, they must establish a
 │     (GET/POST/PATCH)     ├──────────────────────────────►  │  * Executes Apex / Data  │
 │                          │  (Authorization: Bearer Token)  │    within User Context   │
 └──────────────────────────┘                                 └──────────────────────────┘
+```
 
 ### 1.1 OAuth 2.0 Flow Selection
 
