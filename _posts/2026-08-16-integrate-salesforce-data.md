@@ -65,3 +65,16 @@ External teams frequently confuse environment URLs during integration testing. Y
 > Conflating or incorrectly swapping these two URLs will trigger immediate `400 Bad Request` or `INVALID_SESSION_ID` errors. Always ensure the external team configures these endpoints in distinct environment variables within their API client.
 
 ---
+
+## 2. Security & Permission Scoping (Least Privilege Model)
+
+Never assign `System Administrator` profiles to API integration accounts. Instead, enforce a **Minimum Access Policy**:
+
+1. **Dedicated Integration User:** Assign the native **Salesforce Integration User License** (which offers cost-effective API-only access).
+2. **Profile Scoping:** Assign a baseline profile with zero CRUD/FLS permissions.
+3. **Custom Permission Sets:** Create a dedicated Permission Set (e.g., `PS_ERP_Inbound_Integration`) that explicitly grants:
+* **Apex Class Access:** Required if calling Custom Apex REST endpoints (`@RestResource`).
+* **Object CRUD & Field-Level Security (FLS):** Read/Create/Edit access strictly on target fields.
+* **System Permission:** `Api Enabled` active.
+
+---
