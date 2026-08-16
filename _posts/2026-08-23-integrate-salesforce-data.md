@@ -78,3 +78,99 @@ Never assign `System Administrator` profiles to API integration accounts. Instea
 * **System Permission:** `Api Enabled` active.
 
 ---
+
+## 3. API Design Options & Custom Apex REST Error Handling
+
+Depending on payload complexity, data volume, and business logic requirements, select the correct integration mechanism:
+
+### Option A: Standard Salesforce REST API
+
+Best when the external system simply wants to perform standard CRUD operations directly on SObjects without complex transformation logic.
+
+* **Endpoint Pattern:** `/services/data/v61.0/sobjects/Account/`
+* **HTTP Methods:** `GET` (Read), `POST` (Create), `PATCH` (Upsert/Update via External ID), `DELETE`.
+* **Pros:** Zero Apex code required; built-in platform indexing and error handling.
+
+---
+
+### Option B: Custom Apex REST API (`@RestResource`) with Standardized Error Contracts
+
+When inbound data requires multi-object orchestration, complex validation, or custom response formatting, you build a Custom Apex REST API.
+
+However, unlike standard APIs, **Custom Apex REST leaves error handling 100% up to the Apex developer**. You must explicitly set `RestContext.response.statusCode` and return a standardized error JSON schema. Returning an HTTP `200 OK` status with an embedded "error" message in the body is a critical anti-pattern that breaks external API gateway monitoring.
+
+#### Apex Implementation Pattern: Exception Handling & HTTP Status Binding
+
+```apex
+@RestResource(urlMapping='/api/v1/orders/sync/*')
+global with sharing class CustomOrderInboundAPI {
+
+    @HttpPost
+    global static CustomAPIResponse syncIncomingOrder() {
+        RestRequest req = RestContext.request;
+        RestResponse res = RestContext.response;
+        CustomAPIResponse responseWrapper = new CustomAPIResponse();
+
+        try {
+            // 1. Validate Payload & Parse JSON
+            String requestBody = req.requestBody.toString();
+            if (String.isBlank(requestBody)) {
+                return buildErrorResponse(res, 400, 'INVALID_PAYLOAD', 'Request body cannot be empty.');
+            }
+
+            OrderPayload payload = (OrderPayload) JSON.deserialize(requestBody, OrderPayload.class);
+            
+            // 2. Business Validation
+            if (String.isBlank(payload.externalOrderKey)) {
+                return buildErrorResponse(res, 400, 'MISSING_REQUIRED_FIELD', 'externalOrderKey is mandatory.');
+            }
+
+            // 3. Execute Business Logic & Data Upserts
+            Id orderId = CustomOrderService.processIncomingOrder(payload);
+
+            // 4. Success Response (HTTP 200)
+            res.statusCode = 200;
+            responseWrapper.isSuccess = true;
+            responseWrapper.recordId = orderId;
+            responseWrapper.message = 'Order successfully synchronized.';
+
+        } catch (QueryException qe) {
+            // Target Record Not Found (HTTP 404)
+            return buildErrorResponse(res, 404, 'RECORD_NOT_FOUND', qe.getMessage());
+        } catch (System.JSONException je) {
+            // Bad JSON Format (HTTP 400)
+            return buildErrorResponse(res, 400, 'MALFORMED_JSON', 'Invalid JSON syntax: ' + je.getMessage());
+        } catch (Exception e) {
+            // Unexpected System Failure (HTTP 500)
+            return buildErrorResponse(res, 500, 'INTERNAL_SERVER_ERROR', 'An unexpected error occurred: ' + e.getMessage());
+        }
+
+        return responseWrapper;
+    }
+
+    // Standardized Error Helper
+    private static CustomAPIResponse buildErrorResponse(RestResponse res, Integer statusCode, String errorCode, String errorMessage) {
+        res.statusCode = statusCode;
+        CustomAPIResponse errResponse = new CustomAPIResponse();
+        errResponse.isSuccess = false;
+        errResponse.errorCode = errorCode;
+        errResponse.message = errorMessage;
+        return errResponse;
+    }
+
+    // Request & Response DTO Wrappers
+    global class OrderPayload {
+        public String externalOrderKey;
+        public String accountName;
+        public Decimal totalAmount;
+    }
+
+    global class CustomAPIResponse {
+        public Boolean isSuccess;
+        public String recordId;
+        public String errorCode; // E.g., MISSING_REQUIRED_FIELD, MALFORMED_JSON
+        public String message;   // Human-readable error detail
+    }
+}
+
+```
