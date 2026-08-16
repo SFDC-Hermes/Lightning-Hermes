@@ -7,7 +7,7 @@ author_profile: true
 
 # 👋 Hi, I'm Hermes
 
-I am a **Salesforce Developer** with a focus on building secure, scalable, and high-performance architectures. With over few years of experience in the ecosystem, I obsess over **Clean Code** and the art of turning complex business requirements into elegant technical solutions.
+I am a **Salesforce & Agentforce Developer** with a focus on building secure, scalable, and high-performance architectures. With over few years of experience in the ecosystem, I obsess over **Clean Code** and the art of turning complex business requirements into elegant technical solutions.
 
 ---
 
