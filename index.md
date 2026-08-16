@@ -15,7 +15,7 @@ header:
 <div class="intro-wrapper">
   <h1>👋 Welcome!</h1>
   <p class="intro-text">
-    I am a <span class="highlight">Salesforce Developer based in South Korea</span>, dedicated to building clean, scalable, and high-performance architectures.
+    I am a <span class="highlight">Salesforce & Agentforce Developer based in South Korea</span>, dedicated to building clean, scalable, and high-performance architectures.
   </p>
   <p class = "itnro-subtext">
     I can't share the exact code or details from my actual projects, but I plan to consistently post and refine the <b>foundational concepts</b> behind them.
