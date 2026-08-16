@@ -174,3 +174,42 @@ global with sharing class CustomOrderInboundAPI {
 }
 
 ```
+
+#### The Agreed JSON Contract for External Teams
+
+In your handover documentation, always specify both the success and error schemas clearly:
+
+**Success Response (`HTTP 200 OK`):**
+
+```json
+{
+  "isSuccess": true,
+  "recordId": "00123456789abcdefg",
+  "errorCode": null,
+  "message": "Order successfully synchronized."
+}
+
+```
+
+**Error Response (`HTTP 400 Bad Request` / `HTTP 404 Not Found`):**
+
+```json
+{
+  "isSuccess": false,
+  "recordId": null,
+  "errorCode": "MISSING_REQUIRED_FIELD",
+  "message": "externalOrderKey is mandatory."
+}
+
+```
+
+---
+
+### Option C: Handling High Data Volume (Composite REST vs Bulk API 2.0)
+
+If the external system plans to push thousands of records simultaneously, standard Apex `@HttpPost` endpoints will quickly hit **Governor Limits** (`Heap Size Limit` or `10,000 DML Rows Limit`).
+
+* **Composite REST API:** Allows bundling up to 25 sub-requests into a single HTTP callout payload (`/services/data/v61.0/composite`).
+* **Bulk API 2.0:** Mandatory for asynchronous batch loads exceeding 10,000+ records. The external client uploads CSV/JSON files to a bulk job queue (`/services/data/v61.0/jobs/ingest`), bypassing standard Apex synchronous processing limits.
+
+---
