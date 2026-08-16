@@ -203,8 +203,6 @@ In your handover documentation, always specify both the success and error schema
 
 ```
 
----
-
 ### Option C: Handling High Data Volume (Composite REST vs Bulk API 2.0)
 
 If the external system plans to push thousands of records simultaneously, standard Apex `@HttpPost` endpoints will quickly hit **Governor Limits** (`Heap Size Limit` or `10,000 DML Rows Limit`).
