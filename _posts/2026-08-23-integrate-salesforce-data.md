@@ -223,7 +223,7 @@ Provide them with a document containing the following 5 assets:
 | Asset Component | Content / Value Delivered |
 | --- | --- |
 | **1. OAuth Credentials** | `Client ID` (Consumer Key), `Client Secret` (or instructions to send Public Cert), and Explicit Token URLs. |
-| **2. Differentiated Base URLs** | Test Sandbox Token URL vs My Domain Base URL (e.g., `https://yourdomain.my.salesforce.com`) and target Custom API path (e.g., `/services/apexrest/api/v1/orders/sync`). |
+| **2. Differentiated Base URLs** | Test Sandbox Token URL vs My Domain Base URL (e.g., `https://mydomain.my.salesforce.com`) and target Custom API path (e.g., `/services/apexrest/api/v1/orders/sync`). |
 | **3. Request Specification** | Expected HTTP Header (`Authorization: Bearer <access_token>`, `Content-Type: application/json`) and sample JSON Request Payload. |
 | **4. Response & Error Contract** | Standardized JSON schema for Success (`200 OK`) and Errors (`400 Bad Request`, `404 Not Found`, `500 Internal Server Error`) mapped to HTTP Status Codes. |
 | **5. Postman Collection** | A pre-configured Postman JSON environment file containing pre-built Auth and Data requests for sandbox testing. |
