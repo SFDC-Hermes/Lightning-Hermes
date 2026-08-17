@@ -211,3 +211,21 @@ If the external system plans to push thousands of records simultaneously, standa
 * **Bulk API 2.0:** Mandatory for asynchronous batch loads exceeding 10,000+ records. The external client uploads CSV/JSON files to a bulk job queue (`/services/data/v61.0/jobs/ingest`), bypassing standard Apex synchronous processing limits.
 
 ---
+
+## 4. The External Developer Handover Package Checklist
+
+Once your backend setup is complete, you must deliver a clean **API Handover Specification** to the external development team.
+
+Provide them with a document containing the following 5 assets:
+
+### 📄 Handover Checklist Table
+
+| Asset Component | Content / Value Delivered |
+| --- | --- |
+| **1. OAuth Credentials** | `Client ID` (Consumer Key), `Client Secret` (or instructions to send Public Cert), and Explicit Token URLs. |
+| **2. Differentiated Base URLs** | Test Sandbox Token URL vs My Domain Base URL (e.g., `https://yourdomain.my.salesforce.com`) and target Custom API path (e.g., `/services/apexrest/api/v1/orders/sync`). |
+| **3. Request Specification** | Expected HTTP Header (`Authorization: Bearer <access_token>`, `Content-Type: application/json`) and sample JSON Request Payload. |
+| **4. Response & Error Contract** | Standardized JSON schema for Success (`200 OK`) and Errors (`400 Bad Request`, `404 Not Found`, `500 Internal Server Error`) mapped to HTTP Status Codes. |
+| **5. Postman Collection** | A pre-configured Postman JSON environment file containing pre-built Auth and Data requests for sandbox testing. |
+
+---
