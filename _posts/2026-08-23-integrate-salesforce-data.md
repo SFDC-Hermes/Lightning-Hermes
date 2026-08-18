@@ -229,3 +229,9 @@ Provide them with a document containing the following 5 assets:
 | **5. Postman Collection** | A pre-configured Postman JSON environment file containing pre-built Auth and Data requests for sandbox testing. |
 
 ---
+
+## 6. Conclusion
+
+Successfully integrating external systems into Salesforce depends on strong platform governance and explicit API contracts. By establishing secure Connected Apps, enforcing minimal permission boundaries, binding HTTP Status Codes explicitly within Custom Apex REST, and delivering comprehensive handover documentation, you ensure an inbound integration that is secure, performant, and maintainable.
+
+```
