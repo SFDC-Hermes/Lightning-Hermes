@@ -12,8 +12,6 @@ tags:
   - Architecture
 ---
 
-## 1. Overview: The Need for a Custom File Manager
-
 In standard Salesforce Lightning record pages, the out-of-the-box **Files Related List** provides basic file attachment and download capabilities. However, enterprise business requirements often demand a more versatile file management solution due to key limitations in the standard component:
 
 1. **Rigid View Options:** Standard file lists offer only a single-column list layout, making visual inspection of images, diagrams, or design attachments inefficient.
