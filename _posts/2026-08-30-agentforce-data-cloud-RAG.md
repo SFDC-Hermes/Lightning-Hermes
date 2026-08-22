@@ -41,3 +41,22 @@ The integration between Agentforce and Data Cloud relies on converting unstructu
 └─────────────────────────────────────────────────────────────────────────┘
 
 ```
+
+## 2. End-to-End RAG Pipeline Implementation Steps
+
+### Step 1: Ingestion & Vector Indexing in Data Cloud
+
+Unstructured text assets are ingested into Data Cloud, broken down into standardized text chunks, and processed through an embedding model to create a **Vector Search Index**.
+
+1. **Unstructured Data Ingestion:** Connect file repositories (SharePoint, Amazon S3, or Salesforce ContentVersion) to Data Cloud as Data Streams.
+2. **Chunking Strategy Setup:** Configure optimal token chunk sizes (e.g., 512 tokens with 50-token overlap) to preserve semantic context across sentence boundaries.
+3. **Vector Index Creation:** Define a **Vector Search Index** on the Target Data Model Object (DMO). Data Cloud automatically converts the text chunks into vector embeddings using native embedding models hosted within the secure platform environment.
+
+### Step 2: Configuring the Search Index Retriever as an Agentforce Action
+
+Once the Vector Search Index is built, it must be exposed to Agentforce so the Atlas Reasoning Engine knows *when* and *how* to query it.
+
+1. In the Agent Builder, navigate to **Actions** and create a new **Retriever Action** bound to the Data Cloud Vector Search Index.
+2. Define the input schema (e.g., `SearchQuery` string passed dynamically from user prompts) and output parameters (e.g., `Top_K_Results` returning the top 3-5 most semantically relevant text chunks).
+3. Assign clear, natural-language instructions to the Action description so Atlas understands its purpose:
+> *"Use this action to search technical product documentation, troubleshooting manuals, and warranty policies when resolving customer technical issues."*
