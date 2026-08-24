@@ -60,3 +60,9 @@ Once the Vector Search Index is built, it must be exposed to Agentforce so the A
 2. Define the input schema (e.g., `SearchQuery` string passed dynamically from user prompts) and output parameters (e.g., `Top_K_Results` returning the top 3-5 most semantically relevant text chunks).
 3. Assign clear, natural-language instructions to the Action description so Atlas understands its purpose:
 > *"Use this action to search technical product documentation, troubleshooting manuals, and warranty policies when resolving customer technical issues."*
+
+### Step 3: Prompt Context Injection & Grounding Loop
+When a user submits a complex query to the Main Agent or Sub-Agent (Topic):
+Intent Analysis: Atlas identifies that answering the query requires external technical domain knowledge.
+Action Execution: Atlas invokes the Data Cloud Vector Search Action, converting the user query into a vector and returning the top K matching document chunks.
+
