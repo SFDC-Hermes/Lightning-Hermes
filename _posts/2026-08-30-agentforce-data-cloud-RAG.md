@@ -62,7 +62,47 @@ Once the Vector Search Index is built, it must be exposed to Agentforce so the A
 > *"Use this action to search technical product documentation, troubleshooting manuals, and warranty policies when resolving customer technical issues."*
 
 ### Step 3: Prompt Context Injection & Grounding Loop
-When a user submits a complex query to the Main Agent or Sub-Agent (Topic):
-Intent Analysis: Atlas identifies that answering the query requires external technical domain knowledge.
-Action Execution: Atlas invokes the Data Cloud Vector Search Action, converting the user query into a vector and returning the top K matching document chunks.
 
+When a user submits a complex query to the Main Agent or Sub-Agent (Topic):
+
+1. **Intent Analysis:** Atlas identifies that answering the query requires external technical domain knowledge.
+2. **Action Execution:** Atlas invokes the Data Cloud Vector Search Action, converting the user query into a vector and returning the top $K$ matching document chunks.
+3. **Prompt Augmentation:** The retrieved text chunks are injected dynamically into the system prompt behind the scenes:
+```text
+[SYSTEM CONTEXT - GROUNDING DATA]
+Use ONLY the following retrieved facts to answer the user's question:
+--- Fact Chunk #1 (DocID: KB-9021) ---
+"Model X turbines require synthetic SAE 5W-40 oil during annual maintenance."
+--- Fact Chunk #2 (DocID: KB-9022) ---
+"Warranty coverage expires if non-synthetic oil is applied."
+
+```
+
+
+4. **Grounded Generation:** The LLM synthesizes the response strictly bounded by the provided context.
+
+---
+
+## 4. Grounding vs. Fine-Tuning: Architectural Comparison
+
+Architects often debate whether to fine-tune an LLM or implement a RAG pipeline. For enterprise CRM environments, RAG via Data Cloud is the clear winner:
+
+| Architectural Metric | Fine-Tuned Custom Model | Agentforce + Data Cloud RAG |
+| --- | --- | --- |
+| **Data Freshness** | Static (Requires costly re-training cycles) | **Real-Time** (Reflects newly uploaded files instantly) |
+| **Hallucination Risk** | High (Model generates probabilistic text) | **Near-Zero** (Strictly bounded by retrieved context) |
+| **Auditability & Traceability** | Low (Cannot pinpoint source sentence) | **High** (Cites specific source KB articles/PDFs) |
+| **Data Security & FLS** | Weak (Data baked permanently into weights) | **Maximum** (Governed by Einstein Trust Layer & FLS) |
+| **Implementation Cost** | Extremely High (GPU cluster rental, ML engineers) | **Low / Platform-Native** (Declarative configuration) |
+
+---
+
+## 5. Security & Governance: The Einstein Trust Layer
+
+Connecting LLMs to enterprise data repositories introduces security concerns regarding data leakage and unauthorized access. Salesforce addresses this via the **Einstein Trust Layer**:
+
+* **Zero Data Retention Policy:** Customer data retrieved from Data Cloud and sent to external LLM providers (e.g., OpenAI, Anthropic) is never stored, logged, or used to train vendor models.
+* **Dynamic Masking & Data Privacy:** PII (Personally Identifiable Information) detected in unstructured files can be automatically masked before being sent over the wire.
+* **Role-Based Access Enforcement:** The Vector Search Engine honors user-level data permissions, ensuring users only receive grounded responses built from document chunks they have explicit rights to view.
+
+---
