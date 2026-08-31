@@ -26,7 +26,7 @@ Before comparing platforms, we must understand the universal concepts and framew
 ### 1.1 RAG (Retrieval-Augmented Generation) & Grounding
 
 * **RAG:** An architectural pattern that improves an LLM's output by retrieving facts from an external vector database before generating a response.
-* 
+  
 * **Grounding:** The act of anchoring the AI's response to absolute, verifiable truth. A "grounded" response strictly dictates that the AI must *only* answer using the retrieved facts, preventing hallucinations.
   
 ### 1.2 ReAct Framework (Reasoning + Acting)
