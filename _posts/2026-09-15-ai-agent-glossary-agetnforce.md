@@ -46,3 +46,6 @@ A governance design pattern where high-risk AI actions (e.g., executing a $10,00
 
 * **LangChain:** The foundational open-source framework (Python/TypeScript) for chaining together prompts, models, memory, and tools.
 * **LangGraph:** An advanced extension of LangChain that models stateful, multi-agent interactions as a **Graph (Nodes and Edges)**, allowing cyclic loops, conditional branching, and self-correction.
+
+👉 [View Document in Salesforce Help](https://help.salesforce.com/s/articleView?id=ai.copilot_glossary.htm&type=5)
+
