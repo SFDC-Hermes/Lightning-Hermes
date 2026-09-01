@@ -50,5 +50,6 @@ A governance design pattern where high-risk AI actions (e.g., executing a $10,00
 ### 1.6 Glossary in help document
 
 This is a glossary of terms to help you understand documentation related to Agentforce (AI) development.
+
 👉 [View Document in Salesforce Help](https://help.salesforce.com/s/articleView?id=ai.copilot_glossary.htm&type=5)
 
