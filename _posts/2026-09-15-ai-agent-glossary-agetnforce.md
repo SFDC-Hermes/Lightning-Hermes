@@ -32,3 +32,17 @@ Before comparing platforms, we must understand the universal concepts and framew
 ### 1.2 ReAct Framework (Reasoning + Acting)
 
 A paradigm that combines Chain-of-Thought reasoning with action execution. Instead of answering immediately, the agent follows an iterative loop: **Thought** (evaluating what to do next) ➔ **Action** (calling a tool) ➔ **Observation** (analyzing the tool's result) until the objective is met.
+
+### 1.3 Human-in-the-Loop (HITL)
+
+A governance design pattern where high-risk AI actions (e.g., executing a $10,000 refund, updating contract terms, or deleting accounts) require explicit human authorization before execution.
+
+### 1.4 Tool Calling (Function Calling) & MCP
+
+* **Tool Calling:** The capability of an LLM to output a structured request (usually JSON) to execute a specific function or API.
+* **MCP (Model Context Protocol):** An open standard designed to standardize how AI models connect to external data sources and tools without custom integration code.
+
+### 1.5 LangChain & LangGraph
+
+* **LangChain:** The foundational open-source framework (Python/TypeScript) for chaining together prompts, models, memory, and tools.
+* **LangGraph:** An advanced extension of LangChain that models stateful, multi-agent interactions as a **Graph (Nodes and Edges)**, allowing cyclic loops, conditional branching, and self-correction.
