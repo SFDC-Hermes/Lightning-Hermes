@@ -53,3 +53,18 @@ This is a glossary of terms to help you understand documentation related to Agen
 
 👉 [View Document in Salesforce Help](https://help.salesforce.com/s/articleView?id=ai.copilot_glossary.htm&type=5)
 
+## 2. The Rosetta Stone: Industry Standard vs. Agentforce
+When migrating an AI architecture from an open-source stack (e.g., LangGraph + LangSmith + OpenAI) to Salesforce Agentforce, here is how the components map to one another:
+| Industry Standard (Open Source / OpenAI) | Salesforce Agentforce Equivalent | Architect's Note |
+| :--- | :--- | :--- |
+| **LangChain (Framework)** | **Agentforce Platform** | The underlying ecosystem that connects prompts, models, and tools together. |
+| **ReAct Loop (Thought ➔ Action)** | **Atlas Reasoning Engine** | The proprietary engine in Agentforce that autonomously evaluates user intent, plans steps, and executes actions. |
+| **System Prompt / Persona** | **Agent Instructions & Role** | The foundational rules defining who the agent is and what its ultimate goal is. |
+| **Tool / Function Calling** | **Agent Actions** | In Agentforce, tools are declarative. Atlas can call *Flows*, *Apex Classes*, or *External APIs*. |
+| **LangGraph (Nodes & Edges)** | **Topics & Atlas Routing** | Instead of coding Python nodes/edges, you define "Topics" (Nodes) and write instructions for Atlas to dynamically route between them (Edges). |
+| **Human-in-the-Loop (HITL)** | **Flow Approvals & Slack Actions** | Agentforce routes high-risk tasks to human agents via Salesforce Approvals or Omni-Channel before finishing the execution. |
+| **Agent Observability (LangSmith)** | **Agentforce Analytics / Testing Console** | Native dashboards for monitoring session traces, action invocation success rates, and prompt quality. |
+| **Vector Database (Pinecone, Milvus)** | **Data Cloud Vector Engine** | Salesforce's native storage for multidimensional embeddings of unstructured data (PDFs, knowledge articles). |
+| **Guardrails & Content Filtering** | **Einstein Trust Layer** | Salesforce's enterprise security perimeter (Zero-Data Retention, PII masking, toxicity scoring). |
+---
+
