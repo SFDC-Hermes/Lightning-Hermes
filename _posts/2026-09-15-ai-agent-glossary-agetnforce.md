@@ -68,3 +68,20 @@ When migrating an AI architecture from an open-source stack (e.g., LangGraph + L
 | **Guardrails & Content Filtering** | **Einstein Trust Layer** | Salesforce's enterprise security perimeter (Zero-Data Retention, PII masking, toxicity scoring). |
 ---
 
+## 3. Deep Dive: Key Architectural Differences
+
+### 3.1 LangGraph vs. Atlas Topic Routing
+
+In **LangGraph**, you explicitly code the state machine using Python, manually writing the conditional edges between nodes.
+**In Agentforce**, routing is intent-driven and declarative. You define **Topics** (containing specific instructions and Actions). The **Atlas Reasoning Engine** uses the ReAct framework behind the scenes to dynamically classify the user's intent and route the context between Topics seamlessly.
+
+### 3.2 Hardcoded Safety vs. Native Human-in-the-Loop (HITL)
+
+In custom Python builds, building HITL requires building custom webhooks, databases to freeze the agent's state, and approval UI dashboards.
+**In Agentforce**, HITL is native. An Agent Action can trigger an **Autolaunched Flow** that submits a standard Salesforce Approval Request or posts an Interactive Card to Slack. The agent pauses execution until the user clicks "Approve," resuming execution without losing conversation context.
+
+### 3.3 Tool Calling vs. Agentforce Actions
+
+In standard OpenAI or LangChain code, when the LLM decides to call a tool, it outputs a JSON string. The developer must manually write the backend parser to execute the function.
+**In Agentforce**, this is fully managed. Mapping an Apex Class (`@InvocableMethod`) or Flow automatically handles parameter parsing, type conversion, and error propagation.
+---
