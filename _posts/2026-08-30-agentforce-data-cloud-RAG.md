@@ -68,7 +68,9 @@ When a user submits a complex query to the Main Agent or Sub-Agent (Topic):
 1. **Intent Analysis:** Atlas identifies that answering the query requires external technical domain knowledge.
 2. **Action Execution:** Atlas invokes the Data Cloud Vector Search Action, converting the user query into a vector and returning the top $K$ matching document chunks.
 3. **Prompt Augmentation:** The retrieved text chunks are injected dynamically into the system prompt behind the scenes:
+   
 ```text
+
 [SYSTEM CONTEXT - GROUNDING DATA]
 Use ONLY the following retrieved facts to answer the user's question:
 --- Fact Chunk #1 (DocID: KB-9021) ---
