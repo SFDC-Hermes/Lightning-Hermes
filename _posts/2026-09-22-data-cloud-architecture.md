@@ -1,12 +1,12 @@
 ---
 layout: single
-title: "Salesforce Data Cloud Architecture: Decoding Data Streams, DLOs, DMOs, Queries & Pricing"
+title: "Salesforce Data 360 Architecture: Decoding Data Streams, DLOs, DMOs, Queries & Pricing"
 date: 2026-10-06
 categories:
   - Development
 tags:
   - Salesforce
-  - DataCloud
+  - Data 360
   - Architecture
   - DataStream
   - DLO
