@@ -24,9 +24,9 @@ This guide breaks down the core data pipeline (**Data Stream ➔ DLO ➔ DMO**),
 Data in Data Cloud does not magically appear in a usable state. It flows through a strict, multi-tier pipeline that transforms raw external records into standardized, unified business entities.
 
 ```text
-┌──────────────────────┐        Ingests         ┌──────────────────────┐        Maps         ┌──────────────────────┐
-│  External Data Source│ ─────────────────────► │  Data Lake Object    │ ──────────────────► │ Data Model Object    │
-│  (CRM, S3, Snowflake)│                        │       (DLO)          │                     │       (DMO)          │
-└──────────────────────┘                        └──────────────────────┘                     └──────────────────────┘
-    (Data Stream)                               (Raw / Tabular Schema)                       (Harmonized / Unified)
+┌────────────────────────┐        Ingests       ┌──────────────────────┐        Maps         ┌──────────────────────┐
+│  External Data Source  │ ───────────────────► │  Data Lake Object    │ ──────────────────► │ Data Model Object    │
+│  (CRM, S3, Snowflake)  │                      │       (DLO)          │                     │       (DMO)          │
+└────────────────────────┘                      └──────────────────────┘                     └──────────────────────┘
+    (Data Stream)                                (Raw / Tabular Schema)                       (Harmonized / Unified)
 ```
